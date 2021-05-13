@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gd.sakila.mapper.BoardMapper">
+	<!-- boardList 쿼리 searchWord 존재에 따라 나뉘는 동적쿼리-->
+	<select id="selectBoardList" resultType="com.gd.sakila.vo.Board" parameterType="com.gd.sakila.vo.Page">
+		SELECT 
+			board_id boardId,
+			board_title boardTitle,
+			insert_date insertDate
+		FROM 
+			board
+		<where>
+			<if test="searchWord != null">
+				board_title LIKE CONCAT('%',#{searchWord},'%')
+			</if>
+		</where>
+		ORDER BY insert_date DESC
+		LIMIT #{beginRow}, #{rowPerPage}
+	</select>
+	
+	<!-- 총 데이터 수를 계산 searchWord에 존재 유무에 따라 나뉘는 동적 쿼리 -->
+	<select id="selectBoardTotal" resultType="Integer" parameterType="String">
+		SELECT COUNT(*) FROM board 
+		<where>
+			<if test="searchWord != null">
+				board_title LIKE CONCAT('%',#{searchWord},'%')
+			</if>
+		</where>
+	</select>
+	
+	<!-- board자세히 보기 쿼리 -->
+	<select id="selectBoardOne" parameterType="Integer" resultType="java.util.Map">
+		SELECT 
+			b.board_id boardId,
+			b.board_title boardTitle,
+			b.board_content boardContent,
+			s.username username,
+			b.insert_date insertDate
+		FROM 
+			board b INNER JOIN staff s ON b.staff_id = s.staff_id
+		<where>
+			board_id = #{boardId}
+		</where>
+	</select>
+	
+	<!-- board 게시물 입력 쿼리 -->
+	<insert id="insertBoard" parameterType="com.gd.sakila.vo.Board">
+		INSERT INTO board(
+			board_pw,
+			board_title,
+			board_content,
+			staff_id,
+			insert_date
+		) 
+		VALUES(
+			PASSWORD(#{boardPw}),<!-- board.getBoardPw()를 첫번 째 물음표에 넣어주세요를 의미 -->
+			#{boardTitle},
+			#{boardContent},
+			#{staffId},
+			NOW()
+		)
+	</insert>
+	
+	<!-- board 게시물 삭제쿼리 -->
+	<delete id="deleteBoard" parameterType="com.gd.sakila.vo.Board">
+		DELETE FROM board 
+		WHERE board_id = #{boardId} AND board_pw = PASSWORD(#{board})
+	</delete>
+	
+	<!-- board 게시물 수정쿼리 -->
+	<update id="updateBoard" parameterType="com.gd.sakila.vo.Board">
+		UPDATE board
+		SET 
+			board_title=#{boardTitle}, board_content=#{boardContent}
+		<where>
+			board_id = #{boardId} AND board_pw = PASSWORD(#{boardPw})
+		</where>	
+	</update>
+</mapper>
