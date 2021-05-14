@@ -24,14 +24,23 @@ public class BoardController {
 	
 	@PostMapping("/addBoard") // board 게시물 입력후 boardList로 redirect
 	public String addBoard(Board board) { // 커맨드객체
+		//디버깅 코드
+		System.out.println(this.getClass()+" board : "+board);
+		
 		boardService.addBoard(board);	
 		return "redirect:/getBoardList";
 	}
 	
 	@GetMapping("/getBoardOne")
 	public String getBoardOne(Model model, @RequestParam(value="boardId", required = true) int boardId) {
-		System.out.println(boardId+" BoardController-boardId"); // 디버깅코드		
+		// 디버깅 코드
+		System.out.println(this.getClass()+" boardId : "+boardId); 
+		
 		Map<String, Object> map = boardService.getBoardOne(boardId);
+		
+		//디버깅 코드
+		System.out.println(this.getClass()+" map : "+map); 
+		
 		model.addAttribute("map", map);
 		return "getBoardOne";
 	}
@@ -39,15 +48,18 @@ public class BoardController {
 	
 	@GetMapping("/getBoardList")
 	public String getBoardList(Model model, @RequestParam(value="currentPage", defaultValue = "1" ) int currentPage, @RequestParam(value="rowPerPage", defaultValue = "10") int rowPerPage, @RequestParam(value="searchWord", required = false) String searchWord){		
-		System.out.println(currentPage+" BoardController-currentPage"); // 디버깅코드
-		System.out.println(rowPerPage+" BoardController-rowPerPage"); // 디버깅코드
-		System.out.println(searchWord+" BoardController-searchWord"); // 디버깅코드
+		System.out.println(this.getClass()+" currentPage : "+currentPage); // 디버깅코드
+		System.out.println(this.getClass()+" rowPerPage : "+rowPerPage); // 디버깅코드
+		System.out.println(this.getClass()+" searchWord : "+searchWord); // 디버깅코드
 		
 		Map<String, Object> map = boardService.getBoardList(currentPage, rowPerPage, searchWord);
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("searchWord", searchWord);
 		model.addAttribute("lastPage", map.get("lastPage"));
 		model.addAttribute("boardList", map.get("boardList"));
+		
+		//디버깅 코드
+		System.out.println(this.getClass()+" map : "+map);
 		
 		return "getBoardList";
 	}

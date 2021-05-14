@@ -20,11 +20,17 @@ public class BoardService {
 	
 	// board 등록 서비스
 	public int addBoard(Board board) {
+		//디버깅 코드
+		System.out.println(this.getClass()+" board : "+board);
+		
 		return boardMapper.insertBoard(board);
 	}
 	
 	//boardOne 자세히보기 서비스
 	public Map<String, Object> getBoardOne(int boardId) {
+		//디버깅 코드
+		System.out.println(this.getClass()+" boardId : "+boardId);
+				
 		return boardMapper.selectBoardOne(boardId);
 	}
 	
@@ -37,8 +43,9 @@ public class BoardService {
 			lastPage ++;
 		}
 		
-		System.out.println(boardTotal+" BoardService-boardTotal"); //디버깅 코드
-		System.out.println(lastPage+" BoardService-lastPage"); //디버깅 코드
+		//디버깅 코드
+		System.out.println(this.getClass()+" boardToTal : "+boardTotal);
+		System.out.println(this.getClass()+" lastPage : "+lastPage); 
 		
 		// 2.
 		Page page = new Page(); // page 변수에 시작행, 찾는 단어, 보여줄 행의 수 탑재
@@ -52,6 +59,11 @@ public class BoardService {
 		map.put("boardTotal", boardTotal);
 		map.put("lastPage", lastPage);
 		map.put("boardList", boardList);
+		
+		// 디버깅 코드
+		System.out.println(this.getClass()+" page : "+page);
+		System.out.println(this.getClass()+" boardList : "+boardList);
+		System.out.println(this.getClass()+" map : "+map);
 			
 		return map;
 	}
