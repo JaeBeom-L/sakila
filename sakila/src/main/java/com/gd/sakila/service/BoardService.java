@@ -12,16 +12,26 @@ import com.gd.sakila.mapper.BoardMapper;
 import com.gd.sakila.vo.Board;
 import com.gd.sakila.vo.Page;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 @Transactional
 public class BoardService {
 	@Autowired
 	BoardMapper boardMapper;
+	//board 삭제 서비스
+	public int removeBoard(Board board) {
+		// 디버깅 코드
+		log.debug(" board: "+board.toString());
+		return boardMapper.deleteBoard(board);
+	}
+	
 	
 	// board 등록 서비스
 	public int addBoard(Board board) {
 		//디버깅 코드
-		System.out.println(this.getClass()+" board : "+board);
+		log.debug(" board : "+board);
 		
 		return boardMapper.insertBoard(board);
 	}
@@ -29,7 +39,7 @@ public class BoardService {
 	//boardOne 자세히보기 서비스
 	public Map<String, Object> getBoardOne(int boardId) {
 		//디버깅 코드
-		System.out.println(this.getClass()+" boardId : "+boardId);
+		log.debug(" boardId : "+boardId);
 				
 		return boardMapper.selectBoardOne(boardId);
 	}
@@ -44,8 +54,8 @@ public class BoardService {
 		}
 		
 		//디버깅 코드
-		System.out.println(this.getClass()+" boardToTal : "+boardTotal);
-		System.out.println(this.getClass()+" lastPage : "+lastPage); 
+		log.debug(" boardToTal : "+boardTotal);
+		log.debug(" lastPage : "+lastPage); 
 		
 		// 2.
 		Page page = new Page(); // page 변수에 시작행, 찾는 단어, 보여줄 행의 수 탑재
@@ -61,9 +71,9 @@ public class BoardService {
 		map.put("boardList", boardList);
 		
 		// 디버깅 코드
-		System.out.println(this.getClass()+" page : "+page);
-		System.out.println(this.getClass()+" boardList : "+boardList);
-		System.out.println(this.getClass()+" map : "+map);
+		log.debug(" page : "+page);
+		log.debug(" boardList : "+boardList);
+		log.debug(" map : "+map);
 			
 		return map;
 	}

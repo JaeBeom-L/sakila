@@ -29,7 +29,7 @@
 	</select>
 	
 	<!-- board자세히 보기 쿼리 -->
-	<select id="selectBoardOne" parameterType="Integer" resultType="java.util.Map">
+	<select id="selectBoardOne" resultType="java.util.Map" parameterType="Integer">
 		SELECT 
 			b.board_id boardId,
 			b.board_title boardTitle,
@@ -64,7 +64,7 @@
 	<!-- board 게시물 삭제쿼리 -->
 	<delete id="deleteBoard" parameterType="com.gd.sakila.vo.Board">
 		DELETE FROM board 
-		WHERE board_id = #{boardId} AND board_pw = PASSWORD(#{board})
+		WHERE board_id = #{boardId} AND board_pw = PASSWORD(#{boardPw})
 	</delete>
 	
 	<!-- board 게시물 수정쿼리 -->
