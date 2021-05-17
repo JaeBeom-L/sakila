@@ -8,8 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.gd.sakila.Debuging;
 import com.gd.sakila.mapper.BoardMapper;
+import com.gd.sakila.mapper.CommentMapper;
 import com.gd.sakila.vo.Board;
+import com.gd.sakila.vo.Comment;
 import com.gd.sakila.vo.Page;
 
 import lombok.extern.slf4j.Slf4j;
@@ -20,10 +23,21 @@ import lombok.extern.slf4j.Slf4j;
 public class BoardService {
 	@Autowired
 	BoardMapper boardMapper;
+	@Autowired
+	CommentMapper commentMapper;
+	//
+	
+	//board 수정 서비스
+	public int modifyBoard(Board board) {
+		// 디버깅 코드
+		log.debug(Debuging.debug+" modifyBoard board: "+board.toString());
+		return boardMapper.updateBoard(board);
+	}
+	
 	//board 삭제 서비스
 	public int removeBoard(Board board) {
 		// 디버깅 코드
-		log.debug(" board: "+board.toString());
+		log.debug(Debuging.debug+" removeBoard board: "+board.toString());
 		return boardMapper.deleteBoard(board);
 	}
 	
@@ -31,17 +45,26 @@ public class BoardService {
 	// board 등록 서비스
 	public int addBoard(Board board) {
 		//디버깅 코드
-		log.debug(" board : "+board);
+		log.debug(Debuging.debug+" board : "+board);
 		
 		return boardMapper.insertBoard(board);
 	}
 	
-	//boardOne 자세히보기 서비스
+	//boardOne 자세히보기, 댓글목록 서비스
 	public Map<String, Object> getBoardOne(int boardId) {
 		//디버깅 코드
-		log.debug(" boardId : "+boardId);
-				
-		return boardMapper.selectBoardOne(boardId);
+		log.debug(Debuging.debug+" boardId : "+boardId);
+		//1. 상세보기
+		Map<String, Object> boardMap = boardMapper.selectBoardOne(boardId);	
+		//2. 댓글 목록
+		log.debug(Debuging.debug+"map : "+boardMap);
+		List<Comment> commentList =commentMapper.selectCommentListByBoard(boardId);
+		log.debug(Debuging.debug+"list size() :" + commentList.size());
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("boardMap", boardMap);
+		map.put("commentList", commentList);
+		return map;
 	}
 	
 	// boardList 출력 서비스
@@ -54,8 +77,8 @@ public class BoardService {
 		}
 		
 		//디버깅 코드
-		log.debug(" boardToTal : "+boardTotal);
-		log.debug(" lastPage : "+lastPage); 
+		log.debug(Debuging.debug+" boardToTal : "+boardTotal);
+		log.debug(Debuging.debug+" lastPage : "+lastPage); 
 		
 		// 2.
 		Page page = new Page(); // page 변수에 시작행, 찾는 단어, 보여줄 행의 수 탑재
@@ -71,9 +94,9 @@ public class BoardService {
 		map.put("boardList", boardList);
 		
 		// 디버깅 코드
-		log.debug(" page : "+page);
-		log.debug(" boardList : "+boardList);
-		log.debug(" map : "+map);
+		log.debug(Debuging.debug+" page : "+page);
+		log.debug(Debuging.debug+" boardList : "+boardList);
+		log.debug(Debuging.debug+" map : "+map);
 			
 		return map;
 	}
