@@ -25,7 +25,7 @@ $(document).ready(function() {
 <body class="container">
 	<jsp:include page="/WEB-INF/view/nav.jsp"/>
 	<h1>removeBoard</h1>
-	<form action="${pageContext.request.contextPath}/removeBoard" method="post" id="removeForm">
+	<form action="${pageContext.request.contextPath}/admin/removeBoard" method="post" id="removeForm">
 		<input type="hidden" name="boardId" value="${boardId}">
 		<div class="row">
 			<div class="col-sm-2"><label>boardPw :</label></div>

@@ -15,7 +15,7 @@ public class HomeController {
 	@GetMapping({"/", "/home", "/index"})
 	public String home() {
 		// 디버깅코드
-		log.debug(Debuging.debug+" home");
+		log.debug(Debuging.debug+" view home");
 		return "home";
 	}
 	

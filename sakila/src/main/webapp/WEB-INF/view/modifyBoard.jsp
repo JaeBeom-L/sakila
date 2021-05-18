@@ -30,7 +30,7 @@ $(document).ready(function(){
 <div class="container">
 	<jsp:include page="/WEB-INF/view/nav.jsp"/>
     <h1>modifyBoard</h1>
-    <form action="${pageContext.request.contextPath }/modifyBoard" method="post" id="modifyForm">
+    <form action="${pageContext.request.contextPath }/admin/modifyBoard" method="post" id="modifyForm">
 	     <table class="table">
 	         <tbody>
 	            <tr>

@@ -38,7 +38,17 @@ public class BoardService {
 	public int removeBoard(Board board) {
 		// 디버깅 코드
 		log.debug(Debuging.debug+" removeBoard board: "+board.toString());
-		return boardMapper.deleteBoard(board);
+		//1. 게시글 삭제
+		int boardRow = boardMapper.deleteBoard(board);
+		if(boardRow == 0) {  // 게시글 삭제 실패시 0으로 리턴하고 메서드를 끝낸다.
+			return 0;
+		}
+		//2. 댓글 삭제
+		int commentRow = commentMapper.deleteCommentByBoardId(board.getBoardId());
+		log.debug(Debuging.debug+" removeCommentRow : "+commentRow);
+		
+		log.debug(Debuging.debug+" removeBoardRow : "+boardRow);
+		return commentRow+boardRow;
 	}
 	
 	
@@ -87,7 +97,7 @@ public class BoardService {
 		page.setRowPerPage(rowPerPage);
 		
 		List<Board> boardList = boardMapper.selectBoardList(page);  // controller에서 받아온 매개변수로 boardList 생성
-	
+		
 		Map<String, Object> map = new HashMap<>(); // Map 타입의 map에 컨트롤러에 필요한 데이터 저장
 		map.put("boardTotal", boardTotal);
 		map.put("lastPage", lastPage);
@@ -97,7 +107,7 @@ public class BoardService {
 		log.debug(Debuging.debug+" page : "+page);
 		log.debug(Debuging.debug+" boardList : "+boardList);
 		log.debug(Debuging.debug+" map : "+map);
-			
+		
 		return map;
 	}
 	

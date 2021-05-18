@@ -19,26 +19,26 @@
 	<jsp:include page="/WEB-INF/view/nav.jsp"/>
     <h1>BoardList</h1>
     <table class="table table-hover">
-        <thead>
+        <thead class="thead-light">
             <tr>
                 <th>boardId</th>
-                <th colspan="10">boardTitle</th>
-                <th>insertDate</th>
+                <th>boardTitle</th>
+                <th style="text-align : center;">insertDate</th>
             </tr>
         </thead>
         <tbody>
             <c:forEach var="b" items="${boardList}">
                 <tr>
                     <td>${b.boardId}</td>
-                    <td colspan="10"><a href="${pageContext.request.contextPath}/getBoardOne?boardId=${b.boardId}">${b.boardTitle}</a></td>                  
-                    <td>${b.insertDate}</td>
+                    <td><a href="${pageContext.request.contextPath}/admin/getBoardOne?boardId=${b.boardId}">${b.boardTitle}</a></td>                  
+                    <td align="center">${b.insertDate}</td>
                 </tr>
             </c:forEach>
         </tbody>
     </table>
     
     <!-- 검색어 입력창 -->
-    <form action="/getBoardList" method="get">
+    <form action="/admin/getBoardList" method="get">
         <div class="row">
 	        <div class="col-sm-1"><label for="searchWord">검색어 :</label> </div>
 	        <div class="col-sm-3"><input name="searchWord" type="text" class="form-control"></div>
@@ -48,14 +48,14 @@
     
     <ul class="pager">
         <c:if test="${currentPage > 1}">
-            <li class="previous"><a href="${pageContext.request.contextPath}/getBoardList?currentPage=${currentPage-1}&searchWord=${searchWord}">이전</a></li>
+            <li class="previous"><a href="${pageContext.request.contextPath}/admin/getBoardList?currentPage=${currentPage-1}&searchWord=${searchWord}">이전</a></li>
         </c:if>
         <c:if test="${currentPage < lastPage}">
-            <li class="next"><a href="${pageContext.request.contextPath}/getBoardList?currentPage=${currentPage+1}&searchWord=${searchWord}">다음</a></li>
+            <li class="next"><a href="${pageContext.request.contextPath}/admin/getBoardList?currentPage=${currentPage+1}&searchWord=${searchWord}">다음</a></li>
         </c:if>
     </ul>
     <div>
-        <a class="btn btn-default" href="${pageContext.request.contextPath}/addBoard">게시글 입력</a>
+        <a class="btn btn-default" href="${pageContext.request.contextPath}/admin/addBoard">게시글 입력</a>
     </div>
 </div>
 </body>

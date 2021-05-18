@@ -4,7 +4,7 @@
       <a class="nav-link" href="${pageContext.request.contextPath}/home">Home</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="${pageContext.request.contextPath}/getBoardList">boardList</a>
+      <a class="nav-link" href="${pageContext.request.contextPath}/admin/getBoardList">boardList</a>
     </li>
   </ul>
 </nav>

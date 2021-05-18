@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gd.sakila.Debuging;
@@ -17,6 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
+@RequestMapping("/admin")
 public class BoardController {
 	@Autowired
 	BoardService boardService;
@@ -36,9 +38,9 @@ public class BoardController {
 		int row = boardService.modifyBoard(board);
 		log.debug(Debuging.debug+"modify row count : "+row);
 		if(row == 1) {
-			return "redirect:/getBoardOne?boardId="+board.getBoardId();
+			return "redirect:/admin/getBoardOne?boardId="+board.getBoardId();
 		}
-		return "redirect:/modifyBoard?boardId="+board.getBoardId();
+		return "redirect:/admin/modifyBoard?boardId="+board.getBoardId();
 	}
 	
 	@GetMapping("/removeBoard")
@@ -54,10 +56,10 @@ public class BoardController {
 	public String removeBoard(Board board) {
 		int row = boardService.removeBoard(board);
 		log.debug(Debuging.debug+"remove row cnt : "+row);
-		if(row == 1 ) {
-			return "redirect:/getBoardList";
+		if(row >= 1 ) {
+			return "redirect:/admin/getBoardList";
 		}
-		return "redirect:/removeBoard?boardId="+board.getBoardId();
+		return "redirect:/admin/removeBoard?boardId="+board.getBoardId();
 	}
 	
 	@GetMapping("/addBoard") // addBoard.jsp 페이지로 이동
@@ -73,9 +75,9 @@ public class BoardController {
 		
 		int row = boardService.addBoard(board);	
 		if(row == 1) {
-			return "redirect:/getBoardList";
+			return "redirect:/admin/getBoardList";
 		}
-		return "redirect:/addBoard";
+		return "redirect:/admin/addBoard";
 	}
 	
 	@GetMapping("/getBoardOne")
