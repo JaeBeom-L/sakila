@@ -25,10 +25,11 @@ public class LoginFilter implements Filter {
 		if(request instanceof HttpServletRequest) {
 			session = ((HttpServletRequest)request).getSession();
 		}
+		
 		/*
 		if(session.getAttribute("loginStaff") == null) {
 			if(response instanceof HttpServletResponse) {
-				((HttpServletResponse)response).sendRedirect("/");
+				((HttpServletResponse)response).sendRedirect("/"); // home.jsp
 			}			
 			return;
 		}

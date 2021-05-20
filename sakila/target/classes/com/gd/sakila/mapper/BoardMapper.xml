@@ -45,6 +45,9 @@
 	
 	<!-- board 게시물 입력 쿼리 -->
 	<insert id="insertBoard" parameterType="com.gd.sakila.vo.Board">
+		<selectKey resultType="Integer" keyProperty="boardId" order="AFTER"><!-- INSERT시 중복방지를 위해 넣는 쿼리 -->
+			SELECT LAST_INSERT_ID()
+		</selectKey>
 		INSERT INTO board(
 			board_pw,
 			board_title,

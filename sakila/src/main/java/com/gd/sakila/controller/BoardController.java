@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.gd.sakila.Debuging;
 import com.gd.sakila.service.BoardService;
 import com.gd.sakila.vo.Board;
+import com.gd.sakila.vo.BoardForm;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -69,15 +70,13 @@ public class BoardController {
 	}
 	
 	@PostMapping("/addBoard") // board 게시물 입력후 boardList로 redirect
-	public String addBoard(Board board) { // 커맨드객체
+	public String addBoard(BoardForm boardForm) { // 커맨드객체
 		//디버깅 코드
-		log.debug(" board : "+board);
+		log.debug(" boardForm : "+boardForm);
 		
-		int row = boardService.addBoard(board);	
-		if(row == 1) {
-			return "redirect:/admin/getBoardList";
-		}
-		return "redirect:/admin/addBoard";
+		boardService.addBoard(boardForm);	
+
+		return "redirect:/admin/getBoardList";
 	}
 	
 	@GetMapping("/getBoardOne")
