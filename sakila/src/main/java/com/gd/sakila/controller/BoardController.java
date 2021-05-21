@@ -35,7 +35,7 @@ public class BoardController {
 	
 	@PostMapping("/modifyBoard")
 	public String modifyBoard(Board board) {
-		log.debug(Debuging.debug+" modifyBoard board : "+board.toString());
+		log.debug(Debuging.debug+" modifyBoard board : "+board);
 		int row = boardService.modifyBoard(board);
 		log.debug(Debuging.debug+"modify row count : "+row);
 		if(row == 1) {
@@ -91,6 +91,7 @@ public class BoardController {
 		
 		model.addAttribute("boardMap", map.get("boardMap"));
 		model.addAttribute("commentList", map.get("commentList"));
+		model.addAttribute("boardfileList", map.get("boardfileList"));
 		return "getBoardOne";
 	}
 	

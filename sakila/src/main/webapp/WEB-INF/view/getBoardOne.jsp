@@ -31,31 +31,47 @@ $(document).ready(function(){
 	    <h1>BoardOne</h1>
 	     <table class="table">
 	         <tbody>
-	             <tr>
+	           	<tr>
 	                <td>boardId :</td>
 	                <td>${boardMap.boardId}</td>
-	               </tr>
-	            <tr>
-	                   <td>boardTitle :</td>
-	                   <td>${boardMap.boardTitle}</td>
 	            </tr>
 	            <tr>
-	                   <td>boardContent :</td>
-	                   <td>${boardMap.boardContent}</td>
+	             	<td>boardTitle :</td>
+	           	   	<td>${boardMap.boardTitle}</td>
 	            </tr>
 	            <tr>
-	                   <td>username :</td>
-	                   <td>${boardMap.username}</td>
+	              	<td>boardContent :</td>
+	               	<td>${boardMap.boardContent}</td>
 	            </tr>
 	            <tr>
-	                   <td>insertDate :</td>
-	                   <td>${boardMap.insertDate}</td>
+	             	<td>username :</td>
+	              	<td>${boardMap.username}</td>
+	            </tr>
+	            <tr>
+	              	<td>insertDate :</td>
+	               	<td>${boardMap.insertDate}</td>
+	            </tr>
+	            <tr>
+	            	<td>boardfile :</td>
+	            	<td>
+	            		<a class="btn btn-default" href="">파일추가</a>
+	            		<!-- 보드파일을 출력하는 반복문 코드 구현 -->
+	            		<c:forEach var="f" items="${boardfileList}">
+	            			<div>
+	            				<a href="${pageContext.request.contextPath}/resource/${f.boardfileName}">${f.boardfileName}</a>
+	            				<a class="btn btn-default" href="${pageContext.request.contextPath}/admin/removeBoardfile?boardfileId=${f.boardfileId}">X</a>            				
+	            			</div>
+	            		</c:forEach>
+	            	</td>
 	            </tr>
 	        </tbody>
 	    </table>
-	    <a class="btn btn-default" href="${pageContext.request.contextPath}/admin/modifyBoard?boardId=${boardMap.boardId}">수정</a>
-	    <a class="btn btn-default" href="${pageContext.request.contextPath}/admin/removeBoard?boardId=${boardMap.boardId}">삭제</a>
-	    <a class="btn btn-default" href="${pageContext.request.contextPath}/admin/getBoardList">글목록</a>	
+	    <hr>
+	    
+	    <div>
+		    <a class="btn btn-default" href="${pageContext.request.contextPath}/admin/modifyBoard?boardId=${boardMap.boardId}">수정</a>
+		    <a class="btn btn-default" href="${pageContext.request.contextPath}/admin/removeBoard?boardId=${boardMap.boardId}">삭제</a>	
+	    </div>
 	</div>
 	<br><br><br><hr>
 	<!-- 댓글 입력 폼 -->
