@@ -54,12 +54,14 @@ $(document).ready(function(){
 	            <tr>
 	            	<td>boardfile :</td>
 	            	<td>
-	            		<a class="btn btn-default" href="">파일추가</a>
+	            		<a class="session" href="${pageContext.request.contextPath}/admin/addBoardfile?boardId=${boardMap.boardId}"><button class="btn btn-default">파일추가</button></a>
 	            		<!-- 보드파일을 출력하는 반복문 코드 구현 -->
 	            		<c:forEach var="f" items="${boardfileList}">
 	            			<div>
 	            				<a href="${pageContext.request.contextPath}/resource/${f.boardfileName}">${f.boardfileName}</a>
-	            				<a class="btn btn-default" href="${pageContext.request.contextPath}/admin/removeBoardfile?boardfileId=${f.boardfileId}">X</a>            				
+	            				<a class="session" href="${pageContext.request.contextPath}/admin/removeBoardfile?boardfileId=${f.boardfileId}&boardId=${f.boardId}&boardfileName=${f.boardfileName}&username=${boardMap.username}">
+	            					<button class="btn btn-default">X</button>
+	            				</a>            				
 	            			</div>
 	            		</c:forEach>
 	            	</td>
@@ -69,8 +71,8 @@ $(document).ready(function(){
 	    <hr>
 	    
 	    <div>
-		    <a class="btn btn-default" href="${pageContext.request.contextPath}/admin/modifyBoard?boardId=${boardMap.boardId}">수정</a>
-		    <a class="btn btn-default" href="${pageContext.request.contextPath}/admin/removeBoard?boardId=${boardMap.boardId}">삭제</a>	
+		    <a class="session" href="${pageContext.request.contextPath}/admin/modifyBoard?boardId=${boardMap.boardId}"><button class="btn btn-default">수정</button></a>
+		    <a class="session" href="${pageContext.request.contextPath}/admin/removeBoard?boardId=${boardMap.boardId}"><button class="btn btn-default">삭제</button></a>	
 	    </div>
 	</div>
 	<br><br><br><hr>

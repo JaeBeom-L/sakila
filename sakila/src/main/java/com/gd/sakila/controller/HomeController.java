@@ -18,8 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 public class HomeController {
-	@Autowired
-	StaffService staffService;
+	@Autowired StaffService staffService;
 	
 	@GetMapping("/admin/logout")
 	public String logout(HttpSession session) {

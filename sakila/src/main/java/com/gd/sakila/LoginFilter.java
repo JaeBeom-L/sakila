@@ -36,7 +36,7 @@ public class LoginFilter implements Filter {
 		*/
 		chain.doFilter(request, response);
 		// 요청 후
-		log.debug(Debuging.debug+" LoginFilter 요청 후 ");
+		log.debug(Debuging.debug+" LoginFilter 요청 후 "+session);
 	}
 
 }

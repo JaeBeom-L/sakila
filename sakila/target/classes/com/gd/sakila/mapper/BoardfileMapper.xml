@@ -3,8 +3,13 @@
 <mapper namespace="com.gd.sakila.mapper.BoardfileMapper">
 	
 	<!--  개별 파일 삭제 -->
-	<delete id="deleteBoardfileOne">
-	
+	<delete id="deleteBoardfileOne" parameterType="Integer">
+		DELETE
+		FROM
+			boardfile
+		<where>
+			boardfile_id=${boardfileId}
+		</where>
 	</delete>
 	
 	<!-- 게시글 삭제시 참조되는 모든 파일 삭제 -->
@@ -41,6 +46,7 @@
 	 -->
 	<select id="selectBoardfileByBoardId" parameterType="Integer" resultType="com.gd.sakila.vo.Boardfile"> 
 		SELECT 
+			board_id boardId,
 			boardfile_id boardfileId,
 			boardfile_name boardfileName,
 			boardfile_size boardfileSize

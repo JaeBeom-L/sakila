@@ -6,5 +6,8 @@
     <li class="nav-item">
       <a class="nav-link" href="${pageContext.request.contextPath}/admin/getBoardList">boardList</a>
     </li>
+    <li class="nav-item">
+      <a class="nav-link" href="${pageContext.request.contextPath}/admin/staffList">staffList</a>
+    </li>
   </ul>
 </nav>
