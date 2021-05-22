@@ -157,7 +157,7 @@ public class BoardService {
 		page.setSearchWord(searchWord);
 		page.setRowPerPage(rowPerPage);
 		
-		List<Board> boardList = boardMapper.selectBoardList(page);  // controller에서 받아온 매개변수로 boardList 생성
+		List<Map<String, Object>> boardList = boardMapper.selectBoardList(page);  // controller에서 받아온 매개변수로 boardList 생성
 		
 		Map<String, Object> map = new HashMap<>(); // Map 타입의 map에 컨트롤러에 필요한 데이터 저장
 		map.put("boardTotal", boardTotal);

@@ -12,11 +12,22 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
 <!-- Latest compiled and minified JavaScript -->
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+ <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
 <div class="container">
 	<jsp:include page="/WEB-INF/view/nav.jsp"/>
-    <h1>staffList</h1>
+    <div class="row">
+    	<h1>&nbsp;staffList&nbsp;</h1>
+    	<form action="${pageContext.request.contextPath}/admin/staffList">
+	    	<select name="staffSID" class="custom-select-lg" id="staffSID">
+	    		<option value="" id="total" >전체</option>
+	    		<option value="1" id="1">1</option>
+	    		<option value="2" id="2">2</option>
+	    	</select>
+    		<button class="btn btn-default">보기</button>
+    	</form>
+    </div>
     <table class="table table-hover">
         <thead class="thead-light">
             <tr>

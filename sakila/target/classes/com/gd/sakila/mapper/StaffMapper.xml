@@ -13,7 +13,7 @@
 		</where>
 	</select>
 	
-	<select id="selectStaff" resultType="map">
+	<select id="selectStaff" resultType="map" parameterType="Integer">
 		SELECT 
 			s.staff_id AS ID, 
 			CONCAT(s.first_name, _utf8mb4' ', s.last_name) AS name, 
@@ -25,5 +25,10 @@
 			s.store_id AS SID
 		FROM 
 			staff AS s JOIN address AS a ON s.address_id = a.address_id JOIN city ON a.city_id = city.city_id JOIN country ON city.country_id = country.country_id 
+		<where>
+			<if test="staffSID != null">
+				s.store_id = #{staffSID}
+			</if>
+		</where>
 	</select>
 </mapper>

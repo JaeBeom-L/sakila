@@ -37,7 +37,7 @@ $(document).ready(function(){
 				<div>password : </div>
 				<div><input type="password" id="password" name="password"></div>
 				<div>
-					<button type="button" id="btn">로그인</button>
+					<button type="button" id="btn" class="btn btn-secondary">로그인</button>
 				</div>
 			</form>
 		</c:if>

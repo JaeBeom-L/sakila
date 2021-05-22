@@ -23,8 +23,8 @@ public class StaffService {
 		return staffMapper.selectStaffByLogin(staff);
 	}
 	
-	public List<Map<String, Object>> getStaffList(){
-		List<Map<String, Object>> staffList = staffMapper.selectStaff();
+	public List<Map<String, Object>> getStaffList(Integer staffSID){
+		List<Map<String, Object>> staffList = staffMapper.selectStaff(staffSID);
 		log.debug(Debuging.debug+" staffList : "+staffList);
 		return staffList;
 	}

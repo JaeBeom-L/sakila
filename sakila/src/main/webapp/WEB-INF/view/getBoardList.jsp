@@ -23,14 +23,21 @@
                 <th>boardId</th>
                 <th>boardTitle</th>
                 <th style="text-align : center;">insertDate</th>
+                <th style="text-align : center;">username</th>
             </tr>
         </thead>
         <tbody>
             <c:forEach var="b" items="${boardList}">
                 <tr>
                     <td>${b.boardId}</td>
-                    <td><a href="${pageContext.request.contextPath}/admin/getBoardOne?boardId=${b.boardId}">${b.boardTitle}</a></td>                  
+                    <td>
+                    	<a href="${pageContext.request.contextPath}/admin/getBoardOne?boardId=${b.boardId}">${b.boardTitle}</a>
+                    	<c:if test="${b.commentCnt != 0}">
+                    		<label style="color:red">[${b.commentCnt}]</label>
+                    	</c:if>
+                    </td>                  
                     <td align="center">${b.insertDate}</td>
+                    <td align="center">${b.username}</td>
                 </tr>
             </c:forEach>
         </tbody>

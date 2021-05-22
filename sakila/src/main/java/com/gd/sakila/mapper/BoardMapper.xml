@@ -2,19 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gd.sakila.mapper.BoardMapper">
 	<!-- boardList 쿼리 searchWord 존재에 따라 나뉘는 동적쿼리-->
-	<select id="selectBoardList" resultType="com.gd.sakila.vo.Board" parameterType="com.gd.sakila.vo.Page">
+	<select id="selectBoardList" resultType="java.util.Map" parameterType="com.gd.sakila.vo.Page">
 		SELECT 
-			board_id boardId,
-			board_title boardTitle,
-			insert_date insertDate
+			b.board_id boardId,
+			b.board_title boardTitle,
+			b.insert_date insertDate, 
+			c.username username, 
+			COUNT(c.comment_id) commentCnt 
 		FROM 
-			board
+			board b JOIN comment c ON b.board_id=c.board_id 
 		<where>
 			<if test="searchWord != null">
-				board_title LIKE CONCAT('%',#{searchWord},'%')
+				b.board_title LIKE CONCAT('%',#{searchWord},'%')
 			</if>
 		</where>
-		ORDER BY insert_date DESC
+		GROUP BY 
+			c.board_id
+		ORDER BY 
+			b.insert_date DESC
 		LIMIT #{beginRow}, #{rowPerPage}
 	</select>
 	
