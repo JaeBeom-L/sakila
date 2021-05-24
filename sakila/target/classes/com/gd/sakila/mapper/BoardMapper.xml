@@ -7,17 +7,17 @@
 			b.board_id boardId,
 			b.board_title boardTitle,
 			b.insert_date insertDate, 
-			c.username username, 
+			s.username username, 
 			COUNT(c.comment_id) commentCnt 
 		FROM 
-			board b JOIN comment c ON b.board_id=c.board_id 
+			board b LEFT JOIN comment c ON b.board_id=c.board_id LEFT JOIN staff s ON b.staff_id = s.staff_id
 		<where>
 			<if test="searchWord != null">
 				b.board_title LIKE CONCAT('%',#{searchWord},'%')
 			</if>
 		</where>
 		GROUP BY 
-			c.board_id
+			b.board_id
 		ORDER BY 
 			b.insert_date DESC
 		LIMIT #{beginRow}, #{rowPerPage}
