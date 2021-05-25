@@ -26,6 +26,7 @@ public class StaffController {
 		List<Map<String, Object>> staffList = staffService.getStaffList(staffSID);
 		log.debug(Debuging.debug+" staffList : "+staffList);
 		model.addAttribute("staffList", staffList);
+		model.addAttribute("staffSID",staffSID);
 		return "staffList";
 	}
 }

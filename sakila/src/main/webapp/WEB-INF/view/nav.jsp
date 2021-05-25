@@ -9,5 +9,8 @@
     <li class="nav-item">
       <a class="nav-link" href="${pageContext.request.contextPath}/admin/staffList">staffList</a>
     </li>
+     <li class="nav-item">
+      <a class="nav-link" href="${pageContext.request.contextPath}/admin/getFilmList">filmList</a>
+    </li>
   </ul>
 </nav>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gd.sakila.mapper.FilmMapper">
+	
+	<!-- 가게 필름 재고 프로시저 -->
+	<select id="selectFilmInStock" parameterType="java.util.Map" resultType="int" statementType="CALLABLE">
+		{
+			call film_in_stock(
+				#{filmId},
+				#{storeId},
+				#{filmCount, mode=OUT, jdbcType=DECIMAL, javaType=Integer}
+			)
+		}
+	</select>	
+	
+	<!-- 영화 상세보기 쿼리 -->
+	<select id="selectFilmOne" resultType="java.util.Map" parameterType="Integer">
+		SELECT
+			f.film_id filmId,
+			f.title title,
+			f.description description,
+			f.release_year releaseYear,
+			l.name language,
+			f.original_language_id originalLanguageId,
+			f.rental_duration rentalDuration,
+			f.rental_rate rentalRate,
+			f.length length,
+			f.replacement_cost replacementCost,
+			f.rating rating,
+			f.special_features specialFeautres,
+			f.last_update lastUpdate,
+			flv.category category,
+			flv.actors actors
+		FROM
+			film f LEFT JOIN film_list flv ON f.film_id=flv.FID JOIN language l ON f.language_id=l.language_id
+		<where>
+			f.film_id=#{FID}
+		</where>
+	</select>
+	
+	<!-- 필름리스트 총 데이터 수 쿼리 -->
+	<select id="selectFilmTotal" parameterType="java.util.Map" resultType="Integer">
+		SELECT 
+			COUNT(FID)
+		FROM
+			film_list
+		<where>
+			<if test="titleSearch != null">
+				AND title LIKE CONCAT('%',#{titleSearch},'%')
+			</if>
+			<if test="actorSearch != null">
+				AND actors LIKE CONCAT('%',#{actorSearch},'%')
+			</if>
+			<if test="price != null">
+				AND price = #{price}
+			</if>
+			<if test="category != null">
+				AND category = #{category}
+			</if>
+			<if test="rating != null">
+				AND rating = #{rating}
+			</if>
+		</where>
+	</select>
+	
+	<!-- 필름 리스트 출력 쿼리 -->
+	<select id="getFilmList" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT 	
+			FID, 
+			title,
+			price, 
+			length, 
+			rating, 
+			category,
+			actors 
+		FROM 
+			film_list
+		<where>
+			<if test="titleSearch != null">
+				AND title LIKE CONCAT('%',#{titleSearch},'%')
+			</if>
+			<if test="actorSearch != null">
+				AND actors LIKE CONCAT('%',#{actorSearch},'%')
+			</if>
+			<if test="price != null">
+				AND price = #{price}
+			</if>
+			<if test="category != null">
+				AND category = #{category}
+			</if>
+			<if test="rating != null">
+				AND rating = #{rating}
+			</if>
+		</where>
+		ORDER BY
+			FID ASC
+		LIMIT
+			#{beginRow}, #{rowPerPage}
+	</select>
+	
+</mapper>

@@ -21,9 +21,9 @@
     	<h1>&nbsp;staffList&nbsp;</h1>
     	<form action="${pageContext.request.contextPath}/admin/staffList">
 	    	<select name="staffSID" class="custom-select-lg" id="staffSID">
-	    		<option value="" id="total" >전체</option>
-	    		<option value="1" id="1">1</option>
-	    		<option value="2" id="2">2</option>
+	    		<option value="" ${staffSID == '' ? 'selected="selected"' : '' }>전체</option>
+	    		<option value="1" ${staffSID == '1' ? 'selected="selected"' : '' }>1</option>
+	    		<option value="2" ${staffSID == '2' ? 'selected="selected"' : '' }>2</option>
 	    	</select>
     		<button class="btn btn-default">보기</button>
     	</form>
