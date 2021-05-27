@@ -12,5 +12,8 @@ import com.gd.sakila.vo.Page;
 public interface ActorMapper {
 	int insertActor(Actor actor);
 	int selectActorTotal(String searchWord);
+	int deleteActorsByFilmActor(int FID);
+	int insertActorsByFilmActor(Map<String, Object> map);
+	List<Map<String, Object>> selectActorsByActorId(int FID);
 	List<Map<String, Object>> selectActorInfoList(Page page);
 }

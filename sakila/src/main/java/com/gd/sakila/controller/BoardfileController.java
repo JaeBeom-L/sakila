@@ -32,8 +32,8 @@ public class BoardfileController {
 	
 	@PostMapping("/addBoardfile")
 	public String addBoard(MultipartFile multipartFile, @RequestParam(value = "boardId", required = true) int boardId) {
-		log.debug(Debuging.debug+" multipartFile : "+multipartFile);
-		log.debug(Debuging.debug+" boardId : "+boardId);
+		log.debug(Debuging.DEBUG+" multipartFile : "+multipartFile);
+		log.debug(Debuging.DEBUG+" boardId : "+boardId);
 		
 		boardfileService.addBoardfile(multipartFile, boardId);
 		return "redirect:/admin/getBoardOne?boardId="+boardId;
@@ -41,8 +41,8 @@ public class BoardfileController {
 	
 	@GetMapping("/removeBoardfile")
 	public String removeBoardfile(Boardfile boardfile) {
-		log.debug(Debuging.debug+" remove boardfileId : "+boardfile.getBoardfileId());
-		log.debug(Debuging.debug+" remove boardId : "+boardfile.getBoardId());
+		log.debug(Debuging.DEBUG+" remove boardfileId : "+boardfile.getBoardfileId());
+		log.debug(Debuging.DEBUG+" remove boardId : "+boardfile.getBoardId());
 		boardfileService.removeBoardfileOne(boardfile);
 		
 		return "redirect:/admin/getBoardOne?boardId="+boardfile.getBoardId();

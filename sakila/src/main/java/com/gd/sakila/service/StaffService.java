@@ -19,13 +19,13 @@ import lombok.extern.slf4j.Slf4j;
 public class StaffService {
 	@Autowired StaffMapper staffMapper; // 의존성 주입 bean객체에 객체를 생성
 	public Staff login(Staff staff) {
-		log.debug(Debuging.debug+" staff : "+staff);
+		log.debug(Debuging.DEBUG+" staff : "+staff);
 		return staffMapper.selectStaffByLogin(staff);
 	}
 	
 	public List<Map<String, Object>> getStaffList(Integer staffSID){
 		List<Map<String, Object>> staffList = staffMapper.selectStaff(staffSID);
-		log.debug(Debuging.debug+" staffList : "+staffList);
+		log.debug(Debuging.DEBUG+" staffList : "+staffList);
 		return staffList;
 	}
 }

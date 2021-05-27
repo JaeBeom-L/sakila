@@ -28,16 +28,16 @@ public class HomeController {
 	
 	@GetMapping({"/", "/home", "/index"})
 	public String home() {
-		log.debug(Debuging.debug+" view home"); //디버깅 코드
+		log.debug(Debuging.DEBUG+" view home"); //디버깅 코드
 		return "home";
 	}
 	
 	@PostMapping("/login")
 	public String login(HttpSession session, Staff staff) { // servlet 세션을 직접 사용, 컨트롤러 메서드의 매개변수는 DI 대상
-		log.debug(Debuging.debug+" staff : "+staff); //디버깅 코드
+		log.debug(Debuging.DEBUG+" staff : "+staff); //디버깅 코드
 		
 		Staff loginStaff = staffService.login(staff);
-		log.debug(Debuging.debug+" loginStaff : "+loginStaff); //디버깅 코드
+		log.debug(Debuging.DEBUG+" loginStaff : "+loginStaff); //디버깅 코드
 		
 		if(loginStaff != null) { // 로그인 시
 			session.setAttribute("loginStaff", session); // new Staff();

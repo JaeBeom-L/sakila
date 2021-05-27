@@ -19,7 +19,7 @@
 			f.film_id filmId,
 			f.title title,
 			f.description description,
-			f.release_year releaseYear,
+			YEAR(f.release_year) releaseYear,
 			l.name language,
 			f.original_language_id originalLanguageId,
 			f.rental_duration rentalDuration,

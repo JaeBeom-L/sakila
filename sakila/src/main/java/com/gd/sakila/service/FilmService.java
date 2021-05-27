@@ -23,18 +23,18 @@ public class FilmService {
 	
 	// FilmOne 출력 서비스
 	public Map<String, Object> getFilmOne(int FID){
-		log.debug(Debuging.debug+" FID : "+FID);  // 디버깅 코드
+		log.debug(Debuging.DEBUG+" FID : "+FID);  // 디버깅 코드
 		
 		// FID에 맞는 정보를 Map타입 변수에 저장
 		Map<String, Object> map = filmMapper.selectFilmOne(FID);
-		log.debug(Debuging.debug+" map : "+map);  // 디버깅 코드
+		log.debug(Debuging.DEBUG+" map : "+map);  // 디버깅 코드
 		return map;
 		
 	}
 	
 	// FilmList 출력 서비스
 	public Map<String, Object> getFilmList(Map<String, Object> controllerMap) {
-		log.debug(Debuging.debug+" getFilmList parm map : "+controllerMap); // 디버깅 코드
+		log.debug(Debuging.DEBUG+" getFilmList parm map : "+controllerMap); // 디버깅 코드
 		
 		int currentPage = (Integer)controllerMap.get("currentPage");
 		int rowPerPage = (Integer)controllerMap.get("rowPerPage");
@@ -72,21 +72,21 @@ public class FilmService {
 		serviceMap.put("rating", rating);
 		serviceMap.put("actorSearch", actorSearch);
 		
-		log.debug(Debuging.debug+" serviceMap : "+serviceMap); // 디버깅 코드
+		log.debug(Debuging.DEBUG+" serviceMap : "+serviceMap); // 디버깅 코드
 		
 		int totalRow = filmMapper.selectFilmTotal(serviceMap);
 		int lastPage = totalRow/rowPerPage;
 		if(totalRow % rowPerPage != 0) {
 			lastPage++;
 		}
-		log.debug(Debuging.debug+" totalRow : "+totalRow); // 디버깅 코드
-		log.debug(Debuging.debug+" lastPage : "+lastPage); // 디버깅 코드
+		log.debug(Debuging.DEBUG+" totalRow : "+totalRow); // 디버깅 코드
+		log.debug(Debuging.DEBUG+" lastPage : "+lastPage); // 디버깅 코드
 		
 		List<Map<String, Object>> getFilmList = filmMapper.getFilmList(serviceMap);
-		log.debug(Debuging.debug+" getFilmList : "+getFilmList); // 디버깅 코드
+		log.debug(Debuging.DEBUG+" getFilmList : "+getFilmList); // 디버깅 코드
 		
 		List<String> categoryList = categoryMapper.selectCategoryName();
-		log.debug(Debuging.debug+ " categoryList : "+categoryList); // 디버깅코드
+		log.debug(Debuging.DEBUG+ " categoryList : "+categoryList); // 디버깅코드
 		
 		// 컨트롤러에서 사용하기 위한 맵
 		Map<String, Object> map = new HashMap<>();
@@ -105,8 +105,8 @@ public class FilmService {
 	
 	// 가게 필름 재고 프로시저 서비스
 	public int getFilmCount(int filmId, int storeId){
-		log.debug(Debuging.debug+" filmId : "+filmId); // 디버깅코드
-		log.debug(Debuging.debug+" sotreId : "+storeId); // 디버깅코드
+		log.debug(Debuging.DEBUG+" filmId : "+filmId); // 디버깅코드
+		log.debug(Debuging.DEBUG+" sotreId : "+storeId); // 디버깅코드
 		
 		Map<String, Object> paramMap = new HashMap<>();
 		paramMap.put("filmId", filmId); // 프로시저 in 매개변수
@@ -116,8 +116,8 @@ public class FilmService {
 		
 		List<Integer> list = filmMapper.selectFilmInStock(paramMap);// 프로시저 실행
 		filmCount = (int) paramMap.get("filmCount");// 프로시저에서 out매개변수 filmCount 추출
-		log.debug(Debuging.debug+" filmCount :"+filmCount); // 디버깅코드
-		log.debug(Debuging.debug+" list :"+list); // 디버깅코드
+		log.debug(Debuging.DEBUG+" filmCount :"+filmCount); // 디버깅코드
+		log.debug(Debuging.DEBUG+" list :"+list); // 디버깅코드
 		
 		return filmCount;
 	}

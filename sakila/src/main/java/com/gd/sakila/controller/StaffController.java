@@ -24,7 +24,7 @@ public class StaffController {
 	@GetMapping("/staffList")
 	public String getStaffList(Model model, @RequestParam(value="staffSID", required = false) Integer staffSID) {
 		List<Map<String, Object>> staffList = staffService.getStaffList(staffSID);
-		log.debug(Debuging.debug+" staffList : "+staffList);
+		log.debug(Debuging.DEBUG+" staffList : "+staffList);
 		model.addAttribute("staffList", staffList);
 		model.addAttribute("staffSID",staffSID);
 		return "staffList";

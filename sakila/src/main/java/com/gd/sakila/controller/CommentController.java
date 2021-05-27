@@ -24,10 +24,10 @@ public class CommentController {
 	@PostMapping("/addComment")
 	public String addComent(Comment comment, @RequestParam(value="boardId", required = true) int boardId) {
 		//디버깅 코드
-		log.debug(Debuging.debug+" comment : "+comment.toString());
+		log.debug(Debuging.DEBUG+" comment : "+comment.toString());
 		
 		int addCommentRow = commentService.addComment(comment); // 	댓글 성공하면 1, 실패시 0	
-		log.debug(Debuging.debug+" addCommentRow : "+addCommentRow);//디버깅 코드
+		log.debug(Debuging.DEBUG+" addCommentRow : "+addCommentRow);//디버깅 코드
 		
 		return "redirect:/admin/getBoardOne?boardId="+boardId; // 입력 후 있던 boardOne페이지로 돌아간다.
 	}
@@ -36,10 +36,10 @@ public class CommentController {
 	@GetMapping("/removeComment")
 	public String removeComment(@RequestParam(value="commentId", required = true) int commentId, @RequestParam(value="boardId", required = true) int boardId) {
 		//디버깅 코드
-		log.debug(Debuging.debug+" commentId: "+commentId);
+		log.debug(Debuging.DEBUG+" commentId: "+commentId);
 		
 		int removeCommentRow = commentService.removeComment(commentId);	// 삭제 성공시 1, 실패시 0
-		log.debug(Debuging.debug+" removeCommentRow : " +removeCommentRow);	//디버깅 코드
+		log.debug(Debuging.DEBUG+" removeCommentRow : " +removeCommentRow);	//디버깅 코드
 		
 		return "redirect:/admin/getBoardOne?boardId="+boardId; // 삭제 후 있던 boardOne페이지로 돌아간다.
 	}

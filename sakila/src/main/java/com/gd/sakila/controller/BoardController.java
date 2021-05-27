@@ -30,7 +30,7 @@ public class BoardController {
 	@GetMapping("/modifyBoard")
 	public String modifyBoard(Model model, @RequestParam(value = "boardId", required = true) int boardId) {
 		// 디버깅코드
-		log.debug(Debuging.debug+" modifyBoard boardId : " + boardId);
+		log.debug(Debuging.DEBUG+" modifyBoard boardId : " + boardId);
 		Map<String, Object> map = boardService.getBoardOne(boardId);
 		model.addAttribute("boardMap", map.get("boardMap"));
 		return "modifyBoard";
@@ -38,9 +38,9 @@ public class BoardController {
 	
 	@PostMapping("/modifyBoard")
 	public String modifyBoard(Board board) {
-		log.debug(Debuging.debug+" modifyBoard board : "+board);
+		log.debug(Debuging.DEBUG+" modifyBoard board : "+board);
 		int row = boardService.modifyBoard(board);
-		log.debug(Debuging.debug+"modify row count : "+row);
+		log.debug(Debuging.DEBUG+"modify row count : "+row);
 		if(row == 1) {
 			return "redirect:/admin/getBoardOne?boardId="+board.getBoardId();
 		}
@@ -50,7 +50,7 @@ public class BoardController {
 	@GetMapping("/removeBoard")
 	public String removeBoard(Model model, @RequestParam(value = "boardId", required = true) int boardId) {
 		//디버깅 코드
-		log.debug(Debuging.debug+" boardId : "+boardId);
+		log.debug(Debuging.DEBUG+" boardId : "+boardId);
 		
 		model.addAttribute("boardId", boardId);
 		return "removeBoard";
@@ -59,7 +59,7 @@ public class BoardController {
 	@PostMapping("/removeBoard")
 	public String removeBoard(Board board) {
 		int row = boardService.removeBoard(board);
-		log.debug(Debuging.debug+"remove row cnt : "+row);
+		log.debug(Debuging.DEBUG+"remove row cnt : "+row);
 		if(row >= 1 ) {
 			return "redirect:/admin/getBoardList";
 		}
@@ -68,7 +68,7 @@ public class BoardController {
 	
 	@GetMapping("/addBoard") // addBoard.jsp 페이지로 이동
 	public String addBoard() {
-		log.debug(Debuging.debug+" addBoard");
+		log.debug(Debuging.DEBUG+" addBoard");
 		return "addBoard";
 	}
 	
@@ -90,7 +90,7 @@ public class BoardController {
 		Map<String, Object> map = boardService.getBoardOne(boardId);
 		
 		//디버깅 코드
-		log.debug(Debuging.debug+" map : "+map); 
+		log.debug(Debuging.DEBUG+" map : "+map); 
 		
 		model.addAttribute("boardMap", map.get("boardMap"));
 		model.addAttribute("commentList", map.get("commentList"));
@@ -101,9 +101,9 @@ public class BoardController {
 	
 	@GetMapping("/getBoardList")
 	public String getBoardList(Model model, @RequestParam(value="currentPage", defaultValue = "1" ) int currentPage, @RequestParam(value="rowPerPage", defaultValue = "10") int rowPerPage, @RequestParam(value="searchWord", required = false) String searchWord){		
-		log.debug(Debuging.debug+" currentPage : "+currentPage); // 디버깅코드
-		log.debug(Debuging.debug+" rowPerPage : "+rowPerPage); // 디버깅코드
-		log.debug(Debuging.debug+" searchWord : "+searchWord); // 디버깅코드
+		log.debug(Debuging.DEBUG+" currentPage : "+currentPage); // 디버깅코드
+		log.debug(Debuging.DEBUG+" rowPerPage : "+rowPerPage); // 디버깅코드
+		log.debug(Debuging.DEBUG+" searchWord : "+searchWord); // 디버깅코드
 		
 		Map<String, Object> map = boardService.getBoardList(currentPage, rowPerPage, searchWord);
 		model.addAttribute("currentPage", currentPage);
@@ -112,7 +112,7 @@ public class BoardController {
 		model.addAttribute("boardList", map.get("boardList"));
 		
 		//디버깅 코드
-		log.debug(Debuging.debug+" map : "+map);
+		log.debug(Debuging.DEBUG+" map : "+map);
 		
 		return "getBoardList";
 	}

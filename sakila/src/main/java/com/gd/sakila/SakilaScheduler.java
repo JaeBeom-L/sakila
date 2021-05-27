@@ -17,6 +17,6 @@ public class SakilaScheduler {
 	@Scheduled(cron ="0 0 0 1 * *") // (cron = *:초, *:분, *:시, *:일, *:요일, *:월, *:년 이지만 생략 가능)
 	public void modifyCustomerActive() {
 		customerService.modifyCustomerActiveByScheduler();
-		log.debug(Debuging.debug+"고객 활동사항 수정 스케줄러 실행"); 
+		log.debug(Debuging.DEBUG+"고객 활동사항 수정 스케줄러 실행"); 
 	}
 }

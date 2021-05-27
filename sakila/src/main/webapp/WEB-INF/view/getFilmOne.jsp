@@ -42,7 +42,7 @@
 		                <td>${getFilmOneMap.releaseYear}</td>
 		            </tr>
 		            <tr>
-		                <td>languageId :</td>
+		                <td>language :</td>
 		                <td>${getFilmOneMap.language}</td>
 		            </tr>
 		            <tr>
@@ -66,7 +66,10 @@
 		                <td>${getFilmOneMap.rating}</td>
 		            </tr>
 		            <tr>
-		                <td>actors :</td>
+		                <td>
+		                	actors :
+		                	<a href="${pageContext.request.contextPath}/admin/addActors?FID=${getFilmOneMap.filmId}"><button class="btn btn-secondary">modify actors</button></a>	
+		                </td>
 		                <td>${getFilmOneMap.actors}</td>
 		            </tr>
 		             <tr>

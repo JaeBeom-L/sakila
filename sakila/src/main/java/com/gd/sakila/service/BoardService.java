@@ -35,23 +35,23 @@ public class BoardService {
 	//board 수정 서비스
 	public int modifyBoard(Board board) {
 		// 디버깅 코드
-		log.debug(Debuging.debug+" modifyBoard board: "+board.toString());
+		log.debug(Debuging.DEBUG+" modifyBoard board: "+board.toString());
 		return boardMapper.updateBoard(board);
 	}
 	
 	//board 삭제 서비스
 	public int removeBoard(Board board) {
 		// 디버깅 코드
-		log.debug(Debuging.debug+" removeBoard board: "+board.toString());
+		log.debug(Debuging.DEBUG+" removeBoard board: "+board.toString());
 		//1. 게시글 삭제
 		int boardRow = boardMapper.deleteBoard(board);
-		log.debug(Debuging.debug+" remove BoardRow : "+boardRow);
+		log.debug(Debuging.DEBUG+" remove BoardRow : "+boardRow);
 		if(boardRow == 0) {  // 게시글 삭제 실패시 0으로 리턴하고 메서드를 끝낸다.
 			return 0;
 		}
 		//2. 댓글 삭제
 		int commentRow = commentMapper.deleteCommentByBoardId(board.getBoardId());
-		log.debug(Debuging.debug+" remove CommentRow : "+commentRow);
+		log.debug(Debuging.DEBUG+" remove CommentRow : "+commentRow);
 		
 		//3. 물리적 파일 삭제(/resource/안에 파일)
 		List<Boardfile> boardfileList = boardfileMapper.selectBoardfileByBoardId(board.getBoardId());
@@ -66,7 +66,7 @@ public class BoardService {
 				
 		//4. 파일 테이블 행 삭제
 		int boardfileRow = boardfileMapper.deleteBoardfileByBoardId(board.getBoardId());
-		log.debug(Debuging.debug+" remove boardfileRow : "+boardfileRow);
+		log.debug(Debuging.DEBUG+" remove boardfileRow : "+boardfileRow);
 		
 		return commentRow+boardRow+boardfileRow;
 	}
@@ -75,7 +75,7 @@ public class BoardService {
 	// board 등록 서비스
 	public void addBoard(BoardForm boardForm) {
 		//디버깅 코드
-		log.debug(Debuging.debug+" boardForm : "+boardForm);
+		log.debug(Debuging.DEBUG+" boardForm : "+boardForm);
 		
 		//1) 
 		Board board = boardForm.getBoard(); // boardId 값이 null
@@ -99,7 +99,7 @@ public class BoardService {
 				boardfile.setBoardfileSize(f.getSize()); // boardfile에 파일 크기 저장
 				boardfile.setBoardfileType(f.getContentType()); // boardfile에 파일 타입을 저장
 				
-				log.debug(Debuging.debug+" boardfile : "+boardfile);// 디버깅 코드
+				log.debug(Debuging.DEBUG+" boardfile : "+boardfile);// 디버깅 코드
 				boardfileMapper.insertBoardfile(boardfile);// boardfile 정보를 저장
 				
 				//2-2) 파일을 저장
@@ -119,16 +119,16 @@ public class BoardService {
 	//boardOne 자세히보기, 댓글목록 서비스
 	public Map<String, Object> getBoardOne(int boardId) {
 		//디버깅 코드
-		log.debug(Debuging.debug+" boardId : "+boardId);
+		log.debug(Debuging.DEBUG+" boardId : "+boardId);
 		//1. 상세보기
 		Map<String, Object> boardMap = boardMapper.selectBoardOne(boardId);	
 		//2. 파일 리스트
 		List<Boardfile> boardfileList = boardfileMapper.selectBoardfileByBoardId(boardId);
-		log.debug(Debuging.debug+" boardfileList : "+boardfileList);
+		log.debug(Debuging.DEBUG+" boardfileList : "+boardfileList);
 		//3. 댓글 목록
-		log.debug(Debuging.debug+" map : "+boardMap);
+		log.debug(Debuging.DEBUG+" map : "+boardMap);
 		List<Comment> commentList =commentMapper.selectCommentListByBoard(boardId);
-		log.debug(Debuging.debug+" list size() :" + commentList.size());
+		log.debug(Debuging.DEBUG+" list size() :" + commentList.size());
 
 		Map<String, Object> map = new HashMap<>();
 		map.put("boardMap", boardMap);
@@ -148,8 +148,8 @@ public class BoardService {
 		}
 		
 		//디버깅 코드
-		log.debug(Debuging.debug+" boardToTal : "+boardTotal);
-		log.debug(Debuging.debug+" lastPage : "+lastPage); 
+		log.debug(Debuging.DEBUG+" boardToTal : "+boardTotal);
+		log.debug(Debuging.DEBUG+" lastPage : "+lastPage); 
 		
 		// 2.
 		Page page = new Page(); // page 변수에 시작행, 찾는 단어, 보여줄 행의 수 탑재
@@ -165,9 +165,9 @@ public class BoardService {
 		map.put("boardList", boardList);
 		
 		// 디버깅 코드
-		log.debug(Debuging.debug+" page : "+page);
-		log.debug(Debuging.debug+" boardList : "+boardList);
-		log.debug(Debuging.debug+" map : "+map);
+		log.debug(Debuging.DEBUG+" page : "+page);
+		log.debug(Debuging.DEBUG+" boardList : "+boardList);
+		log.debug(Debuging.DEBUG+" map : "+map);
 		
 		return map;
 	}

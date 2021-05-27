@@ -16,8 +16,8 @@ public class CustomerService {
 	@Autowired CustomerMapper customerMapper;
 	
 	public void modifyCustomerActiveByScheduler() {
-		log.debug(Debuging.debug+" 고객 활동상태 수정 스케줄러 실행");
+		log.debug(Debuging.DEBUG+" 고객 활동상태 수정 스케줄러 실행");
 		int row = customerMapper.updateCustomerActiveByScheduler();
-		log.debug(Debuging.debug+" 스케줄러 수정 된 고객 수 : "+row);
+		log.debug(Debuging.DEBUG+" 스케줄러 수정 된 고객 수 : "+row);
 	}
 }

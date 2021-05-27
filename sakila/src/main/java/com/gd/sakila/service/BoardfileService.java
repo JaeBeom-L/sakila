@@ -22,8 +22,8 @@ public class BoardfileService {
 	@Autowired BoardfileMapper boardfileMapper;
 	
 	public int addBoardfile(MultipartFile multipartFile, int boardId) {
-		log.debug(Debuging.debug+" multipartFile : "+multipartFile);
-		log.debug(Debuging.debug+" boardId : "+boardId);
+		log.debug(Debuging.DEBUG+" multipartFile : "+multipartFile);
+		log.debug(Debuging.DEBUG+" boardId : "+boardId);
 		
 		int p = multipartFile.getOriginalFilename().lastIndexOf(".");
 		String ext = multipartFile.getOriginalFilename().substring(p).toLowerCase();
@@ -55,7 +55,7 @@ public class BoardfileService {
 	}
 	
 	public void removeBoardfileOne(Boardfile boardfile) {
-		log.debug(Debuging.debug+" remove boardfileId : "+boardfile.getBoardfileId());
+		log.debug(Debuging.DEBUG+" remove boardfileId : "+boardfile.getBoardfileId());
 		
 		//1) 물리적 파일 삭제
 		File temp = new File("");
@@ -67,7 +67,7 @@ public class BoardfileService {
 		
 		//2) db삭제
 		int removeFileRow = boardfileMapper.deleteBoardfileOne(boardfile.getBoardfileId());
-		log.debug(Debuging.debug+"remove removeFileRow : "+removeFileRow);
+		log.debug(Debuging.DEBUG+"remove removeFileRow : "+removeFileRow);
 		
 	}
 }

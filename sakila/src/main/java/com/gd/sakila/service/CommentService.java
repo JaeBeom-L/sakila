@@ -19,20 +19,20 @@ public class CommentService {
 	
 	// 댓글 입력 서비스
 	public int addComment(Comment comment) {		
-		log.debug(Debuging.debug+" comment : "+comment);//디버깅 코드
+		log.debug(Debuging.DEBUG+" comment : "+comment);//디버깅 코드
 		
 		int addCommentRow = commentMapper.insertComment(comment);	// 	댓글 성공하면 1, 실패시 0	
-		log.debug(Debuging.debug+" addCommentRow : "+addCommentRow);//디버깅 코드
+		log.debug(Debuging.DEBUG+" addCommentRow : "+addCommentRow);//디버깅 코드
 		
 		return addCommentRow;
 	}
 	
 	// 댓글 삭제 서비스
 	public int removeComment(int commentId) {	
-		log.debug(Debuging.debug+" commentId : "+commentId);// 디버깅 코드
+		log.debug(Debuging.DEBUG+" commentId : "+commentId);// 디버깅 코드
 		
 		int removeCommentRow = commentMapper.deleteCommentByCommentId(commentId); // 삭제 성공시 1, 실패시 0
-		log.debug(Debuging.debug+" removeCommentRow : "+removeCommentRow);// 디버깅 코드
+		log.debug(Debuging.DEBUG+" removeCommentRow : "+removeCommentRow);// 디버깅 코드
 		
 		return removeCommentRow;
 	}
