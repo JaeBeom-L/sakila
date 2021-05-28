@@ -27,12 +27,12 @@
 				    	<!--  category 콤보박스  -->
 				    	<select name="category" class="custom-select-lg" id="category">
 				    		<option value="">category</option>
-			 				<c:forEach var="name" items="${categoryList}">
-			 					<c:if test="${name == category}">
-			 						<option value="${name}" selected="selected">${name}</option>
+			 				<c:forEach var="c" items="${categoryList}">
+			 					<c:if test="${c.name == category}">
+			 						<option value="${c.name}" selected="selected">${c.name}</option>
 			 					</c:if>
-			 					<c:if test="${name != category}">
-			 						<option value="${name}">${name}</option>
+			 					<c:if test="${c.name != category}">
+			 						<option value="${c.name}">${c.name}</option>
 			 					</c:if>
 			 				</c:forEach>
 				    	</select>
@@ -114,6 +114,8 @@
 		            <li class="next"><a href="${pageContext.request.contextPath}/admin/getFilmList?currentPage=${currentPage+1}&titleSearch=${titleSearch}&price=${price}&category=${category}&rating=${rating}&actorSearch=${actorSearch}">다음</a></li>
 		        </c:if>
     		</ul>
+    		
+    		<a href="${pageContext.request.contextPath}/admin/addFilm" class="btn btn-secondary">add film</a>
 	</div>
 </body>
 </html>

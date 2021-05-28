@@ -27,7 +27,7 @@ public class ActorService {
 		
 		int deleteRow = actorMapper.deleteActorsByFilmActor(FID); // FID에 출연하는 배우 모두 삭제	
 		int insertRow = 0;
-		for(int i : ck) { // ck로 넘어온 actor_id를 FID에 맞는 출여하는 배우들을 다시 등록과정을 반복한다.
+		for(int i : ck) { // ck로 넘어온 actor_id를 FID에 맞는 출여하는 배우들을 다시 등록과정을 반복한다.  
 			Map<String, Object> map = new HashMap<>();
 			map.put("FID", FID);
 			map.put("actorId", i);

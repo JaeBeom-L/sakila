@@ -7,11 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gd.sakila.Debuging;
 import com.gd.sakila.service.FilmService;
+import com.gd.sakila.vo.FilmForm;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -20,6 +22,25 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/admin")
 public class FilmController {
 	@Autowired FilmService filmService;
+	
+	@GetMapping("/addFilm")
+	public String addFilm(Model model) {
+		Map<String, Object> map = filmService.selectMap();
+		log.debug(Debuging.DEBUG+" controller에서 map : "+map);
+		
+		model.addAttribute("categoryList", map.get("categoryList"));
+		model.addAttribute("languageList", map.get("languageList"));
+		
+		return "addFilm";
+	}
+	
+	@PostMapping("/addFilm")
+	public String addFilm(FilmForm filmForm) {
+		log.debug(Debuging.DEBUG+" filmForm : "+filmForm);
+		
+		int filmId = filmService.addFilm(filmForm); // 등록한 film의 filmId
+		return "redirect:/admin/getFilmOne?FID="+filmId;
+	}
 	
 	@GetMapping("/getFilmOne")
 	public String getFilmOne(Model model, @RequestParam(value="FID", required = true) int FID) {

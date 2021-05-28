@@ -11,6 +11,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.gd.sakila.Debuging;
 import com.gd.sakila.mapper.CategoryMapper;
 import com.gd.sakila.mapper.FilmMapper;
+import com.gd.sakila.mapper.LanguageMapper;
+import com.gd.sakila.vo.Category;
+import com.gd.sakila.vo.Film;
+import com.gd.sakila.vo.FilmForm;
+import com.gd.sakila.vo.Language;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -20,6 +25,39 @@ import lombok.extern.slf4j.Slf4j;
 public class FilmService {
 	@Autowired FilmMapper filmMapper;
 	@Autowired CategoryMapper categoryMapper;
+	@Autowired LanguageMapper languageMapper;
+	
+	// addFilm에 category, language list 전달 서비스
+	public Map<String, Object> selectMap(){
+		List<Category> categoryList = categoryMapper.selectCategoryName();
+		List<Language> languageList = languageMapper.selectLanguageName();
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("categoryList", categoryList);
+		map.put("languageList", languageList);
+		log.debug(Debuging.DEBUG+" selectMap : "+map);
+		
+		return map;
+		
+	}
+	
+	// addFilm 서비스 입력한 filmId를 리턴
+	public int addFilm(FilmForm filmForm) {
+		log.debug(Debuging.DEBUG+" filmForm : "+filmForm);
+		
+		Film film = filmForm.getFilm();
+		filmMapper.insertFilm(film); // filmId가 생성된 후 film.setFilmId호출
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("categoryId", filmForm.getCategory().getCategoryId());
+		map.put("filmId", film.getFilmId());
+		
+		log.debug(Debuging.DEBUG+" insertFilm map : "+map);
+		
+		filmMapper.insertFilmCategory(map);
+		
+		return film.getFilmId();
+	}
 	
 	// FilmOne 출력 서비스
 	public Map<String, Object> getFilmOne(int FID){
@@ -85,7 +123,7 @@ public class FilmService {
 		List<Map<String, Object>> getFilmList = filmMapper.getFilmList(serviceMap);
 		log.debug(Debuging.DEBUG+" getFilmList : "+getFilmList); // 디버깅 코드
 		
-		List<String> categoryList = categoryMapper.selectCategoryName();
+		List<Category> categoryList = categoryMapper.selectCategoryName();
 		log.debug(Debuging.DEBUG+ " categoryList : "+categoryList); // 디버깅코드
 		
 		// 컨트롤러에서 사용하기 위한 맵
