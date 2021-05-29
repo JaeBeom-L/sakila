@@ -1,6 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gd.sakila.mapper.CustomerMapper">
+	
+	<select id="selectRentalListByCustomerId" resultType="java.util.Map" parameterType="Integer">
+		SELECT 
+		   r.rental_id rentalId, 
+		   i.inventory_id inventoryId,
+		   f.title title, 
+		   f.film_id filmId,
+		   r.rental_date rentalDate, 
+		   r.return_date returnDate, 
+		   f.rental_duration rentalDuration,
+		   DATEDIFF(CURRENT_DATE(), r.rental_date)-f.rental_duration overdueDate,
+		   IF(r.return_date IS NULL AND DATEDIFF(CURRENT_DATE(), r.rental_date) > f.rental_duration , 'T', '') overdue
+		FROM 
+			rental r LEFT JOIN inventory i ON r.inventory_id=i.inventory_id JOIN film f ON f.film_id=i.film_id 
+		<where>
+			customer_id=#{customerId}
+		</where>
+		ORDER BY
+			return_date asc
+	</select>
+	
+	<select id="selectCustomerOne" resultType="java.util.Map" parameterType="Integer">
+		SELECT 
+			p.customer_id customerId,
+		    cl.SID storeId,
+		    cl.name,
+		    SUM(p.amount) sumAmount,
+		    cl.country country,
+		    cl.city city,
+		    cl.address address,
+		    cl.phone phone,
+		    cl.notes active
+		FROM 
+			payment p left JOIN customer_list cl ON cl.ID = p.customer_id
+		<where>
+			p.customer_id=#{customerId}
+		</where>
+		GROUP BY 
+		p.customer_id;
+	</select>
+	
+	<select id="selectCustomerTotal" resultType="Integer" parameterType="java.util.Map">
+		SELECT 
+			COUNT(*)
+		FROM customer
+		<where>
+			<if test="searchWord != null">
+				AND CONCAT(first_name, ' ' , last_name) LIKE CONCAT('%', #{searchWord}, '%')
+			</if>
+			
+			<if test="storeId != 0">
+				AND store_id = #{storeId}
+			</if>
+		</where>
+	</select>
+	
+	<select id="selectCustomerList" resultType="java.util.Map" parameterType="java.util.Map">
+		SELECT 
+			customer_id customerId,
+			CONCAT(first_name, ' ' , last_name) name, 
+			email,
+			store_id storeId,
+			if(customer_id IN(SELECT p.customer_id
+									FROM payment p LEFT JOIN rental r ON p.rental_id=r.rental_id 
+									JOIN inventory i ON r.inventory_id=i.inventory_id 
+									JOIN film f ON i.film_id=f.film_id 
+									WHERE DATEDIFF(r.return_date, r.rental_date) > f.rental_duration
+									GROUP BY p.customer_id
+									HAVING COUNT(p.customer_id)>=20),'BLACK', '') blackList,
+			if(customer_id IN(SELECT p.customer_id
+								   FROM payment AS p
+								   WHERE DATE(p.payment_date) BETWEEN DATE_SUB(CURRENT_DATE(), INTERVAL 1 MONTH) AND CURRENT_DATE()
+								   GROUP BY customer_id
+								   HAVING SUM(p.amount) > 10
+								   AND COUNT(customer_id) > 5), 'VIP','') VIP
+		FROM customer
+		<where>
+			<if test="searchWord != null">
+				AND CONCAT(first_name, ' ' , last_name) LIKE CONCAT('%', #{searchWord}, '%')
+			</if>
+			
+			<if test="storeId != 0">
+				AND store_id = #{storeId}
+			</if>
+		</where>
+		LIMIT #{beginRow}, #{rowPerPage}
+	</select>
+	
 	<update id="updateCustomerActiveByScheduler">
 		UPDATE customer 
 			SET active = 0
