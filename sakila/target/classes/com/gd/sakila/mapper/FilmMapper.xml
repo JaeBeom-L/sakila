@@ -2,6 +2,50 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gd.sakila.mapper.FilmMapper">
 	
+	<delete id="deleteFilmCategory" parameterType="Integer">
+		DELETE
+		FROM
+			film_category
+		<where>
+			film_id=#{filmId}
+		</where>
+	</delete>
+	
+	<delete id="deleteFilmActor" parameterType="Integer">
+		DELETE
+		FROM
+			film_actor
+		<where>
+			film_id=#{filmId}
+		</where>
+	</delete>
+	
+	<delete id="deleteFilm" parameterType="Integer">
+		DELETE
+		FROM
+			film
+		<where>
+			film_id=#{filmId}
+		</where>
+	</delete>
+	
+	<update id="updateFilmCategory" parameterType="java.util.Map">
+		UPDATE 
+			film_category 
+		SET category_id=#{categoryId} 
+		<where>
+			film_id=#{filmId}
+		</where>
+	</update>
+	
+	<update id="updateFilm" parameterType="com.gd.sakila.vo.Film">
+		UPDATE 
+			film SET title=#{title}, description=#{description}, length=#{length}, rating=#{rating}, rental_rate=#{rentalRate} 
+		<where>
+			film_id=#{filmId}
+		</where>
+	</update>
+	
 	<insert id="insertFilmCategory" parameterType="java.util.Map">
 		INSERT INTO
 			film_category(

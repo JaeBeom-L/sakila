@@ -46,7 +46,7 @@
 	            		<c:if test="${c.blackList == 'BLACK'}">
 	            			<i class="fas fa-file"></i>BLACK
 	            		</c:if>
-	            		<c:if test="${c.VIP == 'VIP'}">
+	            		<c:if test="${c.VIP == 'VIP' && c.blackList != 'BLACK'}">
 	            			<i class="fas fa-file"></i>VIP
 	            		</c:if>
 	            	</td>

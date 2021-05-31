@@ -23,6 +23,35 @@ import lombok.extern.slf4j.Slf4j;
 public class FilmController {
 	@Autowired FilmService filmService;
 	
+	@GetMapping("/removeFilm")
+	public String removeFilm(@RequestParam(value="filmId", required = true) int filmId) {
+		log.debug(Debuging.DEBUG+" filmId : "+filmId);
+		filmService.removeFilm(filmId);
+		return "redirect:/admin/getFilmList";
+	}
+	
+	@GetMapping("/modifyFilm")
+	public String modifyFilm(Model model, @RequestParam(value="filmId", required = true) int filmId) {
+		log.debug(Debuging.DEBUG+" filmId : "+filmId);
+		
+		Map<String, Object> filmOneMap = filmService.getFilmOne(filmId);
+		Map<String, Object> map = filmService.selectMap();
+		
+		model.addAttribute("filmId", filmId);
+		model.addAttribute("filmOneMap", filmOneMap);
+		model.addAttribute("categoryList", map.get("categoryList"));
+		return "modifyFilm";		
+	}
+	
+	@PostMapping("/modifyFilm")
+	public String modifyFilm(FilmForm filmForm) {
+		log.debug(Debuging.DEBUG+" filmForm : "+filmForm);
+		
+		filmService.modify(filmForm);
+		
+		return "redirect:/admin/getFilmOne?FID="+filmForm.getFilm().getFilmId();
+	}
+	
 	@GetMapping("/addFilm")
 	public String addFilm(Model model) {
 		Map<String, Object> map = filmService.selectMap();

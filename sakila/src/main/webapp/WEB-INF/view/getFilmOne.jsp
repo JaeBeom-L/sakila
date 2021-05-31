@@ -92,6 +92,8 @@
 		            </tr>
 		        </tbody>
 		    </table>
+		    <a href="${pageContext.request.contextPath}/admin/modifyFilm?filmId=${getFilmOneMap.filmId}" class="btn btn-secondary">수정</a>
+		    <a href="${pageContext.request.contextPath}/admin/removeFilm?filmId=${getFilmOneMap.filmId}" class="btn btn-secondary">삭제</a>
 		   </div>
 	   </div>
 </body>

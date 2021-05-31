@@ -27,6 +27,27 @@ public class FilmService {
 	@Autowired CategoryMapper categoryMapper;
 	@Autowired LanguageMapper languageMapper;
 	
+	public void removeFilm(int filmId) {
+		log.debug(Debuging.DEBUG+" filmId : "+filmId);
+		filmMapper.deleteFilmActor(filmId);
+		filmMapper.deleteFilmCategory(filmId);
+		filmMapper.deleteFilm(filmId);		
+	}
+	
+	public void modify(FilmForm filmForm) {
+		log.debug(Debuging.DEBUG+" filmForm : "+filmForm);
+		filmMapper.updateFilm(filmForm.getFilm());
+		
+		Map<String, Object> modifyCategoryMap = new HashMap<>();
+		modifyCategoryMap.put("categoryId", filmForm.getCategory().getCategoryId());
+		modifyCategoryMap.put("filmId", filmForm.getFilm().getFilmId());
+		
+		log.debug(Debuging.DEBUG+" category modify map : "+modifyCategoryMap);
+		
+		filmMapper.updateFilmCategory(modifyCategoryMap);
+			
+	}
+	
 	// addFilm에 category, language list 전달 서비스
 	public Map<String, Object> selectMap(){
 		List<Category> categoryList = categoryMapper.selectCategoryName();
