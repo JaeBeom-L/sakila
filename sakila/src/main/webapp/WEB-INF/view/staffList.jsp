@@ -47,7 +47,7 @@
 	            	<td>${b.ID}</td>
 	            	<td>${b.name}</td>
 	            	<td>${b.address}</td>
-	            	<td></td>
+	            	<td>${b.zipcode}</td>
 	            	<td>${b.phone}</td>
 	            	<td>${b.city}</td>
 	            	<td>${b.country}</td>
@@ -56,7 +56,7 @@
           	</c:forEach>
         </tbody>
     </table>
-    
+    <a href="${pageContext.request.contextPath}/admin/addStaff" class="btn btn-secondary">add staff</a>
 </div>
 </body>
 </html>

@@ -1,34 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.gd.sakila.mapper.FilmMapper">
-	
-	<delete id="deleteFilmCategory" parameterType="Integer">
-		DELETE
-		FROM
-			film_category
-		<where>
-			film_id=#{filmId}
-		</where>
-	</delete>
-	
-	<delete id="deleteFilmActor" parameterType="Integer">
-		DELETE
-		FROM
-			film_actor
-		<where>
-			film_id=#{filmId}
-		</where>
-	</delete>
-	
-	<delete id="deleteFilm" parameterType="Integer">
-		DELETE
-		FROM
-			film
-		<where>
-			film_id=#{filmId}
-		</where>
-	</delete>
-	
+<mapper namespace="com.gd.sakila.mapper.FilmMapper">	
 	<update id="updateFilmCategory" parameterType="java.util.Map">
 		UPDATE 
 			film_category 

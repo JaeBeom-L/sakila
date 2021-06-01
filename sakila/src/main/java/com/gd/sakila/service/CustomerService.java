@@ -9,7 +9,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.gd.sakila.Debuging;
+import com.gd.sakila.mapper.AddressMapper;
 import com.gd.sakila.mapper.CustomerMapper;
+import com.gd.sakila.vo.Address;
+import com.gd.sakila.vo.Customer;
+import com.gd.sakila.vo.CustomerForm;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -18,6 +22,25 @@ import lombok.extern.slf4j.Slf4j;
 @Transactional
 public class CustomerService {
 	@Autowired CustomerMapper customerMapper;
+	@Autowired AddressMapper addressMapper;
+	
+	public void addCustomer(CustomerForm customerForm) {
+		log.debug(Debuging.DEBUG+" customerForm : "+customerForm);
+		
+		Address address = customerForm.getAddress();
+		log.debug(Debuging.DEBUG+" address : "+address);
+		addressMapper.insertAdress(address);
+		
+		int addressId = customerForm.getAddress().getAddressId();
+		log.debug(Debuging.DEBUG+ " addressId : "+addressId);
+		
+		Customer customer = customerForm.getCustomer();
+		customer.setAddressId(addressId);
+		log.debug(Debuging.DEBUG+" customer : "+customer);
+		
+		customerMapper.insertCustomer(customer);
+		
+	}
 	
 	public void modifyCustomerActiveByScheduler() {
 		log.debug(Debuging.DEBUG+" 고객 활동상태 수정 스케줄러 실행");

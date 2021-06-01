@@ -1,6 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gd.sakila.mapper.CustomerMapper">
+
+	<insert id="insertCustomer" parameterType="com.gd.sakila.vo.Customer">
+		INSERT INTO
+			customer(
+				store_id,
+				first_name,
+				last_name,
+				email,
+				address_id,
+				active,
+				create_date
+			)VALUES(
+				#{storeId},
+				#{firstName},
+				#{lastName},
+				#{email},
+				#{addressId},
+				1,
+				NOW()
+			)
+	</insert>
 	
 	<select id="selectRentalListByCustomerId" resultType="java.util.Map" parameterType="Integer">
 		SELECT 
@@ -24,7 +45,7 @@
 	
 	<select id="selectCustomerOne" resultType="java.util.Map" parameterType="Integer">
 		SELECT 
-			p.customer_id customerId,
+			cl.ID customerId,
 		    cl.SID storeId,
 		    cl.name,
 		    SUM(p.amount) sumAmount,
@@ -34,9 +55,9 @@
 		    cl.phone phone,
 		    cl.notes active
 		FROM 
-			payment p left JOIN customer_list cl ON cl.ID = p.customer_id
+			customer_list cl left JOIN payment p ON cl.ID = p.customer_id
 		<where>
-			p.customer_id=#{customerId}
+			cl.ID=#{customerId}
 		</where>
 		GROUP BY 
 		p.customer_id;

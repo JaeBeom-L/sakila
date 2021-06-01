@@ -5,8 +5,11 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.gd.sakila.vo.Customer;
+
 @Mapper
 public interface CustomerMapper {
+	int insertCustomer(Customer customer);
 	int updateCustomerActiveByScheduler();
 	int selectCustomerTotal(Map<String, Object> map);
 	Map<String, Object> selectCustomerOne(int customerId);

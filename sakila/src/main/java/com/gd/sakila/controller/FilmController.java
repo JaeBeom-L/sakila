@@ -23,13 +23,6 @@ import lombok.extern.slf4j.Slf4j;
 public class FilmController {
 	@Autowired FilmService filmService;
 	
-	@GetMapping("/removeFilm")
-	public String removeFilm(@RequestParam(value="filmId", required = true) int filmId) {
-		log.debug(Debuging.DEBUG+" filmId : "+filmId);
-		filmService.removeFilm(filmId);
-		return "redirect:/admin/getFilmList";
-	}
-	
 	@GetMapping("/modifyFilm")
 	public String modifyFilm(Model model, @RequestParam(value="filmId", required = true) int filmId) {
 		log.debug(Debuging.DEBUG+" filmId : "+filmId);

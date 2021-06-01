@@ -75,7 +75,7 @@
         </c:if>
     </ul>
     <div>
-        <a class="btn btn-default" href="${pageContext.request.contextPath}/admin/addBoard">add customer</a>
+        <a class="btn btn-default" href="${pageContext.request.contextPath}/admin/addCustomer">add customer</a>
     </div>
     
 </div>

@@ -27,13 +27,6 @@ public class FilmService {
 	@Autowired CategoryMapper categoryMapper;
 	@Autowired LanguageMapper languageMapper;
 	
-	public void removeFilm(int filmId) {
-		log.debug(Debuging.DEBUG+" filmId : "+filmId);
-		filmMapper.deleteFilmActor(filmId);
-		filmMapper.deleteFilmCategory(filmId);
-		filmMapper.deleteFilm(filmId);		
-	}
-	
 	public void modify(FilmForm filmForm) {
 		log.debug(Debuging.DEBUG+" filmForm : "+filmForm);
 		filmMapper.updateFilm(filmForm.getFilm());

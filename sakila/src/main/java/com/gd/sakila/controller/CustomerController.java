@@ -7,11 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gd.sakila.Debuging;
 import com.gd.sakila.service.CustomerService;
+import com.gd.sakila.vo.CustomerForm;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -20,6 +22,20 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/admin")
 public class CustomerController {
 	@Autowired CustomerService customerService;
+	
+	@GetMapping("/addCustomer")
+	public String addStaff() {
+		return "addCustomer";
+	}
+	
+	@PostMapping("/addCustomer")
+	public String addStaff(CustomerForm customerForm) {
+		log.debug(Debuging.DEBUG+" customerForm : "+customerForm);
+		
+		customerService.addCustomer(customerForm);
+		
+		return "redirect:/admin/getCustomerList"; 
+	}
 	
 	@GetMapping("/getCustomerOne")
 	public String getCustomerOne(Model model, @RequestParam(value="customerId", required = true) int customerId) {

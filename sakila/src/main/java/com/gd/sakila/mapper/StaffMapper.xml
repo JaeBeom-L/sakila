@@ -1,6 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gd.sakila.mapper.StaffMapper">
+	
+	<insert id="insertStaff" parameterType="com.gd.sakila.vo.Staff">	
+		INSERT INTO
+			staff(
+				first_name,
+				last_name,
+				address_id,
+				picture,
+				email,
+				store_id,
+				active,
+				username,
+				password
+			)VALUES(
+				#{firstName},
+				#{lastName},
+				#{addressId},
+				#{picture},
+				#{email},
+				#{storeId},
+				1,
+				#{username},
+				PASSWORD(#{password})
+			)
+	</insert>
+	
 	<select id="selectStaffByLogin" parameterType="com.gd.sakila.vo.Staff" resultType="com.gd.sakila.vo.Staff">
 		SELECT
 			staff_id staffId,
@@ -18,7 +44,7 @@
 			ID, 
 			name, 
 			address, 
-			`zip code`, 
+			`zip code` zipcode, 
 			phone,
 			city, 
 			country, 
