@@ -11,6 +11,9 @@
 <!-- Optional theme -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<style>
+	.span{color: red}
+</style>
 <!-- jquery를 사용하기위한 CDN주소 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
@@ -44,6 +47,47 @@ $(document).ready(function(){
 			}
 		}); 
 	});
+	
+	// 정규식
+	let numberCode = /^[0-9]+$/;
+	let emailCode = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
+	
+	$('#btn').click(function() {
+		console.log(numberCode.test($('#postalCode').val()));
+       	if($('#firstName').val() == ''){
+       		$('#firstNameCheck').append('firstName을 입력해주세요');
+       		$('#fisrtName').focus();
+       	}else if($('#lastName').val() == ''){
+       		$('#lastNameCheck').append('lastName을 입력해주세요');
+       		$('#lastName').focus();
+       	}else if($('#email').val() == ''){
+       		$('#emailCheck').append('email을 입력해주세요');
+       		$('#picture').focus();
+       	}else if(!emailCode.test($('#email').val())){
+       		$('#emailCheck').append('email을 정확히 입력해주세요');
+       		$('#picture').focus();       	
+       	}else if($('#city').text() == ''){
+       		$('#addressCheck').append('city를 입력해주세요');
+       	}else if($('#district').val() == ''){
+       		$('#districtCheck').append('district를 입력해주세요');
+       		$('#district').focus();
+       	}else if($('#postalCode').val() == ''){
+       		$('#postalCodeCheck').append('postalCode를 입력해주세요');
+       		$('#postalCode').focus();
+       	}else if(!numberCode.test($('#postalCode').val())){
+       		$('#postalCodeCheck').append('postalCode를 정확하게 입력해주세요');
+       		$('#postalCode').focus();      	
+		}else if($('#phone').val() == ''){
+       		$('#phoneCheck').append('phone를 입력해주세요');
+       		$('#phone').focus();
+       	}else if(!numberCode.test($('#phone').val())){
+       		$('#phoneCheck').append('phone를 정확히 입력해주세요');
+       		$('#phone').focus();		
+		}else{
+       		$('#addForm').submit();
+       	}
+	});
+	
 });
 </script>
 <title>add customer</title>
@@ -54,13 +98,13 @@ $(document).ready(function(){
         <h1>add customer</h1>
         <form id="addForm" action="${pageContext.request.contextPath}/admin/addCustomer" method="post">    
             <div class="form-group">
-                <label for="firstName">firstName :</label> <input class="form-control" name="customer.firstName" id="firstName" type="text" />
+                <label for="firstName">firstName :</label><span id="firstNameCheck" class="span"></span> <input class="form-control" name="customer.firstName" id="firstName" type="text" />
             </div>
             <div class="form-group">
-                <label for="lastName">lastName :</label> <input class="form-control" name="customer.lastName" id="lastName" type="text" />
+                <label for="lastName">lastName :</label><span id="lastNameCheck" class="span"></span> <input class="form-control" name="customer.lastName" id="lastName" type="text" />
             </div>
             <div class="form-group">
-                <label for="email">email :</label> <input class="form-control" name="customer.email" id="email" type="text" />
+                <label for="email">email :</label><span id="emailCheck" class="span"></span> <input class="form-control" name="customer.email" id="email" type="text" />
             </div>
             <div class="form-group">
             	<label for="storeId">storeId :</label>
@@ -73,20 +117,21 @@ $(document).ready(function(){
                 <label for="username">select Adress :</label>
                 <select name="country" id="country" class="select"></select>
 				<select name="address.cityId" id="city" class="select"></select>
+				<span id="addressCheck" class="span"></span>
 				<input class="form-control" name="address.address" id="address" type="text" value="adress" />
 				<br>
 				<input class="form-control" name="address.address2" id="address2" type="text" value="adress2" />
             </div>
             <div class="form-group">
-                <label for="district">district :</label> <input class="form-control" name="address.district" id="district" type="text" />
+                <label for="district">district :</label> <span id="districtCheck" class="span"></span><input class="form-control" name="address.district" id="district" type="text" />
             </div>
             <div class="form-group">
-                <label for="postalCode">postalCode :</label> <input class="form-control" name="address.postalCode" id="postalCode" type="text" />
+                <label for="postalCode">postalCode :</label> <span id="postalCodeCheck" class="span"></span><input class="form-control" name="address.postalCode" id="postalCode" type="text" />
             </div>
             <div class="form-group">
-                <label for="phone">phone :</label> <input class="form-control" name="address.phone" id="phone" type="text" />
+                <label for="phone">phone :</label> <span id="phoneCheck" class="span"></span><input class="form-control" name="address.phone" id="phone" type="text" />
             </div>
-            <button id="btn" class="btn btn-secondary">add</button>
+            <button id="btn" class="btn btn-secondary" type="button">add</button>
         </form>
     </div>
 </body>

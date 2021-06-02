@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
 <!-- Latest compiled and minified JavaScript -->
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
  <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
@@ -44,10 +45,10 @@
 	            	<td>
 	            		<a href="${pageContext.request.contextPath}/admin/getCustomerOne?customerId=${c.customerId}">${c.name}</a>
 	            		<c:if test="${c.blackList == 'BLACK'}">
-	            			<i class="fas fa-file"></i>BLACK
+	            			<i class="bi bi-bootstrap-fill"></i>
 	            		</c:if>
 	            		<c:if test="${c.VIP == 'VIP' && c.blackList != 'BLACK'}">
-	            			<i class="fas fa-file"></i>VIP
+	            			<i class="bi bi-heart"></i>
 	            		</c:if>
 	            	</td>
 	            	<td>${c.email}</td>
