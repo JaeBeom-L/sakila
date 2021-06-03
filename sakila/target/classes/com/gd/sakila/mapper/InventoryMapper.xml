@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gd.sakila.mapper.InventoryMapper">
+	
+	<select id="selectRentalListByInventoryId" resultType="java.util.Map" parameterType="Integer">
+		SELECT
+			r.rental_id rentalId,
+			r.rental_date rentalDate,
+			CONCAT(c.first_name, " ", c.last_name) name,
+			r.return_Date returnDate,
+			r.staff_id staffId
+		FROM
+			rental r LEFT JOIN customer c on r.customer_id=c.customer_id
+		<where>
+			r.inventory_id=#{inventoryId}
+		</where>
+		ORDER BY
+			r.rental_date desc
+	</select>
+	
+	<select id="selectInventoryTotal" resultType="Integer" parameterType="java.util.Map">
+		SELECT
+		   COUNT(i.inventory_id)
+		FROM
+		   inventory i	
+		LEFT join (select * from rental where (rental_date) in (select max(rental_date) from rental group by inventory_id)) r ON i.inventory_id = r.inventory_id	
+     	JOIN film f ON i.film_id = f.film_id
+		<where>
+			<if test="storeId != null">
+				AND i.store_id=#{storeId}
+			</if>
+			<if test="searchWord != null">
+				AND f.title LIKE CONCAT('%',#{searchWord},'%')
+			</if>
+			<if test="inventoryId != null">
+				AND i.inventory_id=#{inventoryId}
+			</if>
+		</where>
+	</select>
+	
+	<select id="selectInventoryList" resultType="java.util.Map" parameterType="java.util.Map">
+		SELECT
+		   i.inventory_id inventoryId,
+		   f.title title,
+		   f.film_id filmId,
+		   i.store_id storeId,
+		   f.rental_rate rentalRate,
+		   f.rating rating,
+		   if(r.rental_date IS NULL, 'T', '') rentalDate,
+		   if(r.return_date IS NULL, 'T', '') returnDate,
+		   DATEDIFF(CURRENT_DATE(), r.rental_date)-f.rental_duration overdue
+		FROM
+		   inventory i	
+		LEFT join (select * from rental where (rental_date) in (select max(rental_date) from rental group by inventory_id)) r ON i.inventory_id = r.inventory_id	
+     	JOIN film f ON i.film_id = f.film_id
+		<where>
+			<if test="storeId != null">
+				AND i.store_id=#{storeId}
+			</if>
+			<if test="searchWord != null">
+				AND f.title LIKE CONCAT('%',#{searchWord},'%')
+			</if>
+			<if test="inventoryId != null">
+				AND i.inventory_id=#{inventoryId}
+			</if>
+		</where>
+		GROUP BY 
+			i.inventory_id
+		LIMIT #{beginRow}, #{rowPerPage}
+	</select>
+</mapper>

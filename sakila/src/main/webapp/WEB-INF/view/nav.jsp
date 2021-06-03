@@ -18,5 +18,8 @@
     <li class="nav-item">
       <a class="nav-link" href="${pageContext.request.contextPath}/admin/getCustomerList">customerList</a>
     </li>
+    <li class="nav-item">
+      <a class="nav-link" href="${pageContext.request.contextPath}/admin/getInventoryList">inventoryList</a>
+    </li>
   </ul>
 </nav>
