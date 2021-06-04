@@ -5,8 +5,11 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.gd.sakila.vo.Inventory;
+
 @Mapper
 public interface InventoryMapper {
+	int insertInventory(Map<String, Object> map);
 	List<Map<String, Object>> selectInventoryList(Map<String, Object> map);
 	int selectInventoryTotal(Map<String, Object> map);
 	List<Map<String, Object>> selectRentalListByInventoryId(int inventoryId);

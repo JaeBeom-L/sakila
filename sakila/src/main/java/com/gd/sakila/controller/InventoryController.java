@@ -7,10 +7,13 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gd.sakila.Debuging;
+import com.gd.sakila.service.FilmService;
 import com.gd.sakila.service.InventoryService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +23,38 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/admin")
 public class InventoryController {
 	@Autowired InventoryService inventoryService;
+	@Autowired FilmService filmService;
+	
+	@GetMapping("/addInventory")
+	public String addInventory(Model model, int filmId) {
+		log.debug(Debuging.DEBUG+" filmId : "+filmId);
+		
+		Map<String, Object> getFilmOneMap = filmService.getFilmOne(filmId);
+		log.debug(Debuging.DEBUG+" getFilmOneMap : "+getFilmOneMap);
+		
+		model.addAttribute("getFilmOneMap", getFilmOneMap);
+		
+		return "addInventory";
+		
+	}
+	
+	@PostMapping("/addInventory")
+	public String addInventory(Model model, @RequestParam(value="filmId", required = true) int filmId,
+											@RequestParam(value="storeId", required = true) int storeId,
+											@RequestParam(value="count", required = true) int count) {
+		log.debug(Debuging.DEBUG+" filmId : "+filmId);
+		log.debug(Debuging.DEBUG+" storeId : "+storeId);
+		log.debug(Debuging.DEBUG+" count : "+count);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("filmId", filmId);
+		map.put("storeId", storeId);
+		map.put("count", count);
+		
+		inventoryService.addInventory(map);
+				
+		return "redirect:/admin/getInventoryList";
+	}
 	
 	@RequestMapping("/getRentalListByInventoryId")
 	public String getRentalListByInventoryId(Model model, int inventoryId, String title) {

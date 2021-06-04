@@ -18,7 +18,10 @@
 	<div class="container">
 	<jsp:include page="/WEB-INF/view/nav.jsp"/>
 	    <div>
-		    <h1>FilmOne</h1>
+	    	<div class="row">
+		    	<h1>FilmOne</h1>
+		    	<h3><a href="${pageContext.request.contextPath}/admin/addInventory?filmId=${getFilmOneMap.filmId}" class="btn btn-secondary">add inventory</a></h3>
+		    </div>
 		     <table class="table">
 		         <tbody>
 		           	<tr>

@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.gd.sakila.Debuging;
+import com.gd.sakila.mapper.FilmMapper;
 import com.gd.sakila.mapper.InventoryMapper;
+import com.gd.sakila.vo.Inventory;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -18,6 +20,15 @@ import lombok.extern.slf4j.Slf4j;
 @Transactional
 public class InventoryService {
 	@Autowired InventoryMapper inventoryMapper;
+	
+	public void addInventory(Map<String, Object> map){
+		log.debug(Debuging.DEBUG+" map : "+map);
+		
+		for(int i=0; i<(Integer)map.get("count"); i++) {
+			inventoryMapper.insertInventory(map);
+		}
+		
+	}
 	
 	public List<Map<String, Object>> getRentalListByInventoryId(int inventoryId){
 		log.debug(Debuging.DEBUG+ " inventoryId : "+inventoryId);

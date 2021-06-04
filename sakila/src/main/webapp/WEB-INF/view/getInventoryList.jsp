@@ -23,20 +23,20 @@
 	    	<!-- 카테 고리별 검색 폼 -->
 	    	<form action="${pageContext.request.contextPath}/admin/getInventoryList">
 	    		 <div class="row">
-	    		 	<div class="col-sm-2"><!-- 콤보 박스 공간 -->
+	    		 	<div class="col-sm-1"><!-- 콤보 박스 공간 -->
 				    	<select name="storeId" class="custom-select-lg" id="storeId">
 				    		<option value="" ${storeId == '' ? 'selected="selected"' : '' }>전체</option>
 				    		<option value="1" ${storeId == '1' ? 'selected="selected"' : '' }>1</option>
 				    		<option value="2" ${storeId == '2' ? 'selected="selected"' : '' }>2</option>
 	    				</select>					    
 				    </div>
-				    <div class="col-sm-2"><!-- 제목 검색 공간 -->
+				    <div class="col-sm-1"><!-- 제목 검색 공간 -->
 				   		<label>title search :</label>
 				   	</div>
 				   	<div class="col-sm-2">
 				   		<input type="text" name="searchWord" class="form-control">
 				    </div>
-				    <div class="col-sm-2"><!-- 제목 검색 공간 -->
+				    <div class="col-sm-1.5"><!-- 제목 검색 공간 -->
 				   		<label>inventoryId search :</label>
 				   	</div>
 				    <div class="col-sm-2">
@@ -82,12 +82,12 @@
 								<td>${inventory.rentalRate}</td>
 								<td>${inventory.rating}</td>
 								<td>
-									<a href="" class="btn btn-secondary">반납</a>
+									<a href="${pageContext.request.contextPath}/admin/modifyReturnDate?inventoryId=${inventory.inventoryId}" class="btn btn-secondary">반납</a>
 								</td>
 								<td>${inventory.overdue}</td>
 			                </tr>
 			            </c:if>
-			            <c:if test="${inventory.returnDate != 'T'}">
+			            <c:if test="${inventory.returnDate != 'T' || (inventory.returnDate == 'T' && inventory.rentalDate == 'T')}">
 			                <tr>
 			                	<td>${inventory.inventoryId}</td>
 			                	<td>${inventory.storeId}</td>

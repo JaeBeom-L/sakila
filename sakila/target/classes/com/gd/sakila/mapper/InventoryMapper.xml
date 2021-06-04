@@ -2,6 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gd.sakila.mapper.InventoryMapper">
 	
+	<insert id="insertInventory" parameterType="java.util.Map">
+		INSERT INTO
+			inventory(
+				film_id,
+				store_id
+			)VALUES(
+				#{filmId},
+				#{storeId}
+			)
+	</insert>
+	
 	<select id="selectRentalListByInventoryId" resultType="java.util.Map" parameterType="Integer">
 		SELECT
 			r.rental_id rentalId,
@@ -64,8 +75,6 @@
 				AND i.inventory_id=#{inventoryId}
 			</if>
 		</where>
-		GROUP BY 
-			i.inventory_id
 		LIMIT #{beginRow}, #{rowPerPage}
 	</select>
 </mapper>
