@@ -5,7 +5,6 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-public interface RentalMapper {
-	int insertRental(Map<String, Object> map);
-	int returnFilm(int inventoryId);
+public interface PaymentMapper {
+	int insertPayment(Map<String, Object> map);
 }

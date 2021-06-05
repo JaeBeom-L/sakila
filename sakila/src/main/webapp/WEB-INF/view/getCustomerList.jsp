@@ -33,15 +33,17 @@
         <thead class="thead-light">
             <tr>
                 <th>customerId</th>
-                <th>name</th>
-                <th>email</th>
                 <th>storeId</th>
+                <th>name</th>
+                <th>email</th>                
+                <th>rental</th>
             </tr>
         </thead>
         <tbody>
         	<c:forEach var="c" items="${customerList}">
                 <tr>
 	            	<td>${c.customerId}</td>
+	            	<td>${c.storeId}</td> 
 	            	<td>
 	            		<a href="${pageContext.request.contextPath}/admin/getCustomerOne?customerId=${c.customerId}">${c.name}</a>
 	            		<c:if test="${c.blackList == 'BLACK'}">
@@ -51,8 +53,8 @@
 	            			<i class="bi bi-heart"></i>
 	            		</c:if>
 	            	</td>
-	            	<td>${c.email}</td>
-	            	<td>${c.storeId}</td>   
+	            	<td>${c.email}</td>	            	  
+	            	<td><a href="${pageContext.request.contextPath}/admin/addRental?customerId=${c.customerId}&storeId=${c.storeId}" class="btn btn-secondary">rental</a></td>
                 </tr>
           	</c:forEach>
         </tbody>

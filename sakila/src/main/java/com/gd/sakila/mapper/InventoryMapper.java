@@ -9,6 +9,7 @@ import com.gd.sakila.vo.Inventory;
 
 @Mapper
 public interface InventoryMapper {
+	List<Double> selectAmountByInventoryId(int inventoryId);
 	int insertInventory(Map<String, Object> map);
 	List<Map<String, Object>> selectInventoryList(Map<String, Object> map);
 	int selectInventoryTotal(Map<String, Object> map);

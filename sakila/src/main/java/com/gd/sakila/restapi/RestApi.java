@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.gd.sakila.Debuging;
 import com.gd.sakila.mapper.CityMapper;
 import com.gd.sakila.mapper.CountryMapper;
+import com.gd.sakila.mapper.InventoryMapper;
 import com.gd.sakila.vo.City;
 import com.gd.sakila.vo.Country;
 
@@ -20,6 +21,14 @@ import lombok.extern.slf4j.Slf4j;
 public class RestApi {
 	@Autowired CountryMapper countryMapper;
 	@Autowired CityMapper cityMapper;
+	@Autowired InventoryMapper inventoryMapper;
+	
+	@GetMapping("/amount")
+	public List<Double> amount(@RequestParam(value="inventoryId", required = true) int inventoryId){
+		log.debug(Debuging.DEBUG+" inventoryId : "+inventoryId);
+		
+		return inventoryMapper.selectAmountByInventoryId(inventoryId);
+	}
 	
 	@GetMapping("/country")
 	public List<Country> country() {
