@@ -82,7 +82,7 @@
 								<td>${inventory.rentalRate}</td>
 								<td>${inventory.rating}</td>
 								<td>
-									<a href="${pageContext.request.contextPath}/admin/modifyReturnDate?inventoryId=${inventory.inventoryId}" class="btn btn-secondary">반납</a>
+									<a href="${pageContext.request.contextPath}/admin/modifyReturnDate?inventoryId=${inventory.inventoryId}&amount=${inventory.rentalRate}&overdue=${inventory.overdue}" class="btn btn-secondary">반납</a>
 								</td>
 								<td>${inventory.overdue}</td>
 			                </tr>
@@ -114,8 +114,6 @@
 		            <li class="next"><a href="${pageContext.request.contextPath}/admin/getInventoryList?currentPage=${currentPage+1}&searchWord=${searchWord}&storeId=${storeId}&inventoryId=${inventoryId}">다음</a></li>
 		        </c:if>
     		</ul>
-    		
-    		<a href="${pageContext.request.contextPath}/admin/addInventory" class="btn btn-secondary">add inventory</a>
 	</div>
 </body>
 </html>

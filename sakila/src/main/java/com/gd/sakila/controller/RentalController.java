@@ -47,6 +47,11 @@ public class RentalController {
 		log.debug(Debuging.DEBUG+" inventoryId : "+inventoryId);
 		log.debug(Debuging.DEBUG+" amount : "+amount);
 		
+		int overlapRow = rentalService.overlapInventoryId(inventoryId);
+		if(overlapRow != 0) {
+			return "addRental";
+		}
+		
 		Map<String, Object> map = new HashMap<>();
 		map.put("customerId", customerId);
 		map.put("staffId", staffId);
@@ -60,10 +65,17 @@ public class RentalController {
 	}
 	
 	@GetMapping("/modifyReturnDate")
-	public String modifyReturnDate(int inventoryId) {
+	public String modifyReturnDate(int inventoryId, double amount, int overdue) {
 		log.debug(Debuging.DEBUG+" inventoryId : "+inventoryId);
+		log.debug(Debuging.DEBUG+" amount : "+amount);
+		log.debug(Debuging.DEBUG+" overdue : "+overdue);
 		
-		rentalService.modifyReturnDate(inventoryId);
+		Map<String, Object> map = new HashMap<>();
+		map.put("inventoryId", inventoryId);
+		map.put("amount", amount);
+		map.put("overdue", overdue);
+		
+		rentalService.modifyReturnDate(map);
 		
 		return "redirect:/admin/getInventoryList?inventoryId="+inventoryId;
 	}

@@ -24,9 +24,16 @@ $(document).ready(function(){
 				url:'/amount',
 				data:{inventoryId : $('#inventoryId').val()},
 				success: function(jsonData) {
-					$('#amount').append('<input type="text" name="amount" value="'+jsonData+'" class="form-control">');
-					$('#rentalBtn').append('<button id="btn" class="btn btn-secondary">대여</button>');
-					$('#amountBtn').remove();
+					$(jsonData).each(function(index, item) {
+						if(item.rating == 'NC-17'){
+							alert('연령 확인이 필요합니다.');
+						}
+						$('#inventoryId').attr('readonly','readonly');
+						$('#rentalDuration').append('<input type="text" name="rentalDuration" value="'+item.rentalDuration+'" readonly="readonly" class="form-control">');
+						$('#amount').append('<input type="text" name="amount" value="'+item.amount+'" readonly="readonly" class="form-control">');	
+						$('#rentalBtn').append('<button id="btn" class="btn btn-secondary">대여</button>');
+						$('#amountBtn').remove();
+					});					
 				}	
 			});			
 		}		
@@ -62,6 +69,12 @@ $(document).ready(function(){
 					<td>inventoryId</td>
 					<td>
 						<input type="text" name="inventoryId" id="inventoryId" class="form-control">
+					</td>
+				</tr>
+				<tr>
+					<td>rentalDuration</td>
+					<td>
+						<span id="rentalDuration"></span>
 					</td>
 				</tr>
 				<tr>

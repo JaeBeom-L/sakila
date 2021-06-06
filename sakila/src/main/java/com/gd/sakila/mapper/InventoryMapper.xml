@@ -2,11 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gd.sakila.mapper.InventoryMapper">
 	
-	<select id="selectAmountByInventoryId" parameterType="Integer" resultType="Double">
+	<select id="selectAmountByInventoryId" parameterType="Integer" resultType="java.util.Map">
 		SELECT
-			f.rental_rate amount
+			f.rental_rate amount,
+			f.rental_duration rentalDuration,
+			f.rating rating
 		FROM
-			inventory iv LEFT JOIN film f ON iv.film_id=f.film_id
+			inventory iv LEFT JOIN film f ON iv.film_id=f.film_id 
 		<where>
 			iv.inventory_id=#{inventoryId}
 		</where>
@@ -69,10 +71,10 @@
 		   f.rating rating,
 		   if(r.rental_date IS NULL, 'T', '') rentalDate,
 		   if(r.return_date IS NULL, 'T', '') returnDate,
-		   if(DATEDIFF(NOW(), r.rental_date)-f.rental_duration>0, DATEDIFF(NOW(), r.rental_date)-f.rental_duration, 0) overdue
+		   if(DATEDIFF(NOW(), r.rental_date)-CAST(f.rental_duration AS SIGNED)>0,DATEDIFF(NOW(), r.rental_date)-CAST(f.rental_duration AS SIGNED),0) overdue
 		FROM
 		   inventory i	
-		LEFT join (select * from rental where (rental_date) in (select max(rental_date) from rental group by inventory_id)) r ON i.inventory_id = r.inventory_id	
+		LEFT join (SELECT * FROM rental WHERE rental_date IN (select MAX(rental_date) FROM rental GROUP BY inventory_id)) r ON i.inventory_id = r.inventory_id	
      	JOIN film f ON i.film_id = f.film_id
 		<where>
 			<if test="storeId != null">

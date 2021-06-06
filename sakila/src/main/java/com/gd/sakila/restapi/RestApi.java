@@ -1,6 +1,7 @@
 package com.gd.sakila.restapi;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +25,7 @@ public class RestApi {
 	@Autowired InventoryMapper inventoryMapper;
 	
 	@GetMapping("/amount")
-	public List<Double> amount(@RequestParam(value="inventoryId", required = true) int inventoryId){
+	public List<Map<String, Object>> amount(@RequestParam(value="inventoryId", required = true) int inventoryId){
 		log.debug(Debuging.DEBUG+" inventoryId : "+inventoryId);
 		
 		return inventoryMapper.selectAmountByInventoryId(inventoryId);

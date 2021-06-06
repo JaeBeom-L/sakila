@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gd.sakila.mapper.CustomerMapper">
-
+	<!-- customer table 데이터 입력 쿼리 -->
 	<insert id="insertCustomer" parameterType="com.gd.sakila.vo.Customer">
 		INSERT INTO
 			customer(
@@ -23,6 +23,7 @@
 			)
 	</insert>
 	
+	<!-- customer에 따른 rentalList 출력 쿼리 -->
 	<select id="selectRentalListByCustomerId" resultType="java.util.Map" parameterType="Integer">
 		SELECT 
 		   r.rental_id rentalId, 
@@ -32,7 +33,7 @@
 		   r.rental_date rentalDate, 
 		   r.return_date returnDate, 
 		   f.rental_duration rentalDuration,
-		   DATEDIFF(CURRENT_DATE(), r.rental_date)-f.rental_duration overdueDate,
+		   DATEDIFF(CURRENT_DATE(), r.rental_date)-CAST(f.rental_duration AS SIGNED) overdueDate,
 		   IF(r.return_date IS NULL AND DATEDIFF(CURRENT_DATE(), r.rental_date) > f.rental_duration , 'T', '') overdue
 		FROM 
 			rental r LEFT JOIN inventory i ON r.inventory_id=i.inventory_id JOIN film f ON f.film_id=i.film_id 
@@ -43,6 +44,7 @@
 			return_date asc
 	</select>
 	
+	<!-- customer 상세보기  쿼리 -->
 	<select id="selectCustomerOne" resultType="java.util.Map" parameterType="Integer">
 		SELECT 
 			cl.ID customerId,
@@ -63,6 +65,7 @@
 		p.customer_id;
 	</select>
 	
+	<!-- customerList 총 행 구하는 쿼리 -->
 	<select id="selectCustomerTotal" resultType="Integer" parameterType="java.util.Map">
 		SELECT 
 			COUNT(*)
@@ -78,6 +81,7 @@
 		</where>
 	</select>
 	
+	<!-- customerList 출력 쿼리 -->
 	<select id="selectCustomerList" resultType="java.util.Map" parameterType="java.util.Map">
 		SELECT 
 			customer_id customerId,
@@ -110,6 +114,7 @@
 		LIMIT #{beginRow}, #{rowPerPage}
 	</select>
 	
+	<!-- 배치 프고그램 사용을 위해 1년 동안 활동이 없는 고객 active변경 쿼리 -->
 	<update id="updateCustomerActiveByScheduler">
 		UPDATE customer 
 			SET active = 0

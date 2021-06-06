@@ -2,6 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gd.sakila.mapper.RentalMapper">
 	
+	<!-- film 대여시 중복 찾는 쿼리 -->
+	<select id="selectOverlapInventoryId" parameterType="Integer" resultType="Integer">
+		SELECT
+			iv.inventory_id inventoryId
+		FROM
+			inventory iv LEFT JOIN rental r ON iv.inventory_id=r.inventory_id
+		<where>
+			iv.inventory_id=#{inventoryId} AND ISNULL(r.return_date)
+		</where>
+		GROUP BY
+			iv.inventory_id
+	</select>
+	
+	<!-- fiim 대여시 rental테이블에 데이터 입력 쿼리 -->
 	<insert id="insertRental" parameterType="java.util.Map">
 		<selectKey keyProperty="rentalId" resultType="int" order="AFTER">
 			SELECT LAST_INSERT_ID()
@@ -20,13 +34,25 @@
 			)
 	</insert>
 	
-	<update id="returnFilm" parameterType="Integer">
+	<!-- film 대여시 payment table에 amount변경을 위한 rentalId 추출 쿼리 -->
+	<select id="selectRentalId" resultType="Integer" parameterType="Integer">
+		SELECT
+			rental_id rentalId
+		FROM
+			rental
+		<where>
+			inventory_id=#{inventoryId} AND ISNULL(return_date)
+		</where>
+	</select>
+	
+	<!-- film 대여시 return_date 변경 쿼리 -->
+	<update id="returnFilm" parameterType="Integer">	
 		UPDATE
 			rental
 		SET
 			return_date=NOW()
 		<where>
-			inventory_id=#{inventoryId}
+			inventory_id=#{inventoryId} AND ISNULL(return_date)
 		</where>
 	</update>
 </mapper>
