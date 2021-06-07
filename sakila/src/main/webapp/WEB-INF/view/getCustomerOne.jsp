@@ -64,16 +64,18 @@
 		    	<table class="table table-hover">
 					<tr style="font-size : 15px" class="thead">
 		        		<td>rentalId</td>
+		        		<td>storeId</td>
 		        		<td>inventoryId</td>
 		              	<td>title</td>
 		              	<td>rentalDate</td>
 		              	<td>returnDate</td>
-		              	<td>overdueDate</td>
+		              	<td>overdue</td>
 		           	</tr>
 		           <c:forEach var="r" items="${getRentalListByCustomerId}">
 						<c:if test="${r.overdue == 'T'}">
 				            <tr style="color: red">
 				               <td>${r.rentalId}</td>
+				               <td>${r.storeId}</td>
 				               <td>${r.inventoryId}</td>
 				               <td>
 				                  <a href="${pageContext.request.contextPath}/admin/getFilmOne?FID=${r.filmId}" style="color: red">
@@ -88,6 +90,7 @@
 		              	<c:if test="${r.overdue == '' }">
 		              		<tr>
 				               <td>${r.rentalId}</td>
+				               <td>${r.storeId}</td>
 				               <td>${r.inventoryId}</td>
 				               <td>
 				                  <a href="${pageContext.request.contextPath}/admin/getFilmOne?FID=${r.filmId}">
@@ -101,6 +104,14 @@
 				        </c:if>
 		           </c:forEach>
         		</table>
+        		<ul class="pager">
+			        <c:if test="${currentPage > 1}">
+			            <li class="previous"><a href="${pageContext.request.contextPath}/admin/getCustomerOne?currentPage=${currentPage-1}&customerId=${customerId}">이전</a></li>
+			        </c:if>
+			        <c:if test="${currentPage < lastPage}">
+			            <li class="next"><a href="${pageContext.request.contextPath}/admin/getCustomerOne?currentPage=${currentPage+1}&customerId=${customerId}">다음</a></li>
+			        </c:if>
+   				</ul>
 		   </div>
 	   </div>
 </body>

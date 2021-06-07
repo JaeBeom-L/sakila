@@ -38,12 +38,25 @@ public class CustomerController {
 	}
 	
 	@GetMapping("/getCustomerOne")
-	public String getCustomerOne(Model model, @RequestParam(value="customerId", required = true) int customerId) {
+	public String getCustomerOne(Model model, @RequestParam(value="customerId", required = true) int customerId,
+												@RequestParam(value="currentPage", defaultValue = "1") int currentPage,
+												@RequestParam(value="rowPerPage", defaultValue = "10") int rowPerPage) {
 		log.debug(Debuging.DEBUG+" customerId : "+customerId);
-		Map<String, Object> map = customerService.getCustomerOne(customerId);
+		log.debug(Debuging.DEBUG+" currentPage : "+currentPage);
+		log.debug(Debuging.DEBUG+" rowPerPage : "+rowPerPage);
+		
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("customerId", customerId);
+		paramMap.put("rowPerPage", rowPerPage);
+		paramMap.put("currentPage", currentPage);
+		
+		Map<String, Object> map = customerService.getCustomerOne(paramMap);
 		
 		model.addAttribute("getCustomerOne", map.get("getCustomerOne"));
 		model.addAttribute("getRentalListByCustomerId", map.get("getRentalListByCustomerId"));
+		model.addAttribute("currentPage", map.get("currentPage"));
+		model.addAttribute("lastPage", map.get("lastPage"));
+		model.addAttribute("customerId", customerId);
 		
 		return "getCustomerOne";
 	}

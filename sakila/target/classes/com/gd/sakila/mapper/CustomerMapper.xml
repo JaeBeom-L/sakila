@@ -23,11 +23,23 @@
 			)
 	</insert>
 	
+	<!-- customer에 따른 rentalList 행 수 -->
+	<select id="selectRentalListByCustomerIdTotal" resultType="int" parameterType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			rental r LEFT JOIN inventory i ON r.inventory_id=i.inventory_id JOIN film f ON f.film_id=i.film_id 
+		<where>
+			customer_id=#{customerId}
+		</where>
+	</select>
+	
 	<!-- customer에 따른 rentalList 출력 쿼리 -->
-	<select id="selectRentalListByCustomerId" resultType="java.util.Map" parameterType="Integer">
+	<select id="selectRentalListByCustomerId" resultType="java.util.Map" parameterType="java.util.Map">
 		SELECT 
 		   r.rental_id rentalId, 
-		   i.inventory_id inventoryId,
+		   iv.inventory_id inventoryId,
+		   iv.store_id storeId,
 		   f.title title, 
 		   f.film_id filmId,
 		   r.rental_date rentalDate, 
@@ -36,12 +48,14 @@
 		   DATEDIFF(CURRENT_DATE(), r.rental_date)-CAST(f.rental_duration AS SIGNED) overdueDate,
 		   IF(r.return_date IS NULL AND DATEDIFF(CURRENT_DATE(), r.rental_date) > f.rental_duration , 'T', '') overdue
 		FROM 
-			rental r LEFT JOIN inventory i ON r.inventory_id=i.inventory_id JOIN film f ON f.film_id=i.film_id 
+			rental r LEFT JOIN inventory iv ON r.inventory_id=iv.inventory_id JOIN film f ON f.film_id=iv.film_id 
 		<where>
 			customer_id=#{customerId}
 		</where>
 		ORDER BY
-			return_date asc
+			rental_date desc
+		LIMIT
+			#{beginRow}, #{rowPerPage}
 	</select>
 	
 	<!-- customer 상세보기  쿼리 -->

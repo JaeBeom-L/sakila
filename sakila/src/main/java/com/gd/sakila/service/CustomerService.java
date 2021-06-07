@@ -48,14 +48,32 @@ public class CustomerService {
 		log.debug(Debuging.DEBUG+" 스케줄러 수정 된 고객 수 : "+row);
 	}
 	
-	public Map<String, Object> getCustomerOne(int customerId){
-		log.debug(Debuging.DEBUG+" customerId : "+customerId);
-		Map<String, Object> getCustomerOne = customerMapper.selectCustomerOne(customerId);
-		List<Map<String, Object>> getRentalListByCustomerId = customerMapper.selectRentalListByCustomerId(customerId);
+	public Map<String, Object> getCustomerOne(Map<String, Object> controllerMap){
+		log.debug(Debuging.DEBUG+" customerId : "+controllerMap.get("customerId"));
+		Map<String, Object> getCustomerOne = customerMapper.selectCustomerOne((Integer)controllerMap.get("customerId"));
+		
+		int currentPage = (Integer)controllerMap.get("currentPage");
+		int rowPerPage = (Integer)controllerMap.get("rowPerPage");
+		int beginRow = (currentPage-1)*rowPerPage;
+		int total = customerMapper.selectRentalListByCustomerIdTotal((Integer)controllerMap.get("customerId"));
+		int lastPage = total/rowPerPage;
+		if(total % rowPerPage != 0) {
+			lastPage++;
+		}
+		
+		Map<String, Object> serviceMap = new HashMap<>();
+		serviceMap.put("customerId", controllerMap.get("customerId"));
+		serviceMap.put("beginRow", beginRow);
+		serviceMap.put("rowPerPage", rowPerPage);
+		
+		
+		List<Map<String, Object>> getRentalListByCustomerId = customerMapper.selectRentalListByCustomerId(serviceMap);
 		
 		Map<String, Object> map = new HashMap<>();
 		map.put("getCustomerOne", getCustomerOne);
 		map.put("getRentalListByCustomerId", getRentalListByCustomerId);
+		map.put("lastPage", lastPage);
+		map.put("currentPage", currentPage);
 		
 		return map;
 	}

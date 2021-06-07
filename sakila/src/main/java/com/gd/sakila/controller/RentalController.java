@@ -65,7 +65,7 @@ public class RentalController {
 	}
 	
 	@GetMapping("/modifyReturnDate")
-	public String modifyReturnDate(int inventoryId, double amount, int overdue) {
+	public String modifyReturnDate(int inventoryId, double amount, double overdue) {
 		log.debug(Debuging.DEBUG+" inventoryId : "+inventoryId);
 		log.debug(Debuging.DEBUG+" amount : "+amount);
 		log.debug(Debuging.DEBUG+" overdue : "+overdue);

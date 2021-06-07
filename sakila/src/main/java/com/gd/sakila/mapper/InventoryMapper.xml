@@ -63,28 +63,28 @@
 	
 	<select id="selectInventoryList" resultType="java.util.Map" parameterType="java.util.Map">
 		SELECT
-		   i.inventory_id inventoryId,
+		   iv.inventory_id inventoryId,
 		   f.title title,
 		   f.film_id filmId,
-		   i.store_id storeId,
+		   iv.store_id storeId,
 		   f.rental_rate rentalRate,
 		   f.rating rating,
 		   if(r.rental_date IS NULL, 'T', '') rentalDate,
 		   if(r.return_date IS NULL, 'T', '') returnDate,
 		   if(DATEDIFF(NOW(), r.rental_date)-CAST(f.rental_duration AS SIGNED)>0,DATEDIFF(NOW(), r.rental_date)-CAST(f.rental_duration AS SIGNED),0) overdue
 		FROM
-		   inventory i	
-		LEFT join (SELECT * FROM rental WHERE rental_date IN (select MAX(rental_date) FROM rental GROUP BY inventory_id)) r ON i.inventory_id = r.inventory_id	
-     	JOIN film f ON i.film_id = f.film_id
+		   inventory iv	
+		LEFT JOIN (SELECT * FROM rental WHERE rental_date IN (select MAX(rental_date) FROM rental GROUP BY inventory_id)) r ON iv.inventory_id = r.inventory_id	
+     	JOIN film f ON iv.film_id = f.film_id
 		<where>
 			<if test="storeId != null">
-				AND i.store_id=#{storeId}
+				AND iv.store_id=#{storeId}
 			</if>
 			<if test="searchWord != null">
 				AND f.title LIKE CONCAT('%',#{searchWord},'%')
 			</if>
 			<if test="inventoryId != null">
-				AND i.inventory_id=#{inventoryId}
+				AND iv.inventory_id=#{inventoryId}
 			</if>
 		</where>
 		LIMIT #{beginRow}, #{rowPerPage}

@@ -9,7 +9,7 @@
 		FROM
 			inventory iv LEFT JOIN rental r ON iv.inventory_id=r.inventory_id
 		<where>
-			iv.inventory_id=#{inventoryId} AND ISNULL(r.return_date)
+			iv.inventory_id=#{inventoryId} AND ISNULL(r.return_date) AND ISNULL(r.rental_date)=false
 		</where>
 		GROUP BY
 			iv.inventory_id
