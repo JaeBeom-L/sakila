@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gd.sakila.mapper.FilmMapper">	
+	
+	<select id="selectFilmCategoryList" resultType="java.util.Map">
+		SELECT
+			category,
+			total_sales totalSales
+		FROM
+			sales_by_film_category
+	</select>
+	
 	<update id="updateFilmCategory" parameterType="java.util.Map">
 		UPDATE 
 			film_category 

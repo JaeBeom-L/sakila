@@ -9,6 +9,7 @@ import com.gd.sakila.vo.Film;
 
 @Mapper
 public interface FilmMapper {
+	List<Map<String, Object>> selectFilmCategoryList();
 	List<Integer> selectFilmInStock(Map<String, Object> map);
 	List<Map<String, Object>> getFilmList(Map<String, Object> map);
 	Map<String, Object> selectFilmOne(int FID);

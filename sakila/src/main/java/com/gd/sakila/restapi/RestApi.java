@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.gd.sakila.Debuging;
 import com.gd.sakila.mapper.CityMapper;
 import com.gd.sakila.mapper.CountryMapper;
+import com.gd.sakila.mapper.FilmMapper;
 import com.gd.sakila.mapper.InventoryMapper;
+import com.gd.sakila.mapper.PaymentMapper;
 import com.gd.sakila.vo.City;
 import com.gd.sakila.vo.Country;
 
@@ -23,6 +25,18 @@ public class RestApi {
 	@Autowired CountryMapper countryMapper;
 	@Autowired CityMapper cityMapper;
 	@Autowired InventoryMapper inventoryMapper;
+	@Autowired FilmMapper filmMapper;
+	@Autowired PaymentMapper paymentMapper;
+	
+	@GetMapping("/sumPayment")
+	public List<Map<String, Object>> sumPaymentList(int year){
+		return paymentMapper.selectSumPayment(year);
+	}
+	
+	@GetMapping("/filmCategory")
+	public List<Map<String, Object>> filmCategoryList(){
+		return filmMapper.selectFilmCategoryList();
+	}
 	
 	@GetMapping("/amount")
 	public List<Map<String, Object>> amount(@RequestParam(value="inventoryId", required = true) int inventoryId){
