@@ -29,7 +29,8 @@ public class RestApi {
 	@Autowired PaymentMapper paymentMapper;
 	
 	@GetMapping("/sumPayment")
-	public List<Map<String, Object>> sumPaymentList(int year){
+	public List<Map<String, Object>> sumPaymentList(@RequestParam(value="year", defaultValue = "2021") int year){
+		log.debug(Debuging.DEBUG+" year : "+year);
 		return paymentMapper.selectSumPayment(year);
 	}
 	

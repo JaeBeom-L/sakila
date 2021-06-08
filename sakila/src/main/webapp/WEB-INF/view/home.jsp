@@ -90,8 +90,9 @@ $(document).ready(function(){
 			  data: data,
 			};
 	
-	let paymentX = [1,2,3,4,5,6,7,8,9,10,11,12];
+	let paymentX = ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'];
 	let paymentY = [0,0,0,0,0,0,0,0,0,0,0,0];
+	
 	
 	$.ajax({
 		type:'get',
@@ -99,17 +100,68 @@ $(document).ready(function(){
 		data:{year : $('#year').val()},
 		success: function(jsonData){
 			$(jsonData).each(function(index, item){
-				paymentY[item.month]=item.count
+				paymentY[item.month-1]=item.count;
 				console.log(paymentY[item.month]);
 			});
 			console.log(paymentY);
-			let paymentChart = new Chart(document.getElementById('paymentChart'),config);	
+			let paymentChart = new Chart(document.getElementById('paymentChart'),config2);	
 		}
 		
 	});
 	
+	let data2 = {
+			  labels: paymentX,
+			  datasets: [{
+			    label: '대여 수',
+			    data: paymentY,
+			    fill: false			
+			  }]
+			};
 	
+	let config2 = {
+			  type: 'line',
+			  data: data2,
+			};
 	
+	$('#btn').click(function(){
+		paymentY = [0,0,0,0,0,0,0,0,0,0,0,0];
+		
+		$('#paymentChart').remove();
+		$('#paymentChartSpan').append('<canvas id="paymentChart"></canvas>');
+		
+		if($('#year').val() != ""){
+			console.log($('#year').val());
+			$.ajax({
+				type:'get',
+				url:'/sumPayment',
+				data:{year : $('#year').val()},
+				success: function(jsonData){
+					$(jsonData).each(function(index, item){
+						paymentY[item.month-1]=item.count;
+						console.log(paymentY[item.month]);
+					});
+					console.log(paymentY);
+					let paymentChart = new Chart(document.getElementById('paymentChart'),config2);	
+				}
+				
+			});
+			
+			let data2 = {
+					  labels: paymentX,
+					  datasets: [{
+					    label: '대여 수',
+					    data: paymentY,
+					    fill: false			
+					  }]
+					};
+			
+			let config2 = {
+					  type: 'line',
+					  data: data2,
+					};
+		}
+		
+	});
 });
 </script>
 </head>
@@ -137,12 +189,11 @@ $(document).ready(function(){
 			<div>
  				<canvas id="categoryChart"></canvas>
 			</div>
-			<div>
-				<form method="get" action="${pageContext.request.contextPath}/home">
-					<input type="text" name="year">
-					<button>보기</button>
-				</form>
- 				<canvas id="paymentChart"></canvas>
+			<hr>
+			<div>				
+				<label>연도</label> <input type="text" name="year" id="year">
+				<button id="btn" type="button">보기</button>
+ 				<span id="paymentChartSpan"><canvas id="paymentChart"></canvas></span>
 			</div>
 		</c:if>
 		
