@@ -13,16 +13,43 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <!-- jquery를 사용하기위한 CDN주소 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+	$('#btn').click(function(){
+		if($('#title').val() == ''){
+			$('#labelTitle').append('제목을 입력하세요');
+			$('#title').focus();
+		}else if($('#releaseYear').val() == ''){
+			$('#labelReleaseYear').append('발매년도를 입력하세요');
+			$('#releaseYear').focus();
+		}else if($('#rentalDuration').val() == ''){
+			$('#labelRentalDuration').append('대여기간을 입력하세요')
+			$('#rentalDuration').focus();
+		}else if($('#length').val() == ''){
+			$('#labelLength').append('영화 상영시간을 입력하세요')
+			$('#length').focus();
+		}else if($('#replacementCost').val() == ''){
+			$('#labelReplacementCost').append('배상 금액을 입력하세요')
+			$('#replacementCost').focus();
+		}else{
+			$('#addForm').submit();
+		}
+	});
+});
+</script>
 <title>addFilm</title>
 </head>
 <body>
 	<div class="container">
 		<jsp:include page="/WEB-INF/view/nav.jsp"/>
 		<h1>add Film</h1>
-		<form method="post" action="${pageContext.request.contextPath}/admin/addFilm">
+		<form method="post" action="${pageContext.request.contextPath}/admin/addFilm" id="addForm">
 			<table class="table table-hover">
 				<tr>
-					<td>title</td>
+					<td>
+						title
+						<label id="labelTitle"></label>
+					</td>
 					<td>
 						<input type="text" name="film.title" id="title" class="form-control">
 					</td>
@@ -44,7 +71,10 @@
 					</td>
 				</tr>
 				<tr>
-					<td>releaseYear</td>
+					<td>
+						releaseYear
+						<label id="labelReleaseYear"></label>
+					</td>
 					<td>
 						<input type="text" name="film.releaseYear" id="releaseYear" class="form-control">
 					</td>
@@ -70,7 +100,10 @@
 					</td>
 				</tr>
 				<tr>
-					<td>rentalDuration</td>
+					<td>
+						rentalDuration
+						<label id="labelRentalDuration"></label>
+					</td>
 					<td>
 						<input type="text" name="film.rentalDuration" id="rentalDuration" class="form-control" value="3">					
 					</td>
@@ -78,17 +111,27 @@
 				<tr>
 					<td>rentalRate</td>
 					<td>
-						<input type="text" name="film.rentalRate" id="rentalRate" class="form-control" value="4.99">
+						<select name="film.rentalRate" class="form-control">
+							<option value="0.99">0.99</option>
+							<option value="2.99">2.99</option>
+							<option value="4.99">4.99</option>
+						</select>
 					</td>
 				</tr>
 				<tr>
-					<td>length</td>
+					<td>
+						length
+						<label id="labelLength"></label>
+					</td>
 					<td>
 						<input type="text" name="film.length" id="length" class="form-control">
 					</td>
 				</tr>
 				<tr>
-					<td>replacementCost</td>
+					<td>
+						replacementCost
+						<label id="labelReplacementCost"></label>
+					</td>
 					<td>
 						<input type="text" name="film.replacementCost" id="replacementCost" class="form-control" value="19.99">
 					</td>
@@ -116,7 +159,7 @@
 				</tr>
 			</table>
 			
-			<button id="btn" class="btn btn-secondary">등록</button>
+			<button id="btn" class="btn btn-secondary" type="button">등록</button>
 		</form>
 		
 	</div>

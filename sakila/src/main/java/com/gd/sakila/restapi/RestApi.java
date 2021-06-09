@@ -14,6 +14,7 @@ import com.gd.sakila.mapper.CountryMapper;
 import com.gd.sakila.mapper.FilmMapper;
 import com.gd.sakila.mapper.InventoryMapper;
 import com.gd.sakila.mapper.PaymentMapper;
+import com.gd.sakila.mapper.RentalMapper;
 import com.gd.sakila.vo.City;
 import com.gd.sakila.vo.Country;
 
@@ -26,12 +27,19 @@ public class RestApi {
 	@Autowired CityMapper cityMapper;
 	@Autowired InventoryMapper inventoryMapper;
 	@Autowired FilmMapper filmMapper;
+	@Autowired RentalMapper rentalMapper;
 	@Autowired PaymentMapper paymentMapper;
 	
 	@GetMapping("/sumPayment")
 	public List<Map<String, Object>> sumPaymentList(@RequestParam(value="year", defaultValue = "2021") int year){
 		log.debug(Debuging.DEBUG+" year : "+year);
 		return paymentMapper.selectSumPayment(year);
+	}
+	
+	@GetMapping("/countRental")
+	public List<Map<String, Object>> countRentalList(@RequestParam(value="year", defaultValue = "2021") int year){
+		log.debug(Debuging.DEBUG+" year : "+year);
+		return rentalMapper.selectCountRental(year);
 	}
 	
 	@GetMapping("/filmCategory")

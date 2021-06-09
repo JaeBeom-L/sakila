@@ -9,6 +9,7 @@ import com.gd.sakila.vo.Rental;
 
 @Mapper
 public interface RentalMapper {
+	List<Map<String, Object>> selectCountRental(int year);
 	List<Integer> selectOverlapInventoryId(int inventoryId);
 	int insertRental(Map<String, Object> map);
 	int returnFilm(int inventoryId);

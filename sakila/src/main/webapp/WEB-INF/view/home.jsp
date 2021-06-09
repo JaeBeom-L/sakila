@@ -90,30 +90,30 @@ $(document).ready(function(){
 			  data: data,
 			};
 	
-	let paymentX = ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'];
-	let paymentY = [0,0,0,0,0,0,0,0,0,0,0,0];
+	let rentalX = ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'];
+	let rentalY = [0,0,0,0,0,0,0,0,0,0,0,0];
 	
 	
 	$.ajax({
 		type:'get',
-		url:'/sumPayment',
+		url:'/countRental',
 		data:{year : $('#year').val()},
 		success: function(jsonData){
 			$(jsonData).each(function(index, item){
-				paymentY[item.month-1]=item.count;
-				console.log(paymentY[item.month]);
+				rentalY[item.month-1]=item.count;
+				console.log(rentalY[item.month]);
 			});
-			console.log(paymentY);
-			let paymentChart = new Chart(document.getElementById('paymentChart'),config2);	
+			console.log(rentalY);
+			let rentalChart = new Chart(document.getElementById('rentalChart'),config2);	
 		}
 		
 	});
 	
 	let data2 = {
-			  labels: paymentX,
+			  labels: rentalX,
 			  datasets: [{
 			    label: '대여 수',
-			    data: paymentY,
+			    data: rentalY,
 			    fill: false			
 			  }]
 			};
@@ -124,33 +124,33 @@ $(document).ready(function(){
 			};
 	
 	$('#btn').click(function(){
-		paymentY = [0,0,0,0,0,0,0,0,0,0,0,0];
+		rentalY = [0,0,0,0,0,0,0,0,0,0,0,0];
 		
-		$('#paymentChart').remove();
-		$('#paymentChartSpan').append('<canvas id="paymentChart"></canvas>');
+		$('#rentalChart').remove();
+		$('#rentalChartSpan').append('<canvas id="rentalChart"></canvas>');
 		
 		if($('#year').val() != ""){
 			console.log($('#year').val());
 			$.ajax({
 				type:'get',
-				url:'/sumPayment',
+				url:'/countRental',
 				data:{year : $('#year').val()},
 				success: function(jsonData){
 					$(jsonData).each(function(index, item){
-						paymentY[item.month-1]=item.count;
-						console.log(paymentY[item.month]);
+						rentalY[item.month-1]=item.count;
+						console.log(rentalY[item.month]);
 					});
-					console.log(paymentY);
-					let paymentChart = new Chart(document.getElementById('paymentChart'),config2);	
+					console.log(rentalY);
+					let rentalChart = new Chart(document.getElementById('rentalChart'),config2);	
 				}
 				
 			});
 			
 			let data2 = {
-					  labels: paymentX,
+					  labels: rentalX,
 					  datasets: [{
 					    label: '대여 수',
-					    data: paymentY,
+					    data: rentalY,
 					    fill: false			
 					  }]
 					};
@@ -158,6 +158,80 @@ $(document).ready(function(){
 			let config2 = {
 					  type: 'line',
 					  data: data2,
+					  beginAtZero: true
+					};
+		}
+		
+	});
+	
+	let paymentX = ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'];
+	let paymentY = [0,0,0,0,0,0,0,0,0,0,0,0];
+	
+	
+	$.ajax({
+		type:'get',
+		url:'/sumPayment',
+		data:{year : $('#pyear').val()},
+		success: function(jsonData){
+			$(jsonData).each(function(index, item){
+				paymentY[item.month-1]=item.sum;
+				console.log(paymentY[item.month]);
+			});
+			console.log(paymentY);
+			let paymentChart = new Chart(document.getElementById('paymentChart'),config3);	
+		}
+		
+	});
+	
+	let data3 = {
+			  labels: paymentX,
+			  datasets: [{
+			    label: '대여 금액',
+			    data: paymentY,
+			    fill: false			
+			  }]
+			};
+	
+	let config3 = {
+			  type: 'line',
+			  data: data3,
+			};
+	
+	$('#pbtn').click(function(){
+		paymentY = [0,0,0,0,0,0,0,0,0,0,0,0];
+		
+		$('#paymentChart').remove();
+		$('#paymentChartSpan').append('<canvas id="paymentChart"></canvas>');
+		
+		if($('#pyear').val() != ""){
+			console.log($('#pyear').val());
+			$.ajax({
+				type:'get',
+				url:'/sumPayment',
+				data:{year : $('#pyear').val()},
+				success: function(jsonData){
+					$(jsonData).each(function(index, item){
+						paymentY[item.month-1]=item.sum;
+						console.log(paymentY[item.month]);
+					});
+					console.log(paymentY);
+					let paymentChart = new Chart(document.getElementById('paymentChart'),config3);	
+				}
+				
+			});
+			
+			let data3 = {
+					  labels: paymentX,
+					  datasets: [{
+					    label: '대여 금액',
+					    data: paymentY,
+					    fill: false			
+					  }]
+					};
+			
+			let config3 = {
+					  type: 'line',
+					  data: data3
 					};
 		}
 		
@@ -193,6 +267,12 @@ $(document).ready(function(){
 			<div>				
 				<label>연도</label> <input type="text" name="year" id="year">
 				<button id="btn" type="button">보기</button>
+ 				<span id="rentalChartSpan"><canvas id="rentalChart"></canvas></span>
+			</div>
+			<hr>
+			<div>				
+				<label>연도</label> <input type="text" name="pyear" id="pyear">
+				<button id="pbtn" type="button">보기</button>
  				<span id="paymentChartSpan"><canvas id="paymentChart"></canvas></span>
 			</div>
 		</c:if>

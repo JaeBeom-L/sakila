@@ -2,6 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gd.sakila.mapper.RentalMapper">
 	
+	<!-- 년도 별 렌탈 수 차트 -->
+	<select id="selectCountRental" resultType="java.util.Map" parameterType="Integer">
+		SELECT 
+			MONTH(rental_date) month, 
+			COUNT(rental_id) count 
+		FROM rental 
+		<where>
+		 	YEAR(rental_date) = #{year}
+		</where>
+		GROUP BY 
+			MONTH(rental_date)
+	</select>
+	
 	<!-- film 대여시 중복 찾는 쿼리 -->
 	<select id="selectOverlapInventoryId" parameterType="Integer" resultType="Integer">
 		SELECT
