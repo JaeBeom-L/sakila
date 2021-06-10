@@ -5,10 +5,10 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.gd.sakila.vo.Rental;
 
 @Mapper
 public interface RentalMapper {
+	List<Map<String, Object>> selectLastMonthBestFilmList(Map<String, Object> map);
 	List<Map<String, Object>> selectCountRental(int year);
 	List<Integer> selectOverlapInventoryId(int inventoryId);
 	int insertRental(Map<String, Object> map);

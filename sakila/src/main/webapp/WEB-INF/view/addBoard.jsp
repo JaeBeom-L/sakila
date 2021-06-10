@@ -37,9 +37,6 @@
             } else if ($('#boardContent').val() == '') {
                 alert('boardContent을 입력하세요');
                 $('#boardContent').focus();
-            } else if ($('#staffId').val() == '') {
-                alert('staffId를 입력하세요');
-                $('#staffId').focus();
             } else {
                 $('#addForm').submit();
             }
@@ -79,9 +76,6 @@
             <div class="form-group">
                 <label for="boardContent">boardContent :</label>
                 <textarea class="form-control" name="board.boardContent" id="boardContent" rows="5" cols="50"></textarea>
-            </div>
-            <div class="form-group">
-                <label for="staffId">staffId :</label> <input class="form-control" name="board.staffId" id="staffId" type="text" />
             </div>
             <div>
                 <input class="btn btn-default" id="addButton" type="button" value="글입력" /> <input class="btn btn-default" type="reset" value="초기화" /> <a class="btn btn-default" href="${pageContext.request.contextPath}/admin/getBoardList">글목록</a>

@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.gd.sakila.Debuging;
 import com.gd.sakila.service.RentalService;
 import com.gd.sakila.service.StaffService;
+import com.gd.sakila.vo.Staff;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -26,13 +30,21 @@ public class RentalController {
 	@Autowired StaffService staffService;
 	
 	@GetMapping("/addRental")
-	public String addRentalAndPayment(Model model, int customerId, @RequestParam(value="storeId", required = false) int storeId) {
+	public String addRentalAndPayment(Model model, int customerId, @RequestParam(value="storeId", required = false) int storeId, HttpServletRequest request) {
 		log.debug(Debuging.DEBUG+" customerId : "+customerId);
+		
+		HttpSession session = request.getSession();
+		String username = ((Staff)(session.getAttribute("loginStaff"))).getUsername();
+		int staffId = ((Staff)(session.getAttribute("loginStaff"))).getStaffId();
+		log.debug(Debuging.DEBUG+" session staffId : "+staffId);
+		log.debug(Debuging.DEBUG+" session username : "+username);
 		
 		List<Map<String, Object>> staffList = staffService.getStaffList(storeId);
 		
 		model.addAttribute("customerId", customerId);
 		model.addAttribute("staffList", staffList);
+		model.addAttribute("username", username);
+		model.addAttribute("staffId", staffId);
 		
 		return "addRental";
 	}

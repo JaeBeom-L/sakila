@@ -2,6 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gd.sakila.mapper.RentalMapper">
 	
+	<!--  지난달 베스트 리스트 -->
+	<select id="selectLastMonthBestFilmList" resultType="java.util.Map" parameterType="java.util.Map">
+		SELECT 
+			f.title title, 
+			COUNT(r.rental_id) count 
+		FROM 
+			rental r LEFT JOIN inventory iv ON r.inventory_id=iv.inventory_id JOIN film f ON iv.film_id=f.film_id 
+		<where>
+			YEAR(r.rental_date)=#{year} AND MONTH(r.rental_date)=#{month}
+		</where> 
+		GROUP BY 
+			f.title
+		ORDER BY
+			count desc
+		LIMIT 10 
+	</select>
+	
 	<!-- 년도 별 렌탈 수 차트 -->
 	<select id="selectCountRental" resultType="java.util.Map" parameterType="Integer">
 		SELECT 

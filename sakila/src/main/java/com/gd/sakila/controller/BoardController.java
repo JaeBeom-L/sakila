@@ -2,6 +2,7 @@ package com.gd.sakila.controller;
 
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,13 +70,20 @@ public class BoardController {
 	@GetMapping("/addBoard") // addBoard.jsp 페이지로 이동
 	public String addBoard() {
 		log.debug(Debuging.DEBUG+" addBoard");
+		
 		return "addBoard";
 	}
 	
 	@PostMapping("/addBoard") // board 게시물 입력후 boardList로 redirect
-	public String addBoard(BoardForm boardForm) { // 커맨드객체
+	public String addBoard(BoardForm boardForm, HttpServletRequest request) { // 커맨드객체
 		//디버깅 코드
 		log.debug(" boardForm : "+boardForm);
+		
+		HttpSession session = request.getSession();
+		int staffId = ((Staff)(session.getAttribute("loginStaff"))).getStaffId();
+		log.debug(Debuging.DEBUG+" session staffId : "+staffId);
+		
+		boardForm.getBoard().setStaffId(staffId);
 		
 		boardService.addBoard(boardForm);	
 
@@ -83,9 +91,13 @@ public class BoardController {
 	}
 	
 	@GetMapping("/getBoardOne")
-	public String getBoardOne(Model model, @RequestParam(value="boardId", required = true) int boardId) {
+	public String getBoardOne(Model model, @RequestParam(value="boardId", required = true) int boardId, HttpServletRequest request) {
 		// 디버깅 코드
 		log.debug(" boardId : "+boardId); 
+		
+		HttpSession session = request.getSession();
+		String username = ((Staff)(session.getAttribute("loginStaff"))).getUsername();
+		log.debug(Debuging.DEBUG+" session username : "+username);
 		
 		Map<String, Object> map = boardService.getBoardOne(boardId);
 		
@@ -95,6 +107,8 @@ public class BoardController {
 		model.addAttribute("boardMap", map.get("boardMap"));
 		model.addAttribute("commentList", map.get("commentList"));
 		model.addAttribute("boardfileList", map.get("boardfileList"));
+		model.addAttribute("username", username);
+		
 		return "getBoardOne";
 	}
 	

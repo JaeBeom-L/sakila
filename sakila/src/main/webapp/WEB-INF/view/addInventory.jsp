@@ -14,9 +14,19 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
 $(document).ready(function(){
+	
+	// 정규식
+	let numberCode = /^[0-9]+$/;
+	
 	$('#btn').click(function(){
 		if($('#count').val() == ''){
-			alert('수량을 입력해주세요');
+			$('#countLabel').empty();
+       		$('#countLabel').append('수량을 입력하세요');
+       		$('#count').focus();
+		}else if(!numberCode.test($('#count').val())){
+			$('#countLabel').empty();
+       		$('#countLabel').append('숫자를 입력하세요');
+       		$('#count').focus();
 		}else{
 			$('#addForm').submit();
 		}
@@ -107,7 +117,10 @@ $(document).ready(function(){
 					    		</td>
 					    	</tr>
 					    	<tr>
-					    		<td>count</td>
+					    		<td>
+					    			count
+					    			<label id="countLabel" style="color:red"></label>
+					    		</td>
 					    		<td>
 					    			<input type="text" name="count" class="form-control" id="count">
 					    		</td>

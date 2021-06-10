@@ -1,5 +1,7 @@
 package com.gd.sakila.restapi;
 
+
+
 import java.util.List;
 import java.util.Map;
 
@@ -29,6 +31,8 @@ public class RestApi {
 	@Autowired FilmMapper filmMapper;
 	@Autowired RentalMapper rentalMapper;
 	@Autowired PaymentMapper paymentMapper;
+	
+	
 	
 	@GetMapping("/sumPayment")
 	public List<Map<String, Object>> sumPaymentList(@RequestParam(value="year", defaultValue = "2021") int year){

@@ -1,5 +1,7 @@
 package com.gd.sakila.service;
 
+import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,6 +21,22 @@ import lombok.extern.slf4j.Slf4j;
 public class RentalService {
 	@Autowired RentalMapper rentalMapper;
 	@Autowired PaymentMapper paymentMapper;
+	
+	// 지난달 best film list 출력
+	public List<Map<String, Object>> lastMonthBestFilm(){
+		
+		Calendar c = Calendar.getInstance();
+		int year = c.get(Calendar.YEAR);
+		int month = c.get(Calendar.MONTH);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("year", year);
+		map.put("month", month);
+		
+		log.debug(Debuging.DEBUG+" map : "+map);
+		
+		return rentalMapper.selectLastMonthBestFilmList(map);
+	}
 	
 	//film rental 중복 검사
 	public int overlapInventoryId(int inventoryId) {

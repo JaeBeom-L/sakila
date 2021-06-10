@@ -11,4 +11,5 @@ public interface PaymentMapper {
 	int updateAmount(Map<String, Object> map);
 	int insertPayment(Map<String, Object> map);
 	List<Map<String, Object>> selectSumPayment(int year);
+	List<Map<String, Object>> selectLastMonthBestStaff(Map<String, Object> map);
 }

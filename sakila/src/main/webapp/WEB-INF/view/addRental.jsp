@@ -54,15 +54,12 @@ $(document).ready(function(){
 		<h1>add Rental</h1>
 		<form method="post" action="${pageContext.request.contextPath}/admin/addRental" id="addForm">
 			<input type="hidden" name="customerId" value="${customerId}">
+			<input type="hidden" name="staffId" value="${staffId}">
 			<table class="table table-hover">
 				<tr>
 					<td>staff</td>
 					<td>
-						<select name="staffId" id="staffId" class="form-control">
-							<c:forEach var="s" items="${staffList}">
-								<option value="${s.SID}">${s.name}</option>
-							</c:forEach>
-						</select>
+						<input type="text" value="${username}" readonly="readonly" class="form-control">
 					</td>
 				</tr>
 				<tr>

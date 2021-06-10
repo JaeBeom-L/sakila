@@ -12,24 +12,51 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <!-- jquery를 사용하기위한 CDN주소 -->
+<style>
+	.span{color: red}
+</style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
 $(document).ready(function(){
+	
+	let numberCode = /^[0-9]+$/;
+	
 	$('#btn').click(function(){
 		if($('#title').val() == ''){
+			$('#labelTitle').empty();
 			$('#labelTitle').append('제목을 입력하세요');
 			$('#title').focus();
 		}else if($('#releaseYear').val() == ''){
+			$('#labelReleaseYear').empty();
 			$('#labelReleaseYear').append('발매년도를 입력하세요');
 			$('#releaseYear').focus();
 		}else if($('#rentalDuration').val() == ''){
+			$('#labelRentalDuration').empty();
 			$('#labelRentalDuration').append('대여기간을 입력하세요')
 			$('#rentalDuration').focus();
 		}else if($('#length').val() == ''){
+			$('#labelLength').empty();
 			$('#labelLength').append('영화 상영시간을 입력하세요')
 			$('#length').focus();
 		}else if($('#replacementCost').val() == ''){
+			$('#labelReplacementCost').empty();
 			$('#labelReplacementCost').append('배상 금액을 입력하세요')
+			$('#replacementCost').focus();
+		}else if(!numberCode.test($('#releaseYear').val())){
+			$('#labelReleaseYear').empty();
+			$('#labelReleaseYear').append('숫자를 입력하세요');
+			$('#releaseYear').focus();
+		}else if(!numberCode.test($('#rentalDuration').val())){
+			$('#labelRentalDuration').empty();
+			$('#labelRentalDuration').append('숫자를 입력하세요')
+			$('#rentalDuration').focus();		
+		}else if(!numberCode.test($('#length').val())){
+			$('#labelLength').empty();
+			$('#labelLength').append('숫자를 입력하세요')
+			$('#length').focus();
+		}else if(!numberCode.test($('#replacementCost').val())){
+			$('#labelReplacementCost').empty();
+			$('#labelReplacementCost').append('숫자를 입력하세요')
 			$('#replacementCost').focus();
 		}else{
 			$('#addForm').submit();
@@ -48,7 +75,7 @@ $(document).ready(function(){
 				<tr>
 					<td>
 						title
-						<label id="labelTitle"></label>
+						<span class="span"><label id="labelTitle"></label></span>
 					</td>
 					<td>
 						<input type="text" name="film.title" id="title" class="form-control">
@@ -73,7 +100,7 @@ $(document).ready(function(){
 				<tr>
 					<td>
 						releaseYear
-						<label id="labelReleaseYear"></label>
+						<span class="span"><label id="labelReleaseYear"></label></span>
 					</td>
 					<td>
 						<input type="text" name="film.releaseYear" id="releaseYear" class="form-control">
@@ -102,7 +129,7 @@ $(document).ready(function(){
 				<tr>
 					<td>
 						rentalDuration
-						<label id="labelRentalDuration"></label>
+						<span class="span"><label id="labelRentalDuration"></label></span>
 					</td>
 					<td>
 						<input type="text" name="film.rentalDuration" id="rentalDuration" class="form-control" value="3">					
@@ -121,7 +148,7 @@ $(document).ready(function(){
 				<tr>
 					<td>
 						length
-						<label id="labelLength"></label>
+						<span class="span"><label id="labelLength"></label></span>
 					</td>
 					<td>
 						<input type="text" name="film.length" id="length" class="form-control">
@@ -130,7 +157,7 @@ $(document).ready(function(){
 				<tr>
 					<td>
 						replacementCost
-						<label id="labelReplacementCost"></label>
+						<span class="span"><label id="labelReplacementCost"></label></span>
 					</td>
 					<td>
 						<input type="text" name="film.replacementCost" id="replacementCost" class="form-control" value="19.99">

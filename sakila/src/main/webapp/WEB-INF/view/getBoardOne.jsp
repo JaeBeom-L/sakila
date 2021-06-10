@@ -80,10 +80,8 @@ $(document).ready(function(){
 	<form action="${pageContext.request.contextPath}/admin/addComment" method="post" id="addCommentForm">
 		<input type="hidden" name="boardId" value="${boardMap.boardId}">
 		<div class="row">
-			<div class="col-sm-1"><label>유저 입력 : </label></div>
-			<div class="col-sm-2"><input type="text" name="username" class="form-control"></div>
-			<div class="col-sm-2"><label>댓글 입력 : </label></div>
-			<div class="col-sm-6"><input type="text" name="commentContent" class="form-control"></div>
+			<div class="col-sm-1"><label>댓글 입력 : </label></div>
+			<div class="col-sm-10"><input type="text" name="commentContent" class="form-control"></div>
 			<div class="col-sm-1"><button type="button" id="addCommentBtn" class="btn btn-default">댓글추가</button></div>
 		</div>
 	</form>
@@ -107,7 +105,11 @@ $(document).ready(function(){
 						<td>${c.commentContent}</td>
 						<td>${c.username}</td>
 						<td>${c.insertDate}</td>
-						<td><a href="${pageContext.request.contextPath}/admin/removeComment?commentId=${c.commentId}&boardId=${c.boardId}" class="btn btn-default">삭제</a></td>
+						<td>
+							<c:if test="${username == c.username}">
+								<a href="${pageContext.request.contextPath}/admin/removeComment?commentId=${c.commentId}&boardId=${c.boardId}&username=${username}" class="btn btn-default">삭제</a>
+							</c:if>
+						</td>
 					</tr>
 				</c:forEach>
 			</tbody>

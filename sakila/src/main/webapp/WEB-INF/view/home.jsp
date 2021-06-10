@@ -5,13 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>home</title>
-<!-- bootstrap을 사용하기 위한 CDN주소 -->
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
-<!-- Latest compiled and minified JavaScript -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/bootstrap.css">
+<link rel="stylesheet" href="assets/css/app.css">
+<link rel="shortcut icon" href="assets/images/favicon.svg" type="image/x-icon">
 <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
@@ -112,8 +110,9 @@ $(document).ready(function(){
 	let data2 = {
 			  labels: rentalX,
 			  datasets: [{
-			    label: '대여 수',
+			    label: '월별 대여 수',
 			    data: rentalY,
+			    borderColor: 'rgb(255, 99, 132, 0.2)',
 			    fill: false			
 			  }]
 			};
@@ -149,8 +148,9 @@ $(document).ready(function(){
 			let data2 = {
 					  labels: rentalX,
 					  datasets: [{
-					    label: '대여 수',
+					    label: '월별 대여 수',
 					    data: rentalY,
+					    borderColor: 'rgb(255, 99, 132, 0.2)',
 					    fill: false			
 					  }]
 					};
@@ -186,8 +186,9 @@ $(document).ready(function(){
 	let data3 = {
 			  labels: paymentX,
 			  datasets: [{
-			    label: '대여 금액',
+			    label: '월별 대여 금액',
 			    data: paymentY,
+			    borderColor: 'rgb(75, 192, 192, 0.2)',
 			    fill: false			
 			  }]
 			};
@@ -223,8 +224,9 @@ $(document).ready(function(){
 			let data3 = {
 					  labels: paymentX,
 					  datasets: [{
-					    label: '대여 금액',
+					    label: '월별 대여 금액',
 					    data: paymentY,
+					    borderColor: 'rgb(75, 192, 192, 0.2)',
 					    fill: false			
 					  }]
 					};
@@ -240,44 +242,109 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-	<div class="container">
+	<div class="app">
 		<jsp:include page="/WEB-INF/view/nav.jsp"/>
-		<h1>Home</h1>
-
-		<!-- 로그 오프 시 -->
-		<c:if test="${loginStaff == null}">
-			<form id="loginForm" action="${pageContext.request.contextPath}/login" method="post">
-				<div>email : </div>
-				<div><input type="text" id="email" name="email"></div>
-				<div>password : </div>
-				<div><input type="password" id="password" name="password"></div>
-				<div>
-					<button type="button" id="btn" class="btn btn-secondary">로그인</button>
+		<div id="main">	
+			<!-- 로그 오프 시 -->
+			<c:if test="${loginStaff == null}">
+				<div class="col-7">
+					<h1 class="auth-title">Log in.</h1>
+					<form id="loginForm" action="${pageContext.request.contextPath}/login" method="post">
+						<div class="form-group position-relative has-icon-left mb-4">
+		                    <input type="text" id="email" name="email" class="form-control form-control-xl" placeholder="email">
+		                    <div class="form-control-icon">
+		                        <i class="bi bi-person"></i>
+		                    </div>
+	                  	</div>
+						<div class="form-group position-relative has-icon-left mb-4">
+		                    <input type="password" id="password" name="password" class="form-control form-control-xl" placeholder="Password">
+		                    <div class="form-control-icon">
+		                        <i class="bi bi-shield-lock"></i>
+		                    </div>
+		                </div>
+						<div>
+							<button type="button" id="btn" class="btn btn-primary btn-block btn-lg shadow-lg mt-5">Log in</button>
+						</div>
+					</form>
 				</div>
-			</form>
-		</c:if>
-		
-		<!-- 로그 인 시 -->
-		<c:if test="${loginStaff != null}">
-			<a href="${pageContext.request.contextPath}/admin/logout">로그아웃</a>
-			<div>
- 				<canvas id="categoryChart"></canvas>
-			</div>
-			<hr>
-			<div>				
-				<label>연도</label> <input type="text" name="year" id="year">
-				<button id="btn" type="button">보기</button>
- 				<span id="rentalChartSpan"><canvas id="rentalChart"></canvas></span>
-			</div>
-			<hr>
-			<div>				
-				<label>연도</label> <input type="text" name="pyear" id="pyear">
-				<button id="pbtn" type="button">보기</button>
- 				<span id="paymentChartSpan"><canvas id="paymentChart"></canvas></span>
-			</div>
-		</c:if>
-		
-	
+			</c:if>
+			
+			<!-- 로그 인 시 -->
+			<c:if test="${loginStaff != null}">	
+				<h1>Home</h1>
+				<div class="col-12 col-lg-12">
+	            	<div class="row">
+		            	<div class="col-6 col-lg-4 col-md-6">
+                        	<div class="card">
+                              	<div class="card-body px-3 py-4-5">
+                                   	<div class="row">
+                                       	<div class="col-md-4">
+                                          	<div class="stats-icon blue">
+                                            	<i class="iconly-boldProfile"></i>
+                                        	</div>
+                                       	</div>
+                                       	<div class="col-md-8">
+                                          	<h6 class="text-muted font-semibold">지난 달 우수사원</h6>
+                                          	<h6 class="font-extrabold mb-0">${bestStaff.name}</h6>
+                                    	</div>
+                                   	</div>
+                              	</div>
+                           	</div>
+                       	</div>
+						<div class="col-6 col-lg-8 col-md-6">
+							<div class="card">
+								<h5 class="font-extrabold mb-0">지난 달 베스트 영화 목록</h5>
+								<table class="table">
+									<c:forEach var="b" items="${bestList}">
+										<tr>
+											<td>${b.title}</td>
+											<td>${b.count}</td>
+										</tr>
+									</c:forEach>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-12 col-lg-12">
+	            	<div class="row">
+	               		<div class="col-6 col-lg-6 col-md-6">	
+							<div class="card">
+								<br>
+								<div class="row">
+									<div class="col-9">											
+										<input type="text" name="year" id="year" class="form-control">
+									</div>
+									<div class="col-3">
+										<button id="btn" type="button" class="btn btn-secondary">보기</button>
+									</div>
+								</div>
+								<br>
+				 				<span id="rentalChartSpan"><canvas id="rentalChart"></canvas></span>
+							</div>
+						</div>
+						<div class="col-6 col-lg-6 col-md-6">	
+							<div class="card">
+								<br>
+								<div class="row">
+									<div class="col-9">				
+										<input type="text" name="pyear" id="pyear" class="form-control">
+									</div>
+									<div class="col-3">
+										<button id="pbtn" type="button" class="btn btn-secondary">보기</button>
+									</div>
+								</div>
+								<br>
+				 				<span id="paymentChartSpan"><canvas id="paymentChart"></canvas></span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="card">
+	 				<canvas id="categoryChart"></canvas>
+				</div>
+			</c:if>
+		</div>	
 	</div>
 </body>
 </html>

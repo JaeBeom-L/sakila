@@ -54,44 +54,58 @@ $(document).ready(function(){
 	$('#btn').click(function() {
 		console.log(numberCode.test($('#postalCode').val()));
        	if($('#firstName').val() == ''){
+       		$('#firstNameCheck').empty();
        		$('#firstNameCheck').append('firstName을 입력해주세요');
        		$('#fisrtName').focus();
        	}else if($('#lastName').val() == ''){
+       		$('#lastNameCheck').empty();
        		$('#lastNameCheck').append('lastName을 입력해주세요');
        		$('#lastName').focus();
        	}else if($('#picture').val() == ''){
+       		$('#pictureCheck').empty();
        		$('#pictureCheck').append('picture를 등록해주세요');
        		$('#picture').focus();
        	}else if($('#email').val() == ''){
+       		$('#emailCheck').empty();
        		$('#emailCheck').append('email을 입력해주세요');
        		$('#picture').focus();
        	}else if(!emailCode.test($('#email').val())){
+       		$('#emailCheck').empty();
        		$('#emailCheck').append('email을 정확히 입력해주세요');
        		$('#picture').focus();       	
 		}else if($('#password').val() == ''){
+			$('#passwordCheck').empty();
        		$('#passwordCheck').append('password를 입력해주세요');
        		$('#password').focus();
        	}else if($('#password').val().length < 8){
+       		$('#passwordCheck').empty();
        		$('#passwordCheck').append('password를 8자 이상 작성하세요');
        		$('#password').focus();      	       	
 		}else if($('#username').val() == ''){
+			$('#usernameCheck').empty();
        		$('#usernameCheck').append('username을 입력해주세요');
        		$('#username').focus();
        	}else if($('#city').text() == ''){
+       		$('#addressCheck').empty();
        		$('#addressCheck').append('city를 입력해주세요');
        	}else if($('#district').val() == ''){
+       		$('#districtCheck').empty();
        		$('#districtCheck').append('district를 입력해주세요');
        		$('#district').focus();
        	}else if($('#postalCode').val() == ''){
+       		$('#postalCodeCheck').empty();
        		$('#postalCodeCheck').append('postalCode를 입력해주세요');
        		$('#postalCode').focus();
        	}else if(!numberCode.test($('#postalCode').val())){
+       		$('#postalCodeCheck').empty();
        		$('#postalCodeCheck').append('postalCode를 정확하게 입력해주세요');
        		$('#postalCode').focus();      	
 		}else if($('#phone').val() == ''){
+			$('#phoneCheck').empty();
        		$('#phoneCheck').append('phone를 입력해주세요');
        		$('#phone').focus();
        	}else if(!numberCode.test($('#phone').val())){
+       		$('#phoneCheck').empty();
        		$('#phoneCheck').append('phone를 정확히 입력해주세요');
        		$('#phone').focus();		
 		}else{
@@ -126,7 +140,7 @@ $(document).ready(function(){
             </div>
             <div class="form-group">
             	<label for="storeId">storeId :</label>
-                <select name="staff.storeId" id="storeId">               	
+                <select name="staff.storeId" id="storeId" class="form-control">               	
                 	<option value="1">1</option>
                 	<option value="2">2</option>
                 </select>
@@ -136,8 +150,10 @@ $(document).ready(function(){
             </div>
             <div class="form-group">
                 <label for="username">select Adress :</label>
-                <select name="country" id="country" class="select"></select>
-				<select name="address.cityId" id="city" class="select"></select>
+                <select name="country" id="country" class="form-control"></select>
+                <br>
+				<select name="address.cityId" id="city" class="form-control"></select>
+				<br>
 				<span id="addressCheck" class="span"></span>
 				<input class="form-control" name="address.address" id="address" type="text" value="adress" />
 				<br>

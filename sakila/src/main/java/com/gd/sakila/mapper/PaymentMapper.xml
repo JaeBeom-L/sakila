@@ -2,6 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gd.sakila.mapper.PaymentMapper">
 	
+	<!-- 지난 달 우수 사원 쿼리 -->
+	<select id="selectLastMonthBestStaff" resultType="java.util.Map" parameterType="java.util.Map">
+		SELECT 
+			CONCAT(s.first_name, " ", s.last_name) name,
+			SUM(p.amount) sum 
+		FROM 
+			payment p LEFT JOIN staff s ON p.staff_id=s.staff_id
+		where
+			YEAR(p.payment_date)=#{year} AND MONTH(p.payment_date)=#{month}
+		GROUP BY 
+			s.staff_id
+		ORDER BY
+			sum desc
+		LIMIT 1
+	</select>
+	
 	<!-- 년도별 총 대여료 차트 쿼리 -->
 	<select id="selectSumPayment" resultType="java.util.Map" parameterType="Integer">		
 		SELECT 
