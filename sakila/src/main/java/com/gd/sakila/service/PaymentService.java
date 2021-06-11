@@ -2,6 +2,7 @@ package com.gd.sakila.service;
 
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,15 @@ public class PaymentService {
 		
 		log.debug(Debuging.DEBUG+" map : "+map);
 		
-		Map<String, Object> bestStaff = paymentMapper.selectLastMonthBestStaff(map).get(0);
+		Map<String, Object> bestStaff = new HashMap<>();
+		
+		List<Map<String, Object>> bestStaffList = paymentMapper.selectLastMonthBestStaff(map);
+		if(bestStaffList.size() == 0) {
+			return bestStaff;
+		}else {
+			bestStaff = paymentMapper.selectLastMonthBestStaff(map).get(0);
+		}
+		
 		log.debug(Debuging.DEBUG+" bestStaff : "+bestStaff);
 		
 		return bestStaff;
