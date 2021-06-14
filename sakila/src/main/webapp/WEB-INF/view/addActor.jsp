@@ -29,21 +29,37 @@
 <title>addActor</title>
 </head>
 <body>
-	<div class="container">
+	<div class="app">
     	<jsp:include page="/WEB-INF/view/nav.jsp"/>
-        <h1>add actor</h1>
-        <form id="addForm" action="${pageContext.request.contextPath}/admin/addActor" method="post">        
-            <div class="form-group">
-                <label for="boardPw">firstName :</label> <input class="form-control" name="firstName" id="firstName" type="text" />
+        <div id="main">
+	    	<header class="mb-3">
+	        	<a href="#" class="burger-btn d-block d-xl-none">
+	      			<i class="bi bi-justify fs-3"></i>
+	            </a>
+	        </header>
+	        <div class="page-heading">
+                <h3>add actor</h3>
             </div>
-            <div class="form-group">
-                <label for="boardPw">lastName :</label> <input class="form-control" name="lastName" id="lastName" type="text" />
-            </div>
-            <div>
-                <input class="btn btn-default" id="addButton" type="button" value="배우 저장" /> 
-                <input class="btn btn-default" type="reset" value="초기화" /> 
-            </div>
-        </form>
+            <div class="page-content">
+            	<section class="row">
+            		<div class="card">
+            			<br>
+					        <form id="addForm" action="${pageContext.request.contextPath}/admin/addActor" method="post">        
+					            <div class="form-group">
+					                <label for="boardPw">firstName :</label> <input class="form-control" name="firstName" id="firstName" type="text" />
+					            </div>
+					            <div class="form-group">
+					                <label for="boardPw">lastName :</label> <input class="form-control" name="lastName" id="lastName" type="text" />
+					            </div>
+					            <div>
+					                <input class="btn btn-outline-dark" id="addButton" type="button" value="배우 저장" /> 
+					                <input class="btn btn-outline-dark" type="reset" value="초기화" /> 
+					            </div>
+					        </form>
+						</div>
+					</section>
+				</div>
+			</div>
     </div>
 	<script src="${pageContext.request.contextPath}/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 	<script src="${pageContext.request.contextPath}/assets/js/bootstrap.bundle.min.js"></script>

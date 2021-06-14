@@ -49,41 +49,57 @@ $(document).ready(function(){
 <title>addRental</title>
 </head>
 <body>
-	<div class="container">
+	<div class="app">
 		<jsp:include page="/WEB-INF/view/nav.jsp"/>
-		<h1>add Rental</h1>
-		<form method="post" action="${pageContext.request.contextPath}/admin/addRental" id="addForm">
-			<input type="hidden" name="customerId" value="${customerId}">
-			<input type="hidden" name="staffId" value="${staffId}">
-			<table class="table table-hover">
-				<tr>
-					<td>staff</td>
-					<td>
-						<input type="text" value="${username}" readonly="readonly" class="form-control">
-					</td>
-				</tr>
-				<tr>
-					<td>inventoryId</td>
-					<td>
-						<input type="text" name="inventoryId" id="inventoryId" class="form-control">
-					</td>
-				</tr>
-				<tr>
-					<td>rentalDuration</td>
-					<td>
-						<span id="rentalDuration"></span>
-					</td>
-				</tr>
-				<tr>
-					<td>amount</td>
-					<td>
-						<span id="amount"></span>
-					</td>
-				</tr>
-			</table>		
-			<button id="amountBtn" class="btn btn-secondary" type="button">계산</button>
-			<span id="rentalBtn"></span>
-		</form>		
+		<div id="main">
+	    	<header class="mb-3">
+	        	<a href="#" class="burger-btn d-block d-xl-none">
+	      			<i class="bi bi-justify fs-3"></i>
+	            </a>
+	        </header>
+	        <div class="page-heading">
+                <h3>add Rental</h3>
+            </div>
+            <div class="page-content">
+            	<section class="row">
+            		<div class="card">
+            			<br>
+						<form method="post" action="${pageContext.request.contextPath}/admin/addRental" id="addForm">
+							<input type="hidden" name="customerId" value="${customerId}">
+							<input type="hidden" name="staffId" value="${staffId}">
+							<table class="table table-hover">
+								<tr>
+									<td>staff</td>
+									<td>
+										<input type="text" value="${username}" readonly="readonly" class="form-control">
+									</td>
+								</tr>
+								<tr>
+									<td>inventoryId</td>
+									<td>
+										<input type="text" name="inventoryId" id="inventoryId" class="form-control">
+									</td>
+								</tr>
+								<tr>
+									<td>rentalDuration</td>
+									<td>
+										<span id="rentalDuration"></span>
+									</td>
+								</tr>
+								<tr>
+									<td>amount</td>
+									<td>
+										<span id="amount"></span>
+									</td>
+								</tr>
+							</table>		
+							<button id="amountBtn" class="btn btn-secondary" type="button">계산</button>
+							<span id="rentalBtn"></span>
+						</form>
+					</div>
+				</section>
+			</div>
+		</div>		
 	</div>
 	<script src="${pageContext.request.contextPath}/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 	<script src="${pageContext.request.contextPath}/assets/js/bootstrap.bundle.min.js"></script>

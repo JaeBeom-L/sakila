@@ -119,57 +119,73 @@ $(document).ready(function(){
 <title>add staff</title>
 </head>
 <body>
-    <div class="container">
+    <div class="app">
     	<jsp:include page="/WEB-INF/view/nav.jsp"/>
-        <h1>add staff</h1>
-        <form id="addForm" action="${pageContext.request.contextPath}/admin/addStaff" method="post">    
-            <div class="form-group">
-                <label for="firstName">firstName :</label><span id="firstNameCheck" class="span"></span> <input class="form-control" name="staff.firstName" id="firstName" type="text" />
+    	<div id="main">
+	    	<header class="mb-3">
+	        	<a href="#" class="burger-btn d-block d-xl-none">
+	      			<i class="bi bi-justify fs-3"></i>
+	            </a>
+	        </header>
+	        <div class="page-heading">
+                <h3>add staff</h3>
             </div>
-            <div class="form-group">
-                <label for="lastName">lastName :</label><span id="lastNameCheck" class="span"></span> <input class="form-control" name="staff.lastName" id="lastName" type="text" />
-            </div>
-            <div class="form-group">
-                <label for="lastName">picture :</label><span id="pictureCheck" class="span"></span> <input name="staff.picture" id="picture" type="file" />
-            </div>
-            <div class="form-group">
-                <label for="email">email :<span id="emailCheck" class="span"></span></label> <input class="form-control" name="staff.email" id="email" type="text" />
-            </div>
-            <div class="form-group">
-                <label for="password">password :</label> <span id="passwordCheck" class="span"></span><input class="form-control" name="staff.password" id="password" type="password" />
-            </div>
-            <div class="form-group">
-            	<label for="storeId">storeId :</label>
-                <select name="staff.storeId" id="storeId" class="form-control">               	
-                	<option value="1">1</option>
-                	<option value="2">2</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="username">username :</label><span id="usernameCheck" class="span"></span> <input class="form-control" name="staff.username" id="username" type="text" />
-            </div>
-            <div class="form-group">
-                <label for="username">select Adress :</label>
-                <select name="country" id="country" class="form-control"></select>
-                <br>
-				<select name="address.cityId" id="city" class="form-control"></select>
-				<br>
-				<span id="addressCheck" class="span"></span>
-				<input class="form-control" name="address.address" id="address" type="text" value="adress" />
-				<br>
-				<input class="form-control" name="address.address2" id="address2" type="text" value="adress2" />
-            </div>
-            <div class="form-group">
-                <label for="district">district :</label> <span id="districtCheck" class="span"></span><input class="form-control" name="address.district" id="district" type="text" />
-            </div>
-            <div class="form-group">
-                <label for="postalCode">postalCode :</label> <span id="postalCodeCheck" class="span"></span><input class="form-control" name="address.postalCode" id="postalCode" type="text" />
-            </div>
-            <div class="form-group">
-                <label for="phone">phone :</label> <span id="phoneCheck" class="span"></span><input class="form-control" name="address.phone" id="phone" type="text" />
-            </div>
-            <button id="btn" class="btn btn-secondary" type="button">add</button>
-        </form>
+            <div class="page-content">
+            	<section class="row">
+            		<div class="card">
+            			<br>
+				        <form id="addForm" action="${pageContext.request.contextPath}/admin/addStaff" method="post">    
+				            <div class="form-group">
+				                <label for="firstName">firstName :</label><span id="firstNameCheck" class="span"></span> <input class="form-control" name="staff.firstName" id="firstName" type="text" />
+				            </div>
+				            <div class="form-group">
+				                <label for="lastName">lastName :</label><span id="lastNameCheck" class="span"></span> <input class="form-control" name="staff.lastName" id="lastName" type="text" />
+				            </div>
+				            <div class="form-group">
+				                <label for="lastName">picture :</label><span id="pictureCheck" class="span"></span> <input name="staff.picture" id="picture" type="file" class="form-control"/>
+				            </div>
+				            <div class="form-group">
+				                <label for="email">email :<span id="emailCheck" class="span"></span></label> <input class="form-control" name="staff.email" id="email" type="text" />
+				            </div>
+				            <div class="form-group">
+				                <label for="password">password :</label> <span id="passwordCheck" class="span"></span><input class="form-control" name="staff.password" id="password" type="password" />
+				            </div>
+				            <div class="form-group">
+				            	<label for="storeId">storeId :</label>
+				                <select name="staff.storeId" id="storeId" class="form-control">               	
+				                	<option value="1">1</option>
+				                	<option value="2">2</option>
+				                </select>
+				            </div>
+				            <div class="form-group">
+				                <label for="username">username :</label><span id="usernameCheck" class="span"></span> <input class="form-control" name="staff.username" id="username" type="text" />
+				            </div>
+				            <div class="form-group">
+				                <label for="username">select Adress :</label>
+				                <select name="country" id="country" class="form-control"></select>
+				                <br>
+								<select name="address.cityId" id="city" class="form-control"></select>
+								<br>
+								<span id="addressCheck" class="span"></span>
+								<input class="form-control" name="address.address" id="address" type="text" value="adress" />
+								<br>
+								<input class="form-control" name="address.address2" id="address2" type="text" value="adress2" />
+				            </div>
+				            <div class="form-group">
+				                <label for="district">district :</label> <span id="districtCheck" class="span"></span><input class="form-control" name="address.district" id="district" type="text" />
+				            </div>
+				            <div class="form-group">
+				                <label for="postalCode">postalCode :</label> <span id="postalCodeCheck" class="span"></span><input class="form-control" name="address.postalCode" id="postalCode" type="text" />
+				            </div>
+				            <div class="form-group">
+				                <label for="phone">phone :</label> <span id="phoneCheck" class="span"></span><input class="form-control" name="address.phone" id="phone" type="text" />
+				            </div>
+				            <button id="btn" class="btn btn-secondary" type="button">add</button>
+				        </form>
+				 	</div>
+				 </section>
+			</div>
+		</div>
     </div>
 	<script src="${pageContext.request.contextPath}/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 	<script src="${pageContext.request.contextPath}/assets/js/bootstrap.bundle.min.js"></script>

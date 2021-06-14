@@ -323,7 +323,8 @@ $(document).ready(function(){
 								<div class="card">
 									<br>
 									<div class="row">
-										<div class="col-9">											
+										<div class="col-1"></div>
+										<div class="col-8">											
 											<input type="text" name="year" id="year" class="form-control">
 										</div>
 										<div class="col-3">
@@ -332,13 +333,15 @@ $(document).ready(function(){
 									</div>
 									<br>
 					 				<span id="rentalChartSpan"><canvas id="rentalChart"></canvas></span>
+					 				<br>
 								</div>
 							</div>
 							<div class="col-6 col-lg-6 col-md-6">	
 								<div class="card">
 									<br>
 									<div class="row">
-										<div class="col-9">				
+										<div class="col-1"></div>
+										<div class="col-8">				
 											<input type="text" name="pyear" id="pyear" class="form-control">
 										</div>
 										<div class="col-3">
@@ -347,6 +350,7 @@ $(document).ready(function(){
 									</div>
 									<br>
 					 				<span id="paymentChartSpan"><canvas id="paymentChart"></canvas></span>
+					 				<br>
 								</div>
 							</div>
 						</div>

@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendors/bootstrap-icons/bootstrap-icons.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/app.css">
 <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/images/favicon.svg" type="image/x-icon">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
     $(document).ready(function() {
        	$('#addButton').click(function() {
@@ -42,7 +43,7 @@
         // #inputFile에 input type='file'추가
         $('#addFileBtn').click(function(){
         	console.log('addFileBtn click');
-        	$('#inputFile').append('<input type="file" name="boardfile" class="boardfile">');
+        	$('#inputFile').append('<input type="file" name="boardfile" class="form-control">');
         });
         // #inputFile에 input type='file' 마지막 태그 삭제
         $('#delFileBtn').click(function(){
@@ -53,32 +54,48 @@
 <title>ADD BOARD</title>
 </head>
 <body>
-    <div class="container">
+    <div class="app">
     	<jsp:include page="/WEB-INF/view/nav.jsp"/>
-        <h1>add board</h1>
-        <form id="addForm" action="${pageContext.request.contextPath}/admin/addBoard" method="post" enctype="multipart/form-data">
-            <div class="form-group">
-                <div>
-                	<button id="addFileBtn" type="button" class="btn btn-default">파일추가</button>
-                	<button id="delFileBtn" type="button" class="btn btn-default">파일삭제</button>
-                </div>
-                <div id="inputFile">
-                </div>
-            </div>         
-            <div class="form-group">
-                <label for="boardPw">boardPw :</label> <input class="form-control" name="board.boardPw" id="boardPw" type="password" />
+        <div id="main">
+	    	<header class="mb-3">
+	        	<a href="#" class="burger-btn d-block d-xl-none">
+	      			<i class="bi bi-justify fs-3"></i>
+	            </a>
+	        </header>
+	        <div class="page-heading">
+                <h3>add Board</h3>
             </div>
-            <div class="form-group">
-                <label for="boardPw">boardTitle :</label> <input class="form-control" name="board.boardTitle" id="boardTitle" type="text" />
-            </div>
-            <div class="form-group">
-                <label for="boardContent">boardContent :</label>
-                <textarea class="form-control" name="board.boardContent" id="boardContent" rows="5" cols="50"></textarea>
-            </div>
-            <div>
-                <input class="btn btn-default" id="addButton" type="button" value="글입력" /> <input class="btn btn-default" type="reset" value="초기화" /> <a class="btn btn-default" href="${pageContext.request.contextPath}/admin/getBoardList">글목록</a>
-            </div>
-        </form>
+            <div class="page-content">
+            	<section class="row">
+            		<div class="card">
+            			<br>
+				        <form id="addForm" action="${pageContext.request.contextPath}/admin/addBoard" method="post" enctype="multipart/form-data">
+				            <div class="form-group">
+				                <div>
+				                	<button id="addFileBtn" type="button" class="btn btn-secondary">파일추가</button>
+				                	<button id="delFileBtn" type="button" class="btn btn-secondary">파일삭제</button>
+				                </div>
+				                <div id="inputFile">
+				                </div>
+				            </div>         
+				            <div class="form-group">
+				                <label for="boardPw">boardPw :</label> <input class="form-control" name="board.boardPw" id="boardPw" type="password" />
+				            </div>
+				            <div class="form-group">
+				                <label for="boardPw">boardTitle :</label> <input class="form-control" name="board.boardTitle" id="boardTitle" type="text" />
+				            </div>
+				            <div class="form-group">
+				                <label for="boardContent">boardContent :</label>
+				                <textarea class="form-control" name="board.boardContent" id="boardContent" rows="5" cols="80"></textarea>
+				            </div>
+				            <div>
+				                <input class="btn btn-outline-dark" id="addButton" type="button" value="글입력" /> <input class="btn btn-outline-dark" type="reset" value="초기화" /> <a class="btn btn-outline-dark" href="${pageContext.request.contextPath}/admin/getBoardList">글목록</a>
+				            </div>
+				        </form>
+				  	</div>
+				</section>
+			</div>
+		</div>
     </div>
 	<script src="${pageContext.request.contextPath}/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 	<script src="${pageContext.request.contextPath}/assets/js/bootstrap.bundle.min.js"></script>

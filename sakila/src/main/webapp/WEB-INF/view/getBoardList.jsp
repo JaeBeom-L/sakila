@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>getBoardList</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/bootstrap.css">
@@ -30,9 +31,10 @@
             <div class="page-content">
             	<section class="row">
             		<div class="card">
+            			<br>
 	            		<div class="table-responsive">
-						    <table class="table table-lg">
-						        <thead>
+						    <table class="table table-hover">
+						        <thead class="thead thead-light">
 						            <tr>
 						                <th>boardId</th>
 						                <th>boardTitle</th>
@@ -59,25 +61,30 @@
 						</div>
 					    
 					    <!-- 검색어 입력창 -->
-					    <form action="/admin/getBoardList" method="get">
-					        <div class="row">
-						        <div class="col-sm-1"><label for="searchWord">검색어 :</label> </div>
-						        <div class="col-sm-3"><input name="searchWord" type="text"></div>
-						       	<div class="col-sm-2"><button type="submit" class="btn btn-default">검색</button></div>
-					        </div>
-					    </form>
-					    
-					    <ul class="pager">
-					        <c:if test="${currentPage > 1}">
-					            <li><a href="${pageContext.request.contextPath}/admin/getBoardList?currentPage=${currentPage-1}&searchWord=${searchWord}">이전</a></li>
-					        </c:if>
-					        <c:if test="${currentPage < lastPage}">
-					            <li><a href="${pageContext.request.contextPath}/admin/getBoardList?currentPage=${currentPage+1}&searchWord=${searchWord}">다음</a></li>
-					        </c:if>
-					    </ul>
-					    <div>
-					        <a href="${pageContext.request.contextPath}/admin/addBoard">게시글 입력</a>
+					    <div class="row">
+					    	<div class="col-7">
+							    <form action="/admin/getBoardList" method="get">
+							    	<div class="row">				        
+								        <div class="col-sm-5"><input name="searchWord" type="text" class="form-control"></div>
+								       	<div class="col-sm-2"><button type="submit" class="btn btn-light rounded-pill">검색</button></div>
+							       	</div>		        
+							    </form>
+							</div>
+							<div class="col-3"></div>
+						    <div class="col-2">
+						        <c:if test="${currentPage > 1}">
+						            <a href="${pageContext.request.contextPath}/admin/getBoardList?currentPage=${currentPage-1}&searchWord=${searchWord}" class="btn btn-light rounded-pill">이전</a>
+						        </c:if>
+						        <c:if test="${currentPage < lastPage}">
+						            <a href="${pageContext.request.contextPath}/admin/getBoardList?currentPage=${currentPage+1}&searchWord=${searchWord}" class="btn btn-light rounded-pill">다음</a>
+						        </c:if>
+						    </div>
 					    </div>
+					    <br>
+					    <div>
+					        <a href="${pageContext.request.contextPath}/admin/addBoard" class="btn btn-outline-dark">게시글 입력</a>
+					    </div>
+					    <br>
 				    </div>
 				</section>
 			</div>

@@ -25,95 +25,106 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-<div class="container">
+<div class="app">
 	<jsp:include page="/WEB-INF/view/nav.jsp"/>
-    <div>
-	    <h1>BoardOne</h1>
-	     <table class="table">
-	         <tbody>
-	           	<tr>
-	                <td>boardId :</td>
-	                <td>${boardMap.boardId}</td>
-	            </tr>
-	            <tr>
-	             	<td>boardTitle :</td>
-	           	   	<td>${boardMap.boardTitle}</td>
-	            </tr>
-	            <tr>
-	              	<td>boardContent :</td>
-	               	<td>${boardMap.boardContent}</td>
-	            </tr>
-	            <tr>
-	             	<td>username :</td>
-	              	<td>${boardMap.username}</td>
-	            </tr>
-	            <tr>
-	              	<td>insertDate :</td>
-	               	<td>${boardMap.insertDate}</td>
-	            </tr>
-	            <tr>
-	            	<td>boardfile :</td>
-	            	<td>
-	            		<a class="session" href="${pageContext.request.contextPath}/admin/addBoardfile?boardId=${boardMap.boardId}"><button class="btn btn-default">파일추가</button></a>
-	            		<!-- 보드파일을 출력하는 반복문 코드 구현 -->
-	            		<c:forEach var="f" items="${boardfileList}">
-	            			<div>
-	            				<a href="${pageContext.request.contextPath}/resource/${f.boardfileName}">${f.boardfileName}</a>
-	            				<a class="session" href="${pageContext.request.contextPath}/admin/removeBoardfile?boardfileId=${f.boardfileId}&boardId=${f.boardId}&boardfileName=${f.boardfileName}&username=${boardMap.username}">
-	            					<button class="btn btn-default">X</button>
-	            				</a>            				
-	            			</div>
-	            		</c:forEach>
-	            	</td>
-	            </tr>
-	        </tbody>
-	    </table>
-	    <hr>
-	    
-	    <div>
-		    <a class="session" href="${pageContext.request.contextPath}/admin/modifyBoard?boardId=${boardMap.boardId}"><button class="btn btn-default">수정</button></a>
-		    <a class="session" href="${pageContext.request.contextPath}/admin/removeBoard?boardId=${boardMap.boardId}"><button class="btn btn-default">삭제</button></a>	
-	    </div>
-	</div>
-	<br><br><br><hr>
-	<!-- 댓글 입력 폼 -->
-	<form action="${pageContext.request.contextPath}/admin/addComment" method="post" id="addCommentForm">
-		<input type="hidden" name="boardId" value="${boardMap.boardId}">
-		<div class="row">
-			<div class="col-sm-1"><label>댓글 입력 : </label></div>
-			<div class="col-sm-10"><input type="text" name="commentContent" class="form-control"></div>
-			<div class="col-sm-1"><button type="button" id="addCommentBtn" class="btn btn-default">댓글추가</button></div>
-		</div>
-	</form>
-	<br><hr>
-	
-	<!-- 댓글 출력 -->
-	<div>
-		<table class="table">
-			<thead class="thead-light">
-				<tr>
-					<th>commentContent</th>
-					<th>userName</th>
-					<th>insertDate</th>
-					<th>삭제</th>
-				</tr>
-			</thead>
-			
-			<tbody>
-				<c:forEach var="c" items="${commentList}">
-					<tr>
-						<td>${c.commentContent}</td>
-						<td>${c.username}</td>
-						<td>${c.insertDate}</td>
-						<td>
-							<c:if test="${username == c.username}">
-								<a href="${pageContext.request.contextPath}/admin/removeComment?commentId=${c.commentId}&boardId=${c.boardId}&username=${username}" class="btn btn-default">삭제</a>
-							</c:if>
-						</td>
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
+    <div id="main">
+	    	<header class="mb-3">
+	        	<a href="#" class="burger-btn d-block d-xl-none">
+	      			<i class="bi bi-justify fs-3"></i>
+	            </a>
+	        </header>
+	        <div class="page-heading">
+                <h3>BoardOne</h3>
+            </div>
+            <div class="page-content">
+            	<section class="row">
+            		<div class="card">
+            			<br>
+					     <table class="table">
+					         <tbody>
+					           	<tr>
+					                <td>boardId :</td>
+					                <td>${boardMap.boardId}</td>
+					            </tr>
+					            <tr>
+					             	<td>boardTitle :</td>
+					           	   	<td>${boardMap.boardTitle}</td>
+					            </tr>
+					            <tr>
+					              	<td>boardContent :</td>
+					               	<td>${boardMap.boardContent}</td>
+					            </tr>
+					            <tr>
+					             	<td>username :</td>
+					              	<td>${boardMap.username}</td>
+					            </tr>
+					            <tr>
+					              	<td>insertDate :</td>
+					               	<td>${boardMap.insertDate}</td>
+					            </tr>
+					            <tr>
+					            	<td>boardfile :</td>
+					            	<td>
+					            		<a href="${pageContext.request.contextPath}/admin/addBoardfile?boardId=${boardMap.boardId}"><button class="btn btn-sm btn-secondary">파일추가</button></a>
+					            		<!-- 보드파일을 출력하는 반복문 코드 구현 -->
+					            		<c:forEach var="f" items="${boardfileList}">
+					            			<div>
+					            				<a href="${pageContext.request.contextPath}/resource/${f.boardfileName}">${f.boardfileName}</a>
+					            				<a class="session" href="${pageContext.request.contextPath}/admin/removeBoardfile?boardfileId=${f.boardfileId}&boardId=${f.boardId}&boardfileName=${f.boardfileName}&username=${boardMap.username}">
+					            					<button class="btn btn-default">X</button>
+					            				</a>            				
+					            			</div>
+					            		</c:forEach>
+					            	</td>
+					            </tr>
+					        </tbody>
+					    </table>							    
+					    <div>
+						    <a href="${pageContext.request.contextPath}/admin/modifyBoard?boardId=${boardMap.boardId}"><button class="btn btn-outline-dark">수정</button></a>
+						    <a href="${pageContext.request.contextPath}/admin/removeBoard?boardId=${boardMap.boardId}"><button class="btn btn-outline-dark">삭제</button></a>	
+					    </div>
+					    <br>
+					</div>
+					<br><br><br><hr>
+					
+					<!-- 댓글 입력 폼 -->					
+					<form action="${pageContext.request.contextPath}/admin/addComment" method="post" id="addCommentForm">
+						<input type="hidden" name="boardId" value="${boardMap.boardId}">
+						<div class="row">
+							<div class="col-sm-10"><input type="text" name="commentContent" class="form-control"></div>
+							<div class="col-sm-2"><button type="button" id="addCommentBtn" class="btn btn-secondary">댓글추가</button></div>
+						</div>
+					</form>
+					<br><br><hr>
+					<div class="card">
+						<!-- 댓글 출력 -->
+						<div>
+							<table class="table">
+								<thead class="thead-light">
+									<tr>
+										<th>commentContent</th>
+										<th>userName</th>
+										<th>insertDate</th>
+										<th>삭제</th>
+									</tr>
+								</thead>
+								
+								<tbody>
+									<c:forEach var="c" items="${commentList}">
+										<tr>
+											<td>${c.commentContent}</td>
+											<td>${c.username}</td>
+											<td>${c.insertDate}</td>
+											<td>
+												<c:if test="${username == c.username}">
+													<a href="${pageContext.request.contextPath}/admin/removeComment?commentId=${c.commentId}&boardId=${c.boardId}&username=${username}" class="btn btn-secondary">X</a>
+												</c:if>
+											</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+						</div>
 	</div>
 	<script src="${pageContext.request.contextPath}/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 	<script src="${pageContext.request.contextPath}/assets/js/bootstrap.bundle.min.js"></script>

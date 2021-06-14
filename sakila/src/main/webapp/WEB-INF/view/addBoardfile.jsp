@@ -17,27 +17,47 @@
 <script>
 	$(document).ready(function(){
 		$('#btn').click(function(){
-			$('#addFileForm').submit();
+			if($('#multipartFile').val() == ''){
+				alert('파일을 추가해주세요');
+			}else{
+				$('#addFileForm').submit();
+			}			
 		});
 	});
 </script>
 </head>
 <body>
-	<div class="container">
+	<div class="app">
 		<jsp:include page="/WEB-INF/view/nav.jsp"/>
-		<h1>addBoardfile</h1>
-		<form action="${pageContext.request.contextPath}/admin/addBoardfile" method="post" enctype="multipart/form-data" id="addFileForm">
-			<div>
-				boardId : 
-				<input type="hidden" id="boardId" name="boardId" value="${boardId}" readonly="readonly">
-				<br>		
-				<input type="file" id="multipartFile" name="multipartFile">
+		<div id="main">
+	    	<header class="mb-3">
+	        	<a href="#" class="burger-btn d-block d-xl-none">
+	      			<i class="bi bi-justify fs-3"></i>
+	            </a>
+	        </header>
+	        <div class="page-heading">
+                <h3>addBoardfile</h3>
+            </div>
+            <div class="page-content">
+            	<section class="row">
+            		<div class="card">
+            			<br>
+						<form action="${pageContext.request.contextPath}/admin/addBoardfile" method="post" enctype="multipart/form-data" id="addFileForm">
+							<div>
+								boardId : 
+								<input type="hidden" id="boardId" name="boardId" value="${boardId}" readonly="readonly">
+								<br>		
+								<input type="file" id="multipartFile" name="multipartFile" class="form-control">
+							</div>
+							<div>
+								<br>
+								<button type="button" id="btn" class="btn btn-outline-dark">파일 추가</button>
+							</div>
+						</form>
+					</div>
+				</section>
 			</div>
-			<div>
-				<br>
-				<button type="button" id="btn">파일 추가</button>
-			</div>
-		</form>
+		</div>
 	</div>
 	<script src="${pageContext.request.contextPath}/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 	<script src="${pageContext.request.contextPath}/assets/js/bootstrap.bundle.min.js"></script>

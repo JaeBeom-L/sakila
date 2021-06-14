@@ -2,7 +2,7 @@
 	<div class="sidebar-wrapper active">
     	<div class="sidebar-header">        	
        		<div class="row">
-       			<h1>video</h1>
+       			<h1>sakila video</h1>
 				<h6>
 					<a href="${pageContext.request.contextPath}/admin/logout">logout</a>
 				</h6>
