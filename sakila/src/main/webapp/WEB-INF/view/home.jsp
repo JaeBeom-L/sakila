@@ -5,6 +5,14 @@
 <head>
 <meta charset="UTF-8">
 <title>home</title>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/bootstrap.css">
+<link rel="stylesheet" href="assets/vendors/iconly/bold.css">
+<link rel="stylesheet" href="assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+<link rel="stylesheet" href="assets/vendors/bootstrap-icons/bootstrap-icons.css">
+<link rel="stylesheet" href="assets/css/app.css">
+<link rel="shortcut icon" href="assets/images/favicon.svg" type="image/x-icon">
 <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
@@ -32,7 +40,6 @@ $(document).ready(function(){
 		
 	});
 	
-
 	let data = {
 			  labels: categoryX,
 			  datasets: [{
@@ -239,7 +246,12 @@ $(document).ready(function(){
 <body>
 	<div class="app">
 		<jsp:include page="/WEB-INF/view/nav.jsp"/>
-		<div id="main">	
+		<div id="main">
+            <header class="mb-3">
+                <a href="#" class="burger-btn d-block d-xl-none">
+                    <i class="bi bi-justify fs-3"></i>
+                </a>
+            </header>
 			<!-- 로그 오프 시 -->
 			<c:if test="${loginStaff == null}">
 				<div class="col-7">
@@ -265,81 +277,92 @@ $(document).ready(function(){
 			</c:if>
 			
 			<!-- 로그 인 시 -->
-			<c:if test="${loginStaff != null}">	
-				<h1>Home</h1>
-				<div class="col-12 col-lg-12">
-	            	<div class="row">
-		            	<div class="col-6 col-lg-4 col-md-6">
-                        	<div class="card">
-                              	<div class="card-body px-3 py-4-5">
-                                   	<div class="row">
-                                       	<div class="col-md-4">
-                                          	<div class="stats-icon blue">
-                                            	<i class="iconly-boldProfile"></i>
-                                        	</div>
-                                       	</div>
-                                       	<div class="col-md-8">
-                                          	<h6 class="text-muted font-semibold">지난 달 우수사원</h6>
-                                          	<h6 class="font-extrabold mb-0">${bestStaff.name}</h6>
-                                    	</div>
-                                   	</div>
-                              	</div>
-                           	</div>
-                       	</div>
-						<div class="col-6 col-lg-8 col-md-6">
-							<div class="card">
-								<h5 class="font-extrabold mb-0">지난 달 베스트 영화 목록</h5>
-								<table class="table">
-									<c:forEach var="b" items="${bestList}">
-										<tr>
-											<td>${b.title}</td>
-											<td>${b.count}</td>
-										</tr>
-									</c:forEach>
-								</table>
+			<c:if test="${loginStaff != null}">
+			<div class="page-heading">
+                <h3>Home</h3>
+            </div>
+            <div class="page-content">
+				<section class="row">
+					<div class="col-12 col-lg-12">
+		            	<div class="row">
+			            	<div class="col-6 col-lg-4 col-md-6">
+	                        	<div class="card">
+	                              	<div class="card-body px-3 py-4-5">
+	                                   	<div class="row">
+	                                       	<div class="col-md-4">
+	                                          	<div class="stats-icon blue">
+	                                            	<i class="iconly-boldProfile"></i>
+	                                        	</div>
+	                                       	</div>
+	                                       	<div class="col-md-8">
+	                                          	<h6 class="text-muted font-semibold">지난 달 우수사원</h6>
+	                                          	<h6 class="font-extrabold mb-0">${bestStaff.name}</h6>
+	                                    	</div>
+	                                   	</div>
+	                              	</div>
+	                           	</div>
+	                       	</div>
+							<div class="col-6 col-lg-8 col-md-6">
+								<div class="card">
+									<h5 class="font-extrabold mb-0">지난 달 베스트 영화 목록</h5>
+									<table class="table">
+										<c:forEach var="b" items="${bestList}">
+											<tr>
+												<td>${b.title}</td>
+												<td>${b.count}</td>
+											</tr>
+										</c:forEach>
+									</table>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="col-12 col-lg-12">
-	            	<div class="row">
-	               		<div class="col-6 col-lg-6 col-md-6">	
-							<div class="card">
-								<br>
-								<div class="row">
-									<div class="col-9">											
-										<input type="text" name="year" id="year" class="form-control">
+					<div class="col-12 col-lg-12">
+		            	<div class="row">
+		               		<div class="col-6 col-lg-6 col-md-6">	
+								<div class="card">
+									<br>
+									<div class="row">
+										<div class="col-9">											
+											<input type="text" name="year" id="year" class="form-control">
+										</div>
+										<div class="col-3">
+											<button id="btn" type="button" class="btn btn-secondary">보기</button>
+										</div>
 									</div>
-									<div class="col-3">
-										<button id="btn" type="button" class="btn btn-secondary">보기</button>
-									</div>
+									<br>
+					 				<span id="rentalChartSpan"><canvas id="rentalChart"></canvas></span>
 								</div>
-								<br>
-				 				<span id="rentalChartSpan"><canvas id="rentalChart"></canvas></span>
 							</div>
-						</div>
-						<div class="col-6 col-lg-6 col-md-6">	
-							<div class="card">
-								<br>
-								<div class="row">
-									<div class="col-9">				
-										<input type="text" name="pyear" id="pyear" class="form-control">
+							<div class="col-6 col-lg-6 col-md-6">	
+								<div class="card">
+									<br>
+									<div class="row">
+										<div class="col-9">				
+											<input type="text" name="pyear" id="pyear" class="form-control">
+										</div>
+										<div class="col-3">
+											<button id="pbtn" type="button" class="btn btn-secondary">보기</button>
+										</div>
 									</div>
-									<div class="col-3">
-										<button id="pbtn" type="button" class="btn btn-secondary">보기</button>
-									</div>
+									<br>
+					 				<span id="paymentChartSpan"><canvas id="paymentChart"></canvas></span>
 								</div>
-								<br>
-				 				<span id="paymentChartSpan"><canvas id="paymentChart"></canvas></span>
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="card">
-	 				<canvas id="categoryChart"></canvas>
-				</div>
+					<div class="card">
+		 				<canvas id="categoryChart"></canvas>
+					</div>
+				</section>
+			</div>
 			</c:if>
 		</div>	
 	</div>
+	<script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+	<script src="assets/js/bootstrap.bundle.min.js"></script>
+	<script src="assets/vendors/apexcharts/apexcharts.js"></script>
+	<script src="assets/js/pages/dashboard.js"></script>
+	<script src="assets/js/main.js"></script>
 </body>
 </html>

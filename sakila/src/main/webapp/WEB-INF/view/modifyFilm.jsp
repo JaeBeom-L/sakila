@@ -4,15 +4,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<!-- bootstrap을 사용하기 위한 CDN주소 -->
-<!-- Latest compiled and minified CSS -->
-
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<!-- jquery를 사용하기위한 CDN주소 -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/bootstrap.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendors/iconly/bold.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendors/bootstrap-icons/bootstrap-icons.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/app.css">
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/images/favicon.svg" type="image/x-icon">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <title>modifyFilm</title>
 </head>
 <body>
@@ -119,6 +119,10 @@
 		</form>
 		
 	</div>
-
+	<script src="${pageContext.request.contextPath}/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+	<script src="${pageContext.request.contextPath}/assets/js/bootstrap.bundle.min.js"></script>
+	<script src="${pageContext.request.contextPath}/assets/vendors/apexcharts/apexcharts.js"></script>
+	<script src="${pageContext.request.contextPath}/assets/js/pages/dashboard.js"></script>
+	<script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
 </body>
 </html>

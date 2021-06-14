@@ -3,66 +3,90 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta charset="UTF-8">
 <title>getBoardList</title>
-<!-- bootstrap을 사용하기 위한 CDN주소 -->
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
-<!-- Latest compiled and minified JavaScript -->
- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/bootstrap.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendors/iconly/bold.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendors/bootstrap-icons/bootstrap-icons.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/app.css">
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/images/favicon.svg" type="image/x-icon">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
-<div class="container">
-	<jsp:include page="/WEB-INF/view/nav.jsp"/>
-    <h1>BoardList</h1>
-    <table class="table table-hover">
-        <thead class="thead-light">
-            <tr>
-                <th>boardId</th>
-                <th>boardTitle</th>
-                <th style="text-align : center;">insertDate</th>
-                <th style="text-align : center;">username</th>
-            </tr>
-        </thead>
-        <tbody>
-            <c:forEach var="b" items="${boardList}">
-                <tr>
-                    <td>${b.boardId}</td>
-                    <td>
-                    	<a href="${pageContext.request.contextPath}/admin/getBoardOne?boardId=${b.boardId}">${b.boardTitle}</a>
-                    	<c:if test="${b.commentCnt != 0}">
-                    		<label style="color:red">[${b.commentCnt}]</label>
-                    	</c:if>
-                    </td>                  
-                    <td align="center">${b.insertDate}</td>
-                    <td align="center">${b.username}</td>
-                </tr>
-            </c:forEach>
-        </tbody>
-    </table>
-    
-    <!-- 검색어 입력창 -->
-    <form action="/admin/getBoardList" method="get">
-        <div class="row">
-	        <div class="col-sm-1"><label for="searchWord">검색어 :</label> </div>
-	        <div class="col-sm-3"><input name="searchWord" type="text" class="form-control"></div>
-	       	<div class="col-sm-2"><button type="submit" class="btn btn-default">검색</button></div>
-        </div>
-    </form>
-    
-    <ul class="pager">
-        <c:if test="${currentPage > 1}">
-            <li class="previous"><a href="${pageContext.request.contextPath}/admin/getBoardList?currentPage=${currentPage-1}&searchWord=${searchWord}">이전</a></li>
-        </c:if>
-        <c:if test="${currentPage < lastPage}">
-            <li class="next"><a href="${pageContext.request.contextPath}/admin/getBoardList?currentPage=${currentPage+1}&searchWord=${searchWord}">다음</a></li>
-        </c:if>
-    </ul>
-    <div>
-        <a class="btn btn-default" href="${pageContext.request.contextPath}/admin/addBoard">게시글 입력</a>
-    </div>
-</div>
+	<div class="app">
+		<jsp:include page="/WEB-INF/view/nav.jsp"/>
+		<div id="main">
+	    	<header class="mb-3">
+	        	<a href="#" class="burger-btn d-block d-xl-none">
+	      			<i class="bi bi-justify fs-3"></i>
+	            </a>
+	        </header>
+	        <div class="page-heading">
+                <h3>BoardList</h3>
+            </div>
+            <div class="page-content">
+            	<section class="row">
+            		<div class="card">
+	            		<div class="table-responsive">
+						    <table class="table table-lg">
+						        <thead>
+						            <tr>
+						                <th>boardId</th>
+						                <th>boardTitle</th>
+						                <th style="text-align : center;">insertDate</th>
+						                <th style="text-align : center;">username</th>
+						            </tr>
+						        </thead>
+						        <tbody>
+						            <c:forEach var="b" items="${boardList}">
+						                <tr>
+						                    <td>${b.boardId}</td>
+						                    <td>
+						                    	<a href="${pageContext.request.contextPath}/admin/getBoardOne?boardId=${b.boardId}">${b.boardTitle}</a>
+						                    	<c:if test="${b.commentCnt != 0}">
+						                    		<label style="color:red">[${b.commentCnt}]</label>
+						                    	</c:if>
+						                    </td>                  
+						                    <td align="center">${b.insertDate}</td>
+						                    <td align="center">${b.username}</td>
+						                </tr>
+						            </c:forEach>
+						        </tbody>
+						    </table>
+						</div>
+					    
+					    <!-- 검색어 입력창 -->
+					    <form action="/admin/getBoardList" method="get">
+					        <div class="row">
+						        <div class="col-sm-1"><label for="searchWord">검색어 :</label> </div>
+						        <div class="col-sm-3"><input name="searchWord" type="text"></div>
+						       	<div class="col-sm-2"><button type="submit" class="btn btn-default">검색</button></div>
+					        </div>
+					    </form>
+					    
+					    <ul class="pager">
+					        <c:if test="${currentPage > 1}">
+					            <li><a href="${pageContext.request.contextPath}/admin/getBoardList?currentPage=${currentPage-1}&searchWord=${searchWord}">이전</a></li>
+					        </c:if>
+					        <c:if test="${currentPage < lastPage}">
+					            <li><a href="${pageContext.request.contextPath}/admin/getBoardList?currentPage=${currentPage+1}&searchWord=${searchWord}">다음</a></li>
+					        </c:if>
+					    </ul>
+					    <div>
+					        <a href="${pageContext.request.contextPath}/admin/addBoard">게시글 입력</a>
+					    </div>
+				    </div>
+				</section>
+			</div>
+		</div>
+	</div>
+	<script src="${pageContext.request.contextPath}/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+	<script src="${pageContext.request.contextPath}/assets/js/bootstrap.bundle.min.js"></script>
+	<script src="${pageContext.request.contextPath}/assets/vendors/apexcharts/apexcharts.js"></script>
+	<script src="${pageContext.request.contextPath}/assets/js/pages/dashboard.js"></script>
+	<script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
 </body>
 </html>
