@@ -27,41 +27,58 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-<div class="container">
+<div class="app">
 	<jsp:include page="/WEB-INF/view/nav.jsp"/>
-    <h1>modifyBoard</h1>
-    <form action="${pageContext.request.contextPath }/admin/modifyBoard" method="post" id="modifyForm">
-	     <table class="table">
-	         <tbody>
-	            <tr>
-	                <td>boardId :</td>
-	                <td><input type="text" id="boardId" name="boardId" value="${boardMap.boardId}" readonly="readonly" class="form-control"></td>
-	            </tr>
-	            <tr>
-	                <td>boardTitle :</td>
-	                <td><input type="text" id="boardTitle" name="boardTitle" value="${boardMap.boardTitle}" class="form-control"></td>
-	            </tr>
-	            <tr>
-	                <td>boardPw :</td>
-	                <td><input type="password" id="boardPw" name="boardPw" class="form-control"></td>
-	            </tr>
-	            <tr>
-	                <td>boardContent :</td>
-	                <td><textarea rows="5" id="boardContent" name="boardContent" cols="80" class="form-control">${boardMap.boardContent}</textarea></td>
-	            </tr>
-	            <tr>
-	                <td>username :</td>
-	                <td>${boardMap.username}</td>
-	            </tr>
-	            <tr>
-	                <td>insertDate :</td>
-	                <td>${boardMap.insertDate}</td>
-	            </tr>
-	        </tbody>
-	    </table>
-	    <button id="btn" type="button" class="btn btn-default">수정</button>
-    </form>
-</div>
+	<div id="main">
+	    	<header class="mb-3">
+	        	<a href="#" class="burger-btn d-block d-xl-none">
+	      			<i class="bi bi-justify fs-3"></i>
+	            </a>
+	        </header>
+	        <div class="page-heading">
+                <h3>modifyBoard</h3>
+            </div>
+            <div class="page-content">
+            	<section class="row">
+            		<div class="card">
+            			<br>
+					    <form action="${pageContext.request.contextPath }/admin/modifyBoard" method="post" id="modifyForm">
+						     <table class="table">
+						         <tbody>
+						            <tr>
+						                <td>boardId :</td>
+						                <td><input type="text" id="boardId" name="boardId" value="${boardMap.boardId}" readonly="readonly" class="form-control"></td>
+						            </tr>
+						            <tr>
+						                <td>boardTitle :</td>
+						                <td><input type="text" id="boardTitle" name="boardTitle" value="${boardMap.boardTitle}" class="form-control"></td>
+						            </tr>
+						            <tr>
+						                <td>boardPw :</td>
+						                <td><input type="password" id="boardPw" name="boardPw" class="form-control"></td>
+						            </tr>
+						            <tr>
+						                <td>boardContent :</td>
+						                <td><textarea rows="5" id="boardContent" name="boardContent" cols="80" class="form-control">${boardMap.boardContent}</textarea></td>
+						            </tr>
+						            <tr>
+						                <td>username :</td>
+						                <td>${boardMap.username}</td>
+						            </tr>
+						            <tr>
+						                <td>insertDate :</td>
+						                <td>${boardMap.insertDate}</td>
+						            </tr>
+						        </tbody>
+						    </table>
+						    <button id="btn" type="button" class="btn btn-outline-dark">수정</button>
+					    </form>
+					    <br>
+					</div>					
+				</section>
+			</div>
+		</div>
+	</div>
 	<script src="${pageContext.request.contextPath}/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 	<script src="${pageContext.request.contextPath}/assets/js/bootstrap.bundle.min.js"></script>
 	<script src="${pageContext.request.contextPath}/assets/vendors/apexcharts/apexcharts.js"></script>

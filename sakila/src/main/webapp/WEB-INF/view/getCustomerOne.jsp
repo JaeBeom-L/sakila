@@ -15,7 +15,7 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
-	<div class="container">
+	<div class="app">
 	<jsp:include page="/WEB-INF/view/nav.jsp"/>
 	<div id="main">
 	    	<header class="mb-3">

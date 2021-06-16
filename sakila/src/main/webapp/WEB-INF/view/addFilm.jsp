@@ -16,7 +16,7 @@
 <script>
 $(document).ready(function(){
 	
-	let numberCode = /^[0-9]+$/;
+	let numberCode =  /^[0-9]+(.[0-9]+)?$/;
 	
 	$('#btn').click(function(){
 		if($('#title').val() == ''){
@@ -196,6 +196,7 @@ $(document).ready(function(){
 							</table>							
 							<button id="btn" class="btn btn-secondary" type="button">등록</button>
 						</form>
+						<br>
 					</div>
 				</section>
 			</div>

@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendors/bootstrap-icons/bootstrap-icons.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/app.css">
 <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/images/favicon.svg" type="image/x-icon">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
 $(document).ready(function(){
 	console.log("document ready!");
@@ -125,6 +126,9 @@ $(document).ready(function(){
 								</tbody>
 							</table>
 						</div>
+					</div>
+				</section>
+			</div>
 	</div>
 	<script src="${pageContext.request.contextPath}/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 	<script src="${pageContext.request.contextPath}/assets/js/bootstrap.bundle.min.js"></script>

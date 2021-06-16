@@ -15,89 +15,105 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
-	<div class="container">
+	<div class="app">
 	<jsp:include page="/WEB-INF/view/nav.jsp"/>
-	    <div>
-	    	<div class="row">
-		    	<h1>FilmOne</h1>
-		    	<h3><a href="${pageContext.request.contextPath}/admin/addInventory?filmId=${getFilmOneMap.filmId}" class="btn btn-secondary">add inventory</a></h3>
-		    </div>
-		     <table class="table">
-		         <tbody>
-		           	<tr>
-		                <td>filmId :</td>
-		                <td>${getFilmOneMap.filmId}</td>
-		            </tr>
-		            <tr>
-		                <td>category :</td>
-		                <td>${getFilmOneMap.category}</td>
-		            </tr>
-		        	<tr>
-		                <td>title :</td>
-		                <td>${getFilmOneMap.title}</td>
-		            </tr>
-		            <tr>
-		                <td>description :</td>
-		                <td>${getFilmOneMap.description}</td>
-		            </tr>
-		            <tr>
-		                <td>releaseYear :</td>
-		                <td>${getFilmOneMap.releaseYear}</td>
-		            </tr>
-		            <tr>
-		                <td>language :</td>
-		                <td>${getFilmOneMap.language}</td>
-		            </tr>
-		            <tr>
-		                <td>rentalDuration :</td>
-		                <td>${getFilmOneMap.rentalDuration}</td>
-		            </tr>
-		            <tr>
-		                <td>rentalRate :</td>
-		                <td>${getFilmOneMap.rentalRate}</td>
-		            </tr>
-		             <tr>
-		                <td>length :</td>
-		                <td>${getFilmOneMap.length}</td>
-		            </tr>
-		             <tr>
-		                <td>replacementCost :</td>
-		                <td>${getFilmOneMap.replacementCost}</td>
-		            </tr>
-		             <tr>
-		                <td>rating :</td>
-		                <td>${getFilmOneMap.rating}</td>
-		            </tr>
-		            <tr>
-		                <td>
-		                	actors :
-		                	<a href="${pageContext.request.contextPath}/admin/addActors?FID=${getFilmOneMap.filmId}"><button class="btn btn-secondary">modify actors</button></a>	
-		                </td>
-		                <td>${getFilmOneMap.actors}</td>
-		            </tr>
-		             <tr>
-		                <td>specialFeatures :</td>
-		                <td>
-		                	${getFilmOneMap.specialFeautres}
-		                </td>
-		            </tr>
-		             <tr>
-		                <td>lastUpdate :</td>
-		                <td>${getFilmOneMap.lastUpdate}</td>
-		            </tr>
-		            <tr>
-		                <td>SID1 stock :</td>
-		                <td>${fisrtStoreFilmCount}</td>
-		            </tr>
-		            <tr>
-		                <td>SID2 stock :</td>
-		                <td>${secondStoreFilmCount}</td>
-		            </tr>
-		        </tbody>
-		    </table>
-		    <a href="${pageContext.request.contextPath}/admin/modifyFilm?filmId=${getFilmOneMap.filmId}" class="btn btn-secondary">수정</a>
-		    <a href="${pageContext.request.contextPath}/admin/removeFilm?filmId=${getFilmOneMap.filmId}" class="btn btn-secondary">삭제</a>
-		   </div>
+	<div id="main">
+	    	<header class="mb-3">
+	        	<a href="#" class="burger-btn d-block d-xl-none">
+	      			<i class="bi bi-justify fs-3"></i>
+	            </a>
+	        </header>
+	        <div class="page-heading">
+                <h3>FilmOne</h3>
+            </div>
+            <div class="page-content">
+            	<section class="row">
+            		<div class="card">
+            			<br>
+					    <div>
+					    	<div class="row">
+						    	<h3><a href="${pageContext.request.contextPath}/admin/addInventory?filmId=${getFilmOneMap.filmId}" class="btn btn-secondary">add inventory</a></h3>
+						    </div>
+						     <table class="table">
+						         <tbody>
+						           	<tr>
+						                <td>filmId :</td>
+						                <td>${getFilmOneMap.filmId}</td>
+						            </tr>
+						            <tr>
+						                <td>category :</td>
+						                <td>${getFilmOneMap.category}</td>
+						            </tr>
+						        	<tr>
+						                <td>title :</td>
+						                <td>${getFilmOneMap.title}</td>
+						            </tr>
+						            <tr>
+						                <td>description :</td>
+						                <td>${getFilmOneMap.description}</td>
+						            </tr>
+						            <tr>
+						                <td>releaseYear :</td>
+						                <td>${getFilmOneMap.releaseYear}</td>
+						            </tr>
+						            <tr>
+						                <td>language :</td>
+						                <td>${getFilmOneMap.language}</td>
+						            </tr>
+						            <tr>
+						                <td>rentalDuration :</td>
+						                <td>${getFilmOneMap.rentalDuration}</td>
+						            </tr>
+						            <tr>
+						                <td>rentalRate :</td>
+						                <td>${getFilmOneMap.rentalRate}</td>
+						            </tr>
+						             <tr>
+						                <td>length :</td>
+						                <td>${getFilmOneMap.length}</td>
+						            </tr>
+						             <tr>
+						                <td>replacementCost :</td>
+						                <td>${getFilmOneMap.replacementCost}</td>
+						            </tr>
+						             <tr>
+						                <td>rating :</td>
+						                <td>${getFilmOneMap.rating}</td>
+						            </tr>
+						            <tr>
+						                <td>
+						                	actors :
+						                	<a href="${pageContext.request.contextPath}/admin/addActors?FID=${getFilmOneMap.filmId}"><button class="btn btn-secondary">modify actors</button></a>	
+						                </td>
+						                <td>${getFilmOneMap.actors}</td>
+						            </tr>
+						             <tr>
+						                <td>specialFeatures :</td>
+						                <td>
+						                	${getFilmOneMap.specialFeautres}
+						                </td>
+						            </tr>
+						             <tr>
+						                <td>lastUpdate :</td>
+						                <td>${getFilmOneMap.lastUpdate}</td>
+						            </tr>
+						            <tr>
+						                <td>SID1 stock :</td>
+						                <td>${fisrtStoreFilmCount}</td>
+						            </tr>
+						            <tr>
+						                <td>SID2 stock :</td>
+						                <td>${secondStoreFilmCount}</td>
+						            </tr>
+						        </tbody>
+						    </table>
+						    <a href="${pageContext.request.contextPath}/admin/modifyFilm?filmId=${getFilmOneMap.filmId}" class="btn btn-secondary">수정</a>
+						   </div>
+						   <br>
+						</div>						
+					</section>
+				</div>				
+			</div>
 	   </div>
 	<script src="${pageContext.request.contextPath}/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 	<script src="${pageContext.request.contextPath}/assets/js/bootstrap.bundle.min.js"></script>

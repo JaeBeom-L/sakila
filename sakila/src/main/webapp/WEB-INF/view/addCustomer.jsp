@@ -119,12 +119,15 @@ $(document).ready(function(){
 				            <div class="form-group">
 				                <label for="firstName">firstName :</label><span id="firstNameCheck" class="span"></span> <input class="form-control" name="customer.firstName" id="firstName" type="text" />
 				            </div>
+				            <br>
 				            <div class="form-group">
 				                <label for="lastName">lastName :</label><span id="lastNameCheck" class="span"></span> <input class="form-control" name="customer.lastName" id="lastName" type="text" />
 				            </div>
+				            <br>
 				            <div class="form-group">
 				                <label for="email">email :</label><span id="emailCheck" class="span"></span> <input class="form-control" name="customer.email" id="email" type="text" />
 				            </div>
+				            <br>
 				            <div class="form-group">
 				            	<label for="storeId">storeId :</label>
 				                <select name="customer.storeId" id="storeId" class="form-control">               	
@@ -132,6 +135,7 @@ $(document).ready(function(){
 				                	<option value="2">2</option>
 				                </select>
 				            </div>
+				            <br>
 				            <div class="form-group">
 				                <label for="username">select Adress :</label>
 				                <select name="country" id="country" class="form-control"></select>
@@ -143,17 +147,22 @@ $(document).ready(function(){
 								<br>
 								<input class="form-control" name="address.address2" id="address2" type="text" value="adress2" />
 				            </div>
+				            <br>
 				            <div class="form-group">
 				                <label for="district">district :</label> <span id="districtCheck" class="span"></span><input class="form-control" name="address.district" id="district" type="text" />
 				            </div>
+				            <br>
 				            <div class="form-group">
 				                <label for="postalCode">postalCode :</label> <span id="postalCodeCheck" class="span"></span><input class="form-control" name="address.postalCode" id="postalCode" type="text" />
 				            </div>
+				            <br>
 				            <div class="form-group">
 				                <label for="phone">phone :</label> <span id="phoneCheck" class="span"></span><input class="form-control" name="address.phone" id="phone" type="text" />
 				            </div>
+				            <br>
 				            <button id="btn" class="btn btn-secondary" type="button">add</button>
 				        </form>
+				        <br>
 				 	</div>
 				</section>
 			</div>

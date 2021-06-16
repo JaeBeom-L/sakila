@@ -96,6 +96,7 @@ $(document).ready(function(){
 							<button id="amountBtn" class="btn btn-secondary" type="button">계산</button>
 							<span id="rentalBtn"></span>
 						</form>
+						<br>
 					</div>
 				</section>
 			</div>

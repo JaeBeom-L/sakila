@@ -16,7 +16,7 @@
 			f.title
 		ORDER BY
 			count desc
-		LIMIT 10 
+		LIMIT 5 
 	</select>
 	
 	<!-- 년도 별 렌탈 수 차트 -->

@@ -5,6 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>getActorList</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/bootstrap.css">
@@ -32,7 +33,7 @@
             		<div class="card">
             			<br>
 					    <table class="table table-hover">
-					        <thead class="thead-light">
+					        <thead class="thaed thead-light">
 					            <tr>
 					                <th>actorId</th>
 					                <th>name</th>

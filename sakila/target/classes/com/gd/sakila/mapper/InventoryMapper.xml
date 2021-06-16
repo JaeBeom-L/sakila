@@ -87,6 +87,8 @@
 				AND iv.inventory_id=#{inventoryId}
 			</if>
 		</where>
+		ORDER BY
+			iv.inventory_id
 		LIMIT #{beginRow}, #{rowPerPage}
 	</select>
 </mapper>

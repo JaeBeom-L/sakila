@@ -22,17 +22,34 @@ $(document).ready(function() {
 })
 </script>
 </head>
-<body class="container">
+<body class="app">
 	<jsp:include page="/WEB-INF/view/nav.jsp"/>
-	<h1>removeBoard</h1>
-	<form action="${pageContext.request.contextPath}/admin/removeBoard" method="post" id="removeForm">
-		<input type="hidden" name="boardId" value="${boardId}">
-		<div class="row">
-			<div class="col-sm-2"><label>boardPw :</label></div>
-			<div class="col-sm-5"><input type="password" id="boardPw" name="boardPw" class="form-control"></div>
-			<div class="col-sm-3"><button type="button" id="btn" class="btn btn-light">삭제</button></div>		
+	<div id="main">
+    	<header class="mb-3">
+        	<a href="#" class="burger-btn d-block d-xl-none">
+      			<i class="bi bi-justify fs-3"></i>
+            </a>
+        </header>
+        <div class="page-heading">
+               <h3>removeBoard</h3>
+           </div>
+           <div class="page-content">
+           	<section class="row">
+           		<div class="card">
+           			<br>
+					<form action="${pageContext.request.contextPath}/admin/removeBoard" method="post" id="removeForm">
+						<input type="hidden" name="boardId" value="${boardId}">
+						<div class="row">
+							<div class="col-sm-2"><label>boardPw :</label></div>
+							<div class="col-sm-5"><input type="password" id="boardPw" name="boardPw" class="form-control"></div>
+							<div class="col-sm-3"><button type="button" id="btn" class="btn btn-light">삭제</button></div>		
+						</div>
+					</form>
+					<br>
+				</div>
+			</section>
 		</div>
-	</form>
+	</div>
 	<script src="${pageContext.request.contextPath}/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 	<script src="${pageContext.request.contextPath}/assets/js/bootstrap.bundle.min.js"></script>
 	<script src="${pageContext.request.contextPath}/assets/vendors/apexcharts/apexcharts.js"></script>

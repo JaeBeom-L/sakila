@@ -138,18 +138,23 @@ $(document).ready(function(){
 				            <div class="form-group">
 				                <label for="firstName">firstName :</label><span id="firstNameCheck" class="span"></span> <input class="form-control" name="staff.firstName" id="firstName" type="text" />
 				            </div>
+				            <br>
 				            <div class="form-group">
 				                <label for="lastName">lastName :</label><span id="lastNameCheck" class="span"></span> <input class="form-control" name="staff.lastName" id="lastName" type="text" />
 				            </div>
+				            <br>
 				            <div class="form-group">
 				                <label for="lastName">picture :</label><span id="pictureCheck" class="span"></span> <input name="staff.picture" id="picture" type="file" class="form-control"/>
 				            </div>
+				            <br>
 				            <div class="form-group">
 				                <label for="email">email :<span id="emailCheck" class="span"></span></label> <input class="form-control" name="staff.email" id="email" type="text" />
 				            </div>
+				            <br>
 				            <div class="form-group">
 				                <label for="password">password :</label> <span id="passwordCheck" class="span"></span><input class="form-control" name="staff.password" id="password" type="password" />
 				            </div>
+				            <br>
 				            <div class="form-group">
 				            	<label for="storeId">storeId :</label>
 				                <select name="staff.storeId" id="storeId" class="form-control">               	
@@ -157,9 +162,11 @@ $(document).ready(function(){
 				                	<option value="2">2</option>
 				                </select>
 				            </div>
+				            <br>
 				            <div class="form-group">
 				                <label for="username">username :</label><span id="usernameCheck" class="span"></span> <input class="form-control" name="staff.username" id="username" type="text" />
 				            </div>
+				            <br>
 				            <div class="form-group">
 				                <label for="username">select Adress :</label>
 				                <select name="country" id="country" class="form-control"></select>
@@ -171,17 +178,22 @@ $(document).ready(function(){
 								<br>
 								<input class="form-control" name="address.address2" id="address2" type="text" value="adress2" />
 				            </div>
+				            <br>
 				            <div class="form-group">
 				                <label for="district">district :</label> <span id="districtCheck" class="span"></span><input class="form-control" name="address.district" id="district" type="text" />
 				            </div>
+				            <br>
 				            <div class="form-group">
 				                <label for="postalCode">postalCode :</label> <span id="postalCodeCheck" class="span"></span><input class="form-control" name="address.postalCode" id="postalCode" type="text" />
 				            </div>
+				            <br>
 				            <div class="form-group">
 				                <label for="phone">phone :</label> <span id="phoneCheck" class="span"></span><input class="form-control" name="address.phone" id="phone" type="text" />
 				            </div>
+				            <br>
 				            <button id="btn" class="btn btn-secondary" type="button">add</button>
 				        </form>
+				        <br>
 				 	</div>
 				 </section>
 			</div>

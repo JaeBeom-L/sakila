@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>home</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/bootstrap.css">
@@ -304,8 +305,16 @@ $(document).ready(function(){
 	                       	</div>
 							<div class="col-6 col-lg-8 col-md-6">
 								<div class="card">
-									<h5 class="font-extrabold mb-0">지난 달 베스트 영화 목록</h5>
+									<br>
+									<h5 class="font-extrabold mb-0">&nbsp;&nbsp;지난 달 베스트 영화 목록</h5>
+									<br>
 									<table class="table">
+										<thead class="thead thead-light">
+											<tr>
+												<th>title</th>
+												<th>count</th>
+											</tr>
+										</thead>
 										<c:forEach var="b" items="${bestList}">
 											<tr>
 												<td>${b.title}</td>
