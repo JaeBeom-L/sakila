@@ -21,7 +21,7 @@ $(document).ready(function(){
 		}else{
 			$.ajax({
 				type:'get',
-				url:'/amount',
+				url:'/sakila/amount',
 				data:{inventoryId : $('#inventoryId').val()},
 				success: function(jsonData) {
 					$(jsonData).each(function(index, item) {

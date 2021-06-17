@@ -29,7 +29,7 @@ $(document).ready(function(){
 	
 	$.ajax({
 		type:'get',
-		url:'/filmCategory',
+		url:'/sakila/filmCategory',
 		success: function(jsonData){
 			$(jsonData).each(function(index, item){
 				categoryX.push(item.category);
@@ -97,7 +97,7 @@ $(document).ready(function(){
 	
 	$.ajax({
 		type:'get',
-		url:'/countRental',
+		url:'/sakila/countRental',
 		data:{year : $('#year').val()},
 		success: function(jsonData){
 			$(jsonData).each(function(index, item){
@@ -135,7 +135,7 @@ $(document).ready(function(){
 			console.log($('#year').val());
 			$.ajax({
 				type:'get',
-				url:'/countRental',
+				url:'/sakila/countRental',
 				data:{year : $('#year').val()},
 				success: function(jsonData){
 					$(jsonData).each(function(index, item){
@@ -173,7 +173,7 @@ $(document).ready(function(){
 	
 	$.ajax({
 		type:'get',
-		url:'/sumPayment',
+		url:'/sakila/sumPayment',
 		data:{year : $('#pyear').val()},
 		success: function(jsonData){
 			$(jsonData).each(function(index, item){
