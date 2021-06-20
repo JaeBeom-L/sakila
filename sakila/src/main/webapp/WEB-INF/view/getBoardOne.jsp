@@ -70,7 +70,7 @@ $(document).ready(function(){
 					            		<!-- 보드파일을 출력하는 반복문 코드 구현 -->
 					            		<c:forEach var="f" items="${boardfileList}">
 					            			<div>
-					            				<a href="${pageContext.request.contextPath}/resource/${f.boardfileName}">${f.boardfileName}</a>
+					            				<a href="/file/${f.boardfileName}">${f.boardfileName}</a>
 					            				<a class="session" href="${pageContext.request.contextPath}/admin/removeBoardfile?boardfileId=${f.boardfileId}&boardId=${f.boardId}&boardfileName=${f.boardfileName}&username=${boardMap.username}">
 					            					<button class="btn btn-default">X</button>
 					            				</a>            				

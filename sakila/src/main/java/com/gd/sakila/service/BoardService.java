@@ -59,7 +59,7 @@ public class BoardService {
 			for(Boardfile f : boardfileList) {
 				File temp = new File(""); // 프로젝트 폴더에 빈파일 생성
 				String path = temp.getAbsolutePath();// 빈 파일의 경로를 얻어 path 변수에 저장(프로젝트 폴더의 경로가 저장)
-				File file = new File(path+"\\src\\main\\webapp\\resource\\"+f.getBoardfileName());
+				File file = new File(path+"/home/ubuntu/tomcat9/webapps/file/"+f.getBoardfileName());
 				file.delete();
 			}
 		}
@@ -108,7 +108,7 @@ public class BoardService {
 					File file = new File(""); // 프로젝트 폴더에 빈파일 생성
 					String path = file.getAbsolutePath();// 빈 파일의 경로를 얻어 path 변수에 저장(프로젝트 폴더의 경로가 저장)
 					
-					f.transferTo(new File(path+"\\src\\main\\webapp\\resource\\"+filename)); // list의 각 파일을 지정한 주소에 저장
+					f.transferTo(new File(path+"/home/ubuntu/tomcat9/webapps/file/"+filename)); // list의 각 파일을 지정한 주소에 저장
 				} catch (Exception e) {
 					throw new RuntimeException(); // 파일을 저장하다 오류가 나면 컴파일이 안되는 다른 예외 대신 런타임 예외를 일부러 발생시켜 컴파일 되게 한다.
 				}

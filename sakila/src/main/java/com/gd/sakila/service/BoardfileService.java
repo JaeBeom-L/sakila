@@ -43,7 +43,7 @@ public class BoardfileService {
 		if(row == 1) {
 			File temp = new File("");
 			String path = temp.getAbsolutePath();
-			File file = new File(path+"\\src\\main\\webapp\\resource\\"+prename+ext);
+			File file = new File(path+"/home/ubuntu/tomcat9/webapps/file/"+prename+ext);
 			try {
 				multipartFile.transferTo(file);
 			} catch (Exception e) {
@@ -60,7 +60,7 @@ public class BoardfileService {
 		//1) 물리적 파일 삭제
 		File temp = new File("");
 		String path = temp.getAbsolutePath();
-		File file = new File(path+"\\src\\main\\webapp\\resource\\"+boardfile.getBoardfileName());
+		File file = new File(path+"/home/ubuntu/tomcat9/webapps/file/"+boardfile.getBoardfileName());
 		if(file.exists()) {
 			file.delete();
 		}
