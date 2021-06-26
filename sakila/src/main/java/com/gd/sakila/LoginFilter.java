@@ -28,7 +28,7 @@ public class LoginFilter implements Filter {
 
 		if(session.getAttribute("loginStaff") == null) {
 			if(response instanceof HttpServletResponse) {
-				((HttpServletResponse)response).sendRedirect("/"); // home.jsp
+				((HttpServletResponse)response).sendRedirect("/sakila/"); // home.jsp
 			}			
 			return;
 		}

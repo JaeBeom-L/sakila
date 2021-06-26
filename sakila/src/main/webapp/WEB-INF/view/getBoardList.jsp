@@ -63,7 +63,7 @@
 					    <!-- 검색어 입력창 -->
 					    <div class="row">
 					    	<div class="col-7">
-							    <form action="/admin/getBoardList" method="get">
+							    <form action="${pageContext.request.contextPath}/admin/getBoardList" method="get">
 							    	<div class="row">				        
 								        <div class="col-sm-5"><input name="searchWord" type="text" class="form-control"></div>
 								       	<div class="col-sm-2"><button type="submit" class="btn btn-light rounded-pill">검색</button></div>

@@ -259,13 +259,13 @@ $(document).ready(function(){
 					<h1 class="auth-title">Log in.</h1>
 					<form id="loginForm" action="${pageContext.request.contextPath}/login" method="post">
 						<div class="form-group position-relative has-icon-left mb-4">
-		                    <input type="text" id="email" name="email" class="form-control form-control-xl" placeholder="email">
+		                    <input type="text" id="email" name="email" class="form-control form-control-xl" placeholder="email" value="Mike.Hillyer@sakilastaff.com">
 		                    <div class="form-control-icon">
 		                        <i class="bi bi-person"></i>
 		                    </div>
 	                  	</div>
 						<div class="form-group position-relative has-icon-left mb-4">
-		                    <input type="password" id="password" name="password" class="form-control form-control-xl" placeholder="Password">
+		                    <input type="password" id="password" name="password" class="form-control form-control-xl" placeholder="Password" value="1234">
 		                    <div class="form-control-icon">
 		                        <i class="bi bi-shield-lock"></i>
 		                    </div>
